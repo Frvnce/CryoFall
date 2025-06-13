@@ -1,0 +1,82 @@
+﻿[
+  {
+    "id": "introIbernazione",
+    "room": "ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Stai sognando i tuoi ultimi ricordi sulla terra, file immense di persone che vogliono entrare nella nave, hai paura, provi tristezza, sai che non puoi salvare tutti..",
+    "next": "intro_002"
+  },
+  {
+    "id": "intro_002",
+    "room": "ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Li guardi, vedi centinaia di famiglie in cerca di salvezza, bambini alzati in aria, senti urla, sai che tutto questo non è giusto... ",
+    "next": "main_001"
+  },
+  {
+    "id": "main_001",
+    "room": "ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Argh...   aargh...",
+    "next": "main_002"
+  },
+  {
+    "id": "main_002",
+    "room": "ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Ma... ",
+    "next": "main_003"
+  },
+  {
+    "id": "main_003",
+    "room": "ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Siamo già arrivati? cosa sta succedendo?",
+    "next": "intro_003"
+  },
+  {
+    "id": "intro_003",
+    "room": "ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Vedi <robotName>, ti sta guardando, ti ha appena scongelato.",
+    "next": "robot_001"
+  },
+  {
+    "id": "robot_001",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Comandante <playerName>, parametri vitali: 87% oossigenazione. Tempo stimato per recupero cognitivo: 2 Minuti e 14 Secondi. Situazione critica rilevata.",
+    "choices": [
+      {
+      "label": "Cosa?",
+      "next": "robot_002"
+      },
+      {
+        "label": "...Cosa sta succedendo?",
+        "next": "robot_002"
+      }
+    ]
+  },
+  {
+    "id": "robot_002",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "La situazione e grave, ci sono vari malfunzionamenti, serve l'intervento umano e bisogna agire ORA!"
+  }
+]

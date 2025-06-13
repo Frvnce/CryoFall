@@ -1,0 +1,54 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "dialogue.schema.json",
+  "title": "File dialoghi CryoFall",
+  "type": "array",
+
+  "items": { "$ref": "#/$defs/dialogue" },
+
+  "$defs": {
+    "dialogue": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "id":      { "type": "string" },
+        "room":    
+          { "type": "string",
+            "enum":  ["ibernazione","east_corridoio","stanza_tecnica"]},
+        "speakerName": 
+        { "type": "string",
+          "enum":  ["Narratore","<playerName>","<mainHelper>","<robotName>","<secondHelper>"]},
+        "character": {
+          "type": "string",
+          "enum": ["main", "helper", "enemy", "narrator"]
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["dialogue", "narration", "thought"]
+        },
+        "text":    { "type": "string" },
+        "choices": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/choice" }
+        },
+        "next": {"type": "string"}
+      },
+      
+
+      "required": ["id", "room" ,"speakerName","character", "kind", "text"]
+    },
+
+    "choice": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string" },
+        "next":  { "type": "string" }
+      },
+      "required": ["label", "next"]
+    },
+    
+    
+  }
+}

@@ -1,9 +1,12 @@
-﻿namespace CryoFall;
+﻿using CryoFall.Utils;
+namespace CryoFall;
 
 class Program
 {
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        ConsoleStylingWrite.SetPlaceholder("playerName","Fra");
+        ConsoleStylingWrite.StartDialogue("introIbernazione");
+        
     }
 }
