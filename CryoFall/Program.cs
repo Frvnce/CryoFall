@@ -7,6 +7,5 @@ class Program
     {
         ConsoleStylingWrite.SetPlaceholder("playerName","Fra");
         ConsoleStylingWrite.StartDialogue("introIbernazione");
-        
     }
 }
