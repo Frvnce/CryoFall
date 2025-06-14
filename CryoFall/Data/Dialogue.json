@@ -63,7 +63,7 @@
     "choices": [
       {
       "label": "Cosa?",
-      "next": "robot_002"
+      "next": "robot_003"
       },
       {
         "label": "...Cosa sta succedendo?",
@@ -78,5 +78,13 @@
     "character": "helper",
     "kind": "dialogue",
     "text": "La situazione e grave, ci sono vari malfunzionamenti, serve l'intervento umano e bisogna agire ORA!"
+  },
+  {
+    "id": "robot_003",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Non c'è tempo per le spiegazioni, forza, muoviti, alzati!"
   }
 ]
