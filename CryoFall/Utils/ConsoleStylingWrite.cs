@@ -16,51 +16,126 @@ public static class ConsoleStylingWrite
         };
     private static readonly Regex PhRegex =
         new(@"<(?<key>[^>]+)>", RegexOptions.Compiled);
+    private static readonly Regex TagRegex =
+        new(@"\[[^\]]+\].*?\[\/\]", RegexOptions.Compiled | RegexOptions.Singleline);
     
     //Colori vari personaggi.
-    private static readonly string ColorMainCharacter = "#12e6bb";
-    private static readonly string ColorHelperCharacter = "#05a13b";
-    private static readonly string ColorEnemyCharacter = "#9e2416";
-    private static readonly string ColorNarratorCharacter = "#dedddc";
+    private static readonly string ColorMainCharacter = "#12e6bb bold";
+    private static readonly string ColorHelperCharacter = "#05a13b bold";
+    private static readonly string ColorEnemyCharacter = "#9e2416 bold";
+    private static readonly string ColorNarratorCharacter = "#dedddc bold italic";
+    private static readonly string ColorIntroCharacter = "#dedddc bold";
     
     //Vari testi preSalvati.
     private static readonly string ChooseAnOptionTitle = "[bold #f1f1f1]Scegli un'opzione:[/] ";
     
-    private static void WriteDialogue(string character, string characterName, string dialogue, bool liveWriting = true)
+    private static void WriteDialogue(string character, string kind, string characterName, string dialogue, bool liveWriting = true)
     {
+        if (String.IsNullOrEmpty(dialogue)) return;
         //sceglie il colore in base a quale personaggio parla.
-        string color = character switch
+        var color = character switch
         {
             "main"     => ColorMainCharacter,
             "helper"   => ColorHelperCharacter,
             "enemy"    => ColorEnemyCharacter,
+            "intro"    => ColorIntroCharacter,
             _          => ColorNarratorCharacter
         };
+
+        var rules = kind switch
+        {
+            "dialogue" => "",
+            "narration" => "italic",
+            "thought" => "italic",
+            _ => ""
+        };
+
+        //Se le regole di formattazione contengono la parola "italic", allora stamperà un * all'inizio e alla fine
+        var thought = rules.Contains("italic")? "*" : "";
         
         //rimpiazza i placeholder con i veri nomi.
         var finalCharName = ReplacePlaceholders(characterName);
         var finalDialogue = ReplacePlaceholders(dialogue);
-        
+
         //Stampa il nome indipendentemente se c'è il liveWriting o no.
         AnsiConsole.Markup($"[{color}][[{finalCharName}]][/]: ");
+        
         if (liveWriting)
         {
-            LiveWriting(finalDialogue);
+            LiveWriting(finalDialogue, thought, rules);
             return;
         }
-        AnsiConsole.Markup($"{finalDialogue}\n");
+        AnsiConsole.Markup($"[{rules}]{thought}{finalDialogue}{thought}[/]\n");
     }
 
-    private static void LiveWriting(string dialogue) //Stampa aspettando x millisecondi tra una lettera e l'altra.
+    private static void LiveWriting(string dialogue, string thought, string rules = "")
     {
-        foreach (var k in dialogue)
+        // eventuale prefisso (ad es. * se pensiero)
+        if (!string.IsNullOrEmpty(thought))
+            AnsiConsole.Markup($"[{rules}]{thought}[/]");
+
+        int cursor = 0;
+        foreach (Match block in TagRegex.Matches(dialogue))
         {
-            AnsiConsole.Markup($"{k}");
+            // 1) testo normale PRIMA del tag → typewriter
+            if (block.Index > cursor)
+            {
+                string plain = dialogue.Substring(cursor, block.Index - cursor);
+                WritePlainSegment(plain, rules);
+            }
+
+            // 2) il tag completo (es. [bold]CRYOFALL![/]) → in un colpo solo
+            AnsiConsole.Markup(block.Value);
+
+            cursor = block.Index + block.Length;
+        }
+
+        // 3) testo NORMALE dopo l’ultimo tag
+        if (cursor < dialogue.Length)
+        {
+            string tail = dialogue.Substring(cursor);
+            WritePlainSegment(tail, rules);
+        }
+
+        // eventuale suffisso
+        if (!string.IsNullOrEmpty(thought))
+            AnsiConsole.Markup($"[{rules}]{thought}[/]");
+
+        AnsiConsole.WriteLine();          // newline finale
+    }
+
+    private static void WritePlainSegment(string segment, string rules)
+    {
+        foreach (char c in segment)
+        {
+            // se è testo "normale" e NON c'è alcuna regola -> Write più veloce
+            if (string.IsNullOrEmpty(rules))
+            {
+                AnsiConsole.Write(c);
+            }
+            else
+            {
+                // applica lo stile (italic, ecc.) al singolo carattere
+                AnsiConsole.Markup($"[{rules}]{Markup.Escape(c.ToString())}[/]");
+            }
             Thread.Sleep(20);
         }
-        AnsiConsole.Markup("\n");
     }
 
+
+
+    private static void AskPlayerHisName(string dialogue)
+    {
+        var inputName = AnsiConsole.Ask<string>(dialogue);
+        SetPlaceholder("playerName",inputName);
+    }
+
+    public static string GetPlaceHolders(string name)
+    {
+        var result = Vars.GetValueOrDefault(name);
+        return String.IsNullOrEmpty(result)? "" : result;
+    }
+    
     /// <summary>
     /// La funzione serve a far partire un dialogo.
     /// All'interno del file json, c'è un campo chiamato "next", serve a far capire alla funzione se c'è o meno
@@ -68,7 +143,8 @@ public static class ConsoleStylingWrite
     /// </summary>
     /// <param name="id"></param>
     /// <param name="msToWaitForLine"></param>
-    public static void StartDialogue(string id, int msToWaitForLine = 1000)
+    /// <param name="liveWriting"></param>
+    public static void StartDialogue(string id, int msToWaitForLine = 1000, bool liveWriting = true)
     {
         if (!Repo.TryGet(id, out var current))
         {
@@ -78,7 +154,12 @@ public static class ConsoleStylingWrite
 
         while (current is not null) //se il current.next non è null, allora continua a ciclare stampando i messaggi.
         {
-            WriteDialogue(current.Character,current.SpeakerName,current.Text);
+            switch (current.Action)
+            {
+                case "inputName": AskPlayerHisName(current.Text); break;
+                default: WriteDialogue(current.Character, current.Kind, current.SpeakerName,current.Text, liveWriting: liveWriting); break;
+            }
+            
     
             //Se c'è una scelta, allora stampa il menu selezionabile.
             if (current.Choices is { Count: > 0 })
@@ -89,6 +170,7 @@ public static class ConsoleStylingWrite
             else if (!string.IsNullOrEmpty(current.Next)) //Altrimenti, se non c'è. Stampa semplicemente il prossimo dialogo.
             {
                 current = Repo.Get(current.Next);
+                
             }
             else //se non esiste un prossimo dialogo, finisce e prosegue con il gioco.
             {
@@ -106,14 +188,16 @@ public static class ConsoleStylingWrite
         if (string.IsNullOrEmpty(raw))
             return raw;
 
-        string replaced = PhRegex.Replace(raw, m =>
+        // sostituiamo ogni <chiave> con il valore escapato
+        return PhRegex.Replace(raw, m =>
         {
             string key = m.Groups["key"].Value;
-            return Vars.TryGetValue(key, out var val) ? val : m.Value; // se manca, lascia <key>
-        });
 
-        // Protegge da caratteri di markup Spectre ([ ])
-        return Markup.Escape(replaced);
+            if (Vars.TryGetValue(key, out var val))
+                return Markup.Escape(val);   // protegge solo il valore
+
+            return m.Value;                  // se chiave mancante, lascia <chiave>
+        });
     }
     
     /// <summary>

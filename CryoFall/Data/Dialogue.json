@@ -1,5 +1,162 @@
 ﻿[
   {
+    "id": "end",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": ""
+  },
+  {
+    "id": "benvenuto",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "Ti diamo il [bold]Benvenuto[/] in questa nuova avventura! [bold]Iniziamo![/]",
+    "next": "intro"
+  },
+  {
+    "id": "intro",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "Puoi selezionare una delle opzioni qui sotto cliccando le frecce [bold]SU[/] e [bold]GIU[/]' sulla tua tastiera!",
+    "choices": 
+    [{
+      "label": "Voglio impostare il mio nome.",
+      "next": "sceltaNome"
+      },
+      {
+       "label": "Voglio conoscere la storia di [bold]CryoFall[/]",
+        "next": "CryoFallStory001"
+      }
+    ]
+  },
+  {
+    "id": "introNomeScelto",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "Ora puoi iniziare la tua avventura in [bold]CRYOFALL![/]",
+    "choices":
+    [{
+      "label": "Voglio impostare di nuovo il mio nome.",
+      "next": "sceltaNome"
+    },
+      {
+        "label": "Voglio conoscere la storia di [bold]CryoFall[/]",
+        "next": "CryoFallStory001"
+      },
+      {
+        "label": "[bold]INIZIA LA TUA STORIA![/]",
+        "next": "end"
+      }
+    ]
+  },
+  {
+    "id": "sceltaNome",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "action": "inputName",
+    "text": "Scegli il nome del tuo personaggio: ",
+    "next": "sceltaNomeConferma"
+  },
+  {
+    "id": "sceltaNomeConferma",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "[bold]<playerName>[/]... Bel nome! vuoi cambiarlo? ",
+    "choices": [
+      {
+      "label": "No, mi piace, voglio [bold]continuare[/].",
+      "next": "introNomeScelto"
+      },
+      {
+        "label": "Si, vorrei [bold]cambiarlo[/] in realtà.",
+        "next": "sceltaNome"
+      }
+    ]
+  },
+  {
+    "id": "CryoFallStory001",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "Anno 2089. Il progetto *CryoFall* nasce con un obiettivo chiaro: strappare l’umanità alla sua stessa estinzione.",
+    "next": "CryoFallStory002"
+  },
+  {
+    "id": "CryoFallStory002",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "La popolazione mondiale è crollata del 37 %. Carestie, guerre climatiche e pandemie hanno trasformato le metropoli in scheletri di cemento.",
+    "next": "CryoFallStory003"
+  },
+  {
+    "id": "CryoFallStory003",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "La Terra è ormai arida: niente campi, niente foreste. Solo pochi laboratori sotterranei riescono ancora a far germogliare una pianta, protetta da cupole d’acciaio e lampade a spettro completo.",
+    "next": "CryoFallStory004"
+  },
+  {
+    "id": "CryoFallStory004",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "Nelle università non si insegnano più storia o arte; si insegnano idroponica, ingegneria dei motori a fusione e… fuga planetaria.",
+    "next": "CryoFallStory005"
+  },
+  {
+    "id": "CryoFallStory005",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "Dopo anni di ricerca la SpoiceY presenta una flotta di navi-colonia in grado di ospitare poche migliaia di persone, dirette verso una *Nuova Terra* ancora da scoprire.",
+    "next": "CryoFallStory006"
+  },
+  {
+    "id": "CryoFallStory006",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "Ma i posti sono limitati. L’annuncio scatena rivolte: milioni comprendono di non avere un biglietto per il futuro.",
+    "next": "CryoFallStory007"
+  },
+  {
+    "id": "CryoFallStory007",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "Viene avviata una selezione drastica: scienziati, agricoltori, bambini con voti d’eccellenza e donne in età fertile hanno la priorità. Tutti gli altri restano a guardare i razzi levarsi in cielo.",
+    "next": "CryoFallStory008"
+  },
+  {
+    "id": "CryoFallStory008",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": "Tu sei uno dei pochi scelti. Mentre sali la passerella verso CryoFall, senti alle tue spalle il boato della folla e capisci che, da questo istante, ogni respiro sarà anche per chi non è potuto partire.",
+    "next": "intro"
+  },
+  {
     "id": "introIbernazione",
     "room": "ibernazione",
     "speakerName": "Narratore",
@@ -15,6 +172,15 @@
     "character": "narrator",
     "kind": "narration",
     "text": "Li guardi, vedi centinaia di famiglie in cerca di salvezza, bambini alzati in aria, senti urla, sai che tutto questo non è giusto... ",
+    "next": "intro_002.1"
+  },
+  {
+    "id": "intro_002.1",
+    "room": "ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Il tuo sogno si interrompe, inizi ad aprire lentamente gli occhi..",
     "next": "main_001"
   },
   {
@@ -41,7 +207,7 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Siamo già arrivati? cosa sta succedendo?",
+    "text": "Siamo arrivati? cosa sta succedendo?",
     "next": "intro_003"
   },
   {
@@ -59,7 +225,7 @@
     "speakerName": "<robotName>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Comandante <playerName>, parametri vitali: 87% oossigenazione. Tempo stimato per recupero cognitivo: 2 Minuti e 14 Secondi. Situazione critica rilevata.",
+    "text": "Comandante <playerName>, parametri vitali: 87% ossigenazione. Tempo stimato per recupero cognitivo: 2 Minuti e 14 Secondi. Situazione critica rilevata.",
     "choices": [
       {
       "label": "Cosa?",
@@ -77,7 +243,8 @@
     "speakerName": "<robotName>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "La situazione e grave, ci sono vari malfunzionamenti, serve l'intervento umano e bisogna agire ORA!"
+    "text": "La situazione è grave, ci sono vari malfunzionamenti, serve l'intervento umano e bisogna agire ORA!",
+    "next": "main_004"
   },
   {
     "id": "robot_003",
@@ -85,6 +252,155 @@
     "speakerName": "<robotName>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Non c'è tempo per le spiegazioni, forza, muoviti, alzati!"
+    "text": "Non c'è tempo per le spiegazioni, ci sono vari malfunzionamenti e serve l'intervento umano. FORZA!",
+    "next": "main_004"
+  },
+  {
+    "id": "main_004",
+    "room": "ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Che strano...",
+    "next": "main_005"
+  },
+  {
+    "id": "main_005",
+    "room": "ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "ok, forse dovrei alzarmi, ma non mi sento tanto bene, è stato un risveglio brusco..",
+    "next": "narrator_001"
+  },
+  {
+    "id": "narrator_001",
+    "room": "ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Ti senti disorientato, confuso, debole.",
+    "next": "main_006"
+  },
+  {
+    "id": "main_006",
+    "room": "ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Ok.. <robotName>, cosa c'è da fare, illustrami i problemi, ci penserò io!",
+    "next": "robot_005"
+  },
+  {
+    "id": "robot_005",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Tu? non sei da solo <playerName>, qui insieme a te ci sono anche [bold]<mainHelper>[/], [bold]<secondHelper>[/] e [bold]<thirdHelper>[/].",
+    "next": "robot_006"
+  },
+  {
+    "id": "robot_006",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Da protocollo, ho dovuto risvegliare i 4 responsabili della nave, ognuno di voi ha un compito, dovete andare in alcune zone della nave a risolvere i malfunzionamenti.",
+    "next": "robot_007"
+  },
+  {
+    "id": "robot_007",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "<secondHelper> e <thirdHelper> andranno nella zona di scarico, li si è verificata un anomalia piuttosto strana, i miei dati dicono che c'è stato un problema con il computer che gestisce lo scarico.",
+    "next": "robot_008"
+  },
+  {
+    "id": "robot_008",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Tu <secondHelper>, andrai nella stanza del carburante, a Nord, il mio sistema dice che c'è stata una perdita, bisogna controllare a fondo e controllare che non sia così.",
+    "next": "main_007"
+  },
+  {
+    "id": "main_007",
+    "room": "ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Una perdita? come è possibile, la nave avrebbe dato già problemi.. di che perdita sta parlando?",
+    "next": "robot_009"
+  },
+  {
+    "id": "robot_009",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "<playerName>, tu dovrai andare...",
+    "next": "robot_010"
+  },
+  {
+    "id": "robot_010",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "<playerName>, capisco il risveglio brusco, ma il mio algoritmo mi dice che lei non mi sta ascoltando, è così?",
+    "choices": 
+    [
+      {
+        "label": "no, scusa <robotName>, stavo pensando..",
+        "next" : "robot_011.1"
+      },
+      {
+        "label": "si.. ma continua pure",
+        "next": "robot_011.2"
+      },
+      {
+        "label": "In realtà si, non mi interessa tutto ciò, voglio tornare a dormire!",
+        "next": "robot_011.3"
+      }
+    ]
+  },
+  {
+    "id": "robot_011.1",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Non c'è tempo per pensare, ma solo per agire!",
+    "next": "robot_012"
+  },
+  {
+    "id": "robot_011.2",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ok, presta più attenzione sta volta.",
+    "next": "robot_012"
+  },
+  {
+    "id": "robot_011.3",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "<playerName>, Potrà tornare a dormire una volta risolti i problemi della nave, tornare a dormire ora comporterebbe morire.",
+    "next": "robot_012"
+  },
+  {
+    "id": "robot_012",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Come stavo dicendo, lei dovrà andare in."
   }
 ]

@@ -65,6 +65,7 @@ public sealed record DialogueLine(
     string Character,
     string Kind,
     string Text,
+    string? Action      = null,
     string? Next      = null,
     List<Choice>? Choices = null
 );

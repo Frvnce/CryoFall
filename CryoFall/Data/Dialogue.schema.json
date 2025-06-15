@@ -15,17 +15,21 @@
         "id":      { "type": "string" },
         "room":    
           { "type": "string",
-            "enum":  ["ibernazione","east_corridoio","stanza_tecnica"]},
+            "enum":  ["intro","ibernazione","east_corridoio","stanza_tecnica"]},
         "speakerName": 
         { "type": "string",
-          "enum":  ["Narratore","<playerName>","<mainHelper>","<robotName>","<secondHelper>"]},
+          "enum":  ["Introduzione","Narratore","<playerName>","<mainHelper>","<robotName>","<secondHelper>"]},
         "character": {
           "type": "string",
-          "enum": ["main", "helper", "enemy", "narrator"]
+          "enum": ["intro","main", "helper", "enemy", "narrator"]
         },
         "kind": {
           "type": "string",
-          "enum": ["dialogue", "narration", "thought"]
+          "enum": ["intro","dialogue", "narration", "thought"]
+        },
+        "action": {
+          "type": "string",
+          "enum": ["inputName"]
         },
         "text":    { "type": "string" },
         "choices": {
@@ -47,7 +51,7 @@
         "next":  { "type": "string" }
       },
       "required": ["label", "next"]
-    },
+    }
     
     
   }
