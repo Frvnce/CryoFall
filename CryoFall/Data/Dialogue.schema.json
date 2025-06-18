@@ -15,7 +15,7 @@
         "id":      { "type": "string" },
         "room":    
           { "type": "string",
-            "enum":  ["intro","ibernazione","east_corridoio","stanza_tecnica"]},
+            "enum":  ["intro","ibernazione","east_corridoio","stanza_tecnica","corridoio_ovest_2","corridoio_ovest_4","zona_di_scarico","zona_carburante_sud","corridoio_sud"]},
         "speakerName": 
         { "type": "string",
           "enum":  ["Introduzione","Narratore","<playerName>","<mainHelper>","<robotName>","<secondHelper>","<assistant>"]},
