@@ -1,8 +1,7 @@
-﻿using System.Diagnostics;
-using CryoFall.Character;
+﻿using CryoFall.Character;
+using CryoFall.Dialogue;
 using CryoFall.Items;
 using CryoFall.Rooms;
-using CryoFall.Utils;
 namespace CryoFall;
 
 class Program
@@ -23,7 +22,6 @@ class Program
             itemsManager.AddItem(item);
         }
         
-        
         //Manager di tutte le stanze presenti in gioco.
         var roomsManager = new RoomsManager();
         foreach (Room room in roomRepo.GetAllRoomsObjects())
@@ -35,17 +33,10 @@ class Program
             roomsManager.AddRoom(finalRoom);
         }
         roomsManager.SetRooms(roomRepo.GetAllNearRooms(roomsManager.GetRooms(), roomsManager)); // -> Salvo tutte le stanze qui dentro.
-
-        /*foreach (var room in roomsManager.GetRooms())
-        {
-            Console.Write($"Item in stanza {room.Id}: ");
-            foreach (var item in room.GetItems())
-            {
-                Console.Write($"{item.Id} - {item.Name} | ");
-            }
-            Console.WriteLine();
-        }*/
-
+        
+        // crea e avvia il CommandsManager
+        
+        
         var live = false;
         
         //Introduzione, dialogo a scelte multiple per spiegare la storia e far scegliere il nome al giocatore.
@@ -57,18 +48,7 @@ class Program
         //Introduzione, primi dialoghi con robot e amici.
         ConsoleStylingWrite.StartDialogue("introIbernazione",liveWriting: live);
         
-        //TODO Inizio gioco, scelta di dove andare, raccogliere oggetti ecc.
-
-        bool endGame = true;
-        while (endGame)
-        {
-            if (player.CurrentRoom == roomsManager.FindRoom("sala_ibernazione"))
-            {
-                
-            }
-            
-            endGame = false;
-        }
+        //TODO Inizio gioco, comandi usabili ecc.
         
     }
 }

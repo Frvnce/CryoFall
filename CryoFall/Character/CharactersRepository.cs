@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace CryoFall.Utils;
+namespace CryoFall.Character;
 
 /// <summary>
 /// Carica i personaggi (solo Nome + PlaceHolder)

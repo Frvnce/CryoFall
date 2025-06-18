@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
-using CryoFall.Items;
 
-namespace CryoFall.Utils
+namespace CryoFall.Items
 {
     /// <summary>
     /// Rappresenta un singolo item come definito in item.json.

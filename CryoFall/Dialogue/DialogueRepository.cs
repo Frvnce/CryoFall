@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace CryoFall.Utils;
+namespace CryoFall.Dialogue;
 
 /// <summary>
 /// Legge il file JSON e fornisce accesso rapido alle battute.

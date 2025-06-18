@@ -21,7 +21,7 @@ public class MainCharacter(string name, int maxCapacity)
     /// <summary>
     /// Stanza in cui si trova attualmente il giocatore
     /// </summary>
-    public Room? CurrentRoom { get; set; }
+    public Room CurrentRoom { get; set; }
     
     /// <summary>Inventario personale del giocatore.</summary>
     public Inventory Inventory { get; } = new(maxCapacity);

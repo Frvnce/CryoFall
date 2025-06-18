@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
+using CryoFall.Character;
 using Spectre.Console;
-namespace CryoFall.Utils;
+namespace CryoFall.Dialogue;
 
 public static class ConsoleStylingWrite
 {
@@ -23,7 +24,11 @@ public static class ConsoleStylingWrite
     
     //Vari testi preSalvati.
     private static readonly string ChooseAnOptionTitle = "[bold #f1f1f1]Scegli un'opzione:[/] ";
-    
+
+    public static void HelperCmd(string dialogue)
+    {
+        WriteDialogue("helper","help","Assistente",dialogue,false);
+    }
     private static void WriteDialogue(string character, string kind, string characterName, string dialogue, bool liveWriting = true)
     {
         if (String.IsNullOrEmpty(dialogue)) return;

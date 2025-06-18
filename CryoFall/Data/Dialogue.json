@@ -401,6 +401,44 @@
     "speakerName": "<robotName>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Come stavo dicendo, lei dovrà andare in."
+    "text": "Come stavo dicendo, lei dovrà andare nella stanza tecnica per recuperare la [bold]Chiave Magnetica di livello 5[/].", 
+    "next": "robot_013"
+  },
+  {
+    "id": "robot_013",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Tieni, questi occhiali ti permetteranno di parlare con un [#05a13b bold]Assistente[/] virtuale, ti aiuterà e ti guiderà nella tua missione!",
+    "next": "assistente_001"
+  },
+  {
+    "id": "assistente_001",
+    "room": "ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Osservi con attenzione gli occhiali che ti ha dato <robotName>, sembrano avere una telecamera frontale e degli altoparlanti sulle stecche.",
+    "next": "main_008"
+  },
+  {
+    "id": "main_008",
+    "room": "ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Grazie mille, ma come si usano?",
+    "next": "robot_014"
+  },
+  {
+    "id": "robot_014",
+    "room": "ibernazione",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Lo scoprirai presto, ora devi andare, ci vediamo alla fine di tutto! Ricordati di prendere il [bold]Codice d'accesso[/] per uscire!"
   }
+  
+  
 ]

@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using CryoFall.Rooms;
 
-namespace CryoFall.Utils
+namespace CryoFall.Rooms
 {
     /// <summary>
     /// Rappresenta le stanze adiacenti per una RoomDefinition.
