@@ -1,5 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using CryoFall.Character;
+using CryoFall.Commands;
 using Spectre.Console;
 namespace CryoFall.Dialogue;
 
@@ -29,6 +30,16 @@ public static class ConsoleStylingWrite
     {
         WriteDialogue("helper","help","Assistente",dialogue,false);
     }
+
+    public static void WriteCmdHelp(CommandInfo cmd)
+    {
+        
+        //WriteDialogue("helper","help",$"{cmd.Name}",$"{cmd.Description} \n \t[bold]Comando:[/] [bold]{cmd.Cmd}[/]\n",false);
+        WriteDialogue("helper","help",$"{cmd.Cmd}",$"{cmd.Description}",false);
+        
+    }
+    
+    
     private static void WriteDialogue(string character, string kind, string characterName, string dialogue, bool liveWriting = true)
     {
         if (String.IsNullOrEmpty(dialogue)) return;
@@ -124,10 +135,10 @@ public static class ConsoleStylingWrite
 
 
 
-    private static void AskPlayerHisName(string dialogue)
+    private static void AskPlayerPlaceHolders(string placeHolder, string dialogue)
     {
         var inputName = AnsiConsole.Ask<string>(dialogue);
-        SetPlaceholder("playerName",inputName);
+        SetPlaceholder(placeHolder,inputName);
     }
 
     public static string GetPlaceHolders(string name)
@@ -156,7 +167,8 @@ public static class ConsoleStylingWrite
         {
             switch (current.Action)
             {
-                case "inputName": AskPlayerHisName(current.Text); break;
+                case "inputName": AskPlayerPlaceHolders("playerName",current.Text); break;
+                case "inputNameAssistente": AskPlayerPlaceHolders("assistant",current.Text); break;
                 default: WriteDialogue(current.Character, current.Kind, current.SpeakerName,current.Text, liveWriting: liveWriting); break;
             }
             

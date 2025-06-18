@@ -10,5 +10,9 @@
   {
     "Nome": "Lena",
     "PlaceHolder": "mainHelper"
+  },
+  {
+    "Nome": "Assistente",
+    "PlaceHolder": "assistant"
   }
 ]

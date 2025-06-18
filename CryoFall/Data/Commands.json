@@ -3,14 +3,14 @@
     "id": "tp",
     "name": "Teletrasporto",
     "cmd_description": "Utilizza il teletrasporto per andare in un'altra stanza.",
-    "cmd": "teletrasporta <room>",
+    "cmd": "teletrasporta <stanza>",
     "alias": ["tp"]
   },
   {
     "id": "move",
     "name": "Spostamento",
-    "cmd_description": "Spostati nelle direzioni disponibili.",
-    "cmd": "muoviti <direction>",
+    "cmd_description": "Spostati nelle direzioni [bold]disponibili[/]. [italic](Nord|Sud|Est|Ovest)[/]",
+    "cmd": "muoviti <direzione>",
     "alias": ["move"]
   },
   {
@@ -42,6 +42,6 @@
     "id": "analyze",
     "name": "Analizza",
     "cmd_description": "Analizza un oggetto o una stanza in cerca di dettagli.",
-    "cmd": "analizza <something>"
+    "cmd": "analizza <qualcosa>"
   }
 ]

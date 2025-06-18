@@ -8,6 +8,15 @@
     "text": ""
   },
   {
+    "id": "waitForCmd",
+    "room": "intro",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Ok, devo fare [bold]qualcosa[/]!",
+    "next": "end"
+  },
+  {
     "id": "benvenuto",
     "room": "intro",
     "speakerName": "Introduzione",
@@ -411,10 +420,10 @@
     "character": "helper",
     "kind": "dialogue",
     "text": "Tieni, questi occhiali ti permetteranno di parlare con un [#05a13b bold]Assistente[/] virtuale, ti aiuterà e ti guiderà nella tua missione!",
-    "next": "assistente_001"
+    "next": "robot_013.1"
   },
   {
-    "id": "assistente_001",
+    "id": "robot_013.1",
     "room": "ibernazione",
     "speakerName": "Narratore",
     "character": "narrator",
@@ -437,8 +446,54 @@
     "speakerName": "<robotName>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Lo scoprirai presto, ora devi andare, ci vediamo alla fine di tutto! Ricordati di prendere il [bold]Codice d'accesso[/] per uscire!",
-    "next": "end"
+    "text": "Lo scoprirai presto, ora devi andare, ci vediamo alla fine di tutto! Ricordati di prendere il [bold]Codice d'accesso[/] per uscire!\nAh e.. dagli un nome se vuoi.",
+    "next": "assistente_001"
+  },
+  {
+    "id": "assistente_001",
+    "room": "ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Quindi devo dargli anche un nome?",
+    "choices": [
+      {
+    "label": "Dai un nome al tuo assistente",
+    "next": "sceltaNomeAssistente"
+      },
+      {
+        "label": "Non mi interessa dare un nome, si chiamerà [bold]Assistente[/] e basta.",
+        "next": "assistente_002"
+      }
+    ]
+  },
+  {
+    "id": "sceltaNomeAssistente",
+    "room": "ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "action": "inputNameAssistente",
+    "text": "Il tuo nome sarà... ",
+    "next": "sceltaNomeAssistenteConferma"
+  },
+  {
+    "id": "sceltaNomeAssistenteConferma",
+    "room": "ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "<assistant>, carino, vuoi cambiarlo?",
+    "choices": [
+      {
+        "label": "Si voglio cambiarlo",
+        "next": "sceltaNomeAssistente"
+      },
+      {
+        "label": "No, mi piace.",
+        "next": "assistente_002"
+      }
+    ]
   },
   {
     "id": "assistente_002",
@@ -482,7 +537,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "<nome_inserito>...Ah sì? Mi fido! Ok ok… panico panico! Corri nella Stanza Tecnica che stiamo per morire tutti!!! Digita [#808080 bold]HELP[/] per aiutarti nei movimenti! O almeno credo...",
+    "text": "<assistant>...Ah sì? Mi fido! Ok ok… panico panico! Corri nella Stanza Tecnica che stiamo per morire tutti!!! Digita [#808080 bold]HELP[/] per aiutarti nei movimenti! O almeno credo...",
     "next": "main_011"
   },
   {
@@ -536,8 +591,8 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Forse dovrei usare il comando [#808080 bold]HELP[/] come mi ha suggerito <nome_inserito>",
-    "next": "end"
+    "text": "Forse dovrei usare il comando [#808080 bold]HELP[/] come mi ha suggerito <assistente>",
+    "next": "waitForCmd"
   },
   {
     "id": "atto1_001",

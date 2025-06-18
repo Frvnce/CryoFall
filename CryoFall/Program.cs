@@ -1,7 +1,10 @@
 ﻿using CryoFall.Character;
+using CryoFall.Commands;
 using CryoFall.Dialogue;
 using CryoFall.Items;
 using CryoFall.Rooms;
+using Spectre.Console;
+
 namespace CryoFall;
 
 class Program
@@ -9,7 +12,7 @@ class Program
     private static void Main(string[] args)
     {
         //TODO Dare la scelta iniziale al giocatore se far partire una partita da zero o se caricare un salvataggio (solo se c'è già).
-        
+        var cmdManager = new CommandManager();
         
         //Ogni file "Repository" legge il json di una determinata cosa.
         var roomRepo = RoomRepository.Load();
@@ -46,9 +49,21 @@ class Program
         player.CurrentRoom = roomsManager.FindRoom("sala_ibernazione");
         
         //Introduzione, primi dialoghi con robot e amici.
-        ConsoleStylingWrite.StartDialogue("introIbernazione",liveWriting: live);
+        ConsoleStylingWrite.StartDialogue("introIbernazione",10,liveWriting: live);
+        bool isGameOver = false;
         
         //TODO Inizio gioco, comandi usabili ecc.
         
+    }
+
+    static void ReadCmd(CommandManager cmdManager)
+    {
+        ConsoleStylingWrite.StartDialogue("benvenuto",msToWaitForLine:500);
+        var cmd = "";
+        do
+        {
+            Console.Write("> ");
+            cmd = Console.ReadLine();
+        } while (!cmdManager.ReadCommand(cmd));
     }
 }
