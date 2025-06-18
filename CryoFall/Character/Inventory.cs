@@ -57,19 +57,17 @@ namespace CryoFall.Character
         /// <paramref name="itemName"/> e lo mette in cima,
         /// se il peso restante lo consente.
         /// </summary>
-        public bool TryPickUp(Room? room, string itemName)
+        /*public bool TryPickUp(Room? room, string itemName)
         {
             if (room is null) return false;
 
-            var candidate = room.Items
-                .FirstOrDefault(i => i.Name.Equals(itemName,
-                                                   StringComparison.OrdinalIgnoreCase));
+            var candidate = room.Items.FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
             if (candidate is null) return false;
             if (CurrentLoad + candidate.Weight > _maxCapacity) return false;
 
             room.RemoveItem(candidate);
             _stack.Add(candidate);
             return true;
-        }
+        }*/
     }
 }

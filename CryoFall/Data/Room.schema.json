@@ -22,7 +22,7 @@
           "minLength": 1,
           "description": "Nome leggibile della stanza"
         },
-        "description": {
+        "room_description": {
           "type": "string",
           "minLength": 1,
           "description": "Descrizione testuale della stanza"

@@ -10,8 +10,19 @@
     /// Peso dell’oggetto in unità arbitrarie (Chilogrammi).
     /// Deve essere maggiore o uguale a zero.
     /// </param>
-    public class Item(string name, string description, double weight = 0)
+    public class Item(string id, string name, string description, double weight, bool isPickalbe, bool isUsable, bool isAnalyzable, string color)
     {
+        /// <summary>ID identificativo dell’oggetto.</summary>
+        /// <exception cref="ArgumentNullException">
+        /// Il valore assegnato è <c>null</c>.
+        /// </exception>
+        public string Id
+        {
+            get => _id;
+            set => _id = value ?? throw new ArgumentNullException(nameof(value));
+        }
+        private string _id = id;
+        
         /// <summary>Nome identificativo dell’oggetto.</summary>
         /// <exception cref="ArgumentNullException">
         /// Il valore assegnato è <c>null</c>.
@@ -53,5 +64,50 @@
         private double _weight = weight >= 0
             ? weight
             : throw new ArgumentOutOfRangeException(nameof(weight), "Il peso non può essere negativo.");
+        
+        /// <summary>Capire se l'oggetto è raccoglibile o no.</summary>
+        /// <exception cref="ArgumentNullException">
+        /// Il valore assegnato è <c>null</c>.
+        /// </exception>
+        public bool IsPickable
+        {
+            get => _isPickalbe;
+            set => _isPickalbe = value;
+        }
+        private bool _isPickalbe = isPickalbe;
+        
+        /// <summary>Capire se l'oggetto è usabile o no.</summary>
+        /// <exception cref="ArgumentNullException">
+        /// Il valore assegnato è <c>null</c>.
+        /// </exception>
+        public bool IsUsable
+        {
+            get => _isUsable;
+            set => _isUsable = value;
+        }
+        private bool _isUsable = isUsable;
+        
+        /// <summary>Capire se l'oggetto è analizzabile o no.</summary>
+        /// <exception cref="ArgumentNullException">
+        /// Il valore assegnato è <c>null</c>.
+        /// </exception>
+        public bool IsAnalyzable
+        {
+            get => _isAnalyzable;
+            set => _isAnalyzable = value;
+        }
+        private bool _isAnalyzable = isAnalyzable;
+        
+        /// <summary>Colore dell'oggetto.</summary>
+        /// <exception cref="ArgumentNullException">
+        /// Il valore assegnato è <c>null</c>.
+        /// </exception>
+        public string Color
+        {
+            get => _color;
+            set => _color = value ?? throw new ArgumentNullException(nameof(value));
+        }
+        private string _color = color;
+        
     }
 }

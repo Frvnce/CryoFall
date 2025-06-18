@@ -1,4 +1,5 @@
 ﻿using CryoFall.Items;
+using CryoFall.Utils;
 
 namespace CryoFall.Rooms
 {
@@ -8,10 +9,10 @@ namespace CryoFall.Rooms
     /// </summary>
     public struct RoomsNear
     {
-        public Room? UpperRoom { get; set; }
-        public Room? LowerRoom { get; set; }
-        public Room? LeftRoom  { get; set; }
-        public Room? RightRoom { get; set; }
+        public Room? UpperRoom;
+        public Room? LowerRoom;
+        public Room? LeftRoom;
+        public Room? RightRoom;
     }
 
     /// <summary>
@@ -19,11 +20,24 @@ namespace CryoFall.Rooms
     /// lo stato di blocco/sblocco, gli oggetti presenti e i collegamenti
     /// con le stanze adiacenti.
     /// </summary>
-    public class Room(string nameOfTheRoom,
+    public class Room(string id,
+                      string nameOfTheRoom,
                       string descriptionOfTheRoom,
-                      bool   isLocked)
+                      bool   isLocked,
+                      string   unlockKeyId,
+                      AdjacentDefinition adjacentRooms,
+                      List<string>? items,
+                      List<string>? persons)
     {
         // ─── Dati di base ────────────────────────────────────────────────
+
+        public string Id
+        {
+            get => _id;
+            set => _id = value ?? throw new ArgumentNullException(nameof(value));
+        }
+        private string _id = id;
+        
         public string NameOfTheRoom
         {
             get => _nameOfTheRoom;
@@ -45,16 +59,49 @@ namespace CryoFall.Rooms
         }
         private bool _isLocked = isLocked;
 
+        public string UnlockKeyId
+        {
+            get => _unlockKeyId;
+            set => _unlockKeyId = value ?? throw new ArgumentNullException(nameof(value));
+        }
+        private string _unlockKeyId = unlockKeyId;
+        
+        public List<string> ItemsString
+        {
+            get => _itemsString;
+            set => _itemsString = value ?? throw new ArgumentNullException(nameof(value));
+        }
+        private List<string> _itemsString = items;
+
+        public List<string> PersonsInTheRoom
+        {
+            get => _personsInTheRoom;
+            set => _personsInTheRoom = value ?? throw new ArgumentNullException(nameof(value));
+        }
+        private List<string> _personsInTheRoom = persons;
+
+        // ─── Stanze adiacenti ────────────────────────────────────────────
+        public RoomsNear NearRooms;
+
+        public AdjacentDefinition AdjacentRooms
+        {
+            get => _adjacentRooms;
+            set => _adjacentRooms = value ?? throw new ArgumentNullException(nameof(value));
+        }
+        private AdjacentDefinition _adjacentRooms = adjacentRooms;
+
         // ─── Oggetti presenti nella stanza ──────────────────────────────
         private readonly List<Item> _items = new();
 
-        /// <summary>Vista in sola lettura degli oggetti presenti.</summary>
-        public IReadOnlyList<Item> Items => _items.AsReadOnly();
-
+        public List<Item> GetItems()
+        {
+            return _items;
+        }
+        
         /// <summary>Aggiunge un oggetto alla stanza.</summary>
         public void AddItem(Item item)
         {
-            if (item is null) throw new ArgumentNullException(nameof(item));
+            if (item is null) return;
             _items.Add(item);
         }
 
@@ -74,12 +121,6 @@ namespace CryoFall.Rooms
             return found;
         }
 
-        // ─── Stanze adiacenti ────────────────────────────────────────────
-        public RoomsNear NearRooms
-        {
-            get => _nearRooms;
-            set => _nearRooms = value;
-        }
-        private RoomsNear _nearRooms;
+        
     }
 }

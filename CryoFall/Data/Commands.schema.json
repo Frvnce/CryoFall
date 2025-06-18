@@ -1,0 +1,41 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "Commands.schema.json",
+  "title": "Commands CryoFall",
+  "type": "array",
+
+  "items": { "$ref": "#/$defs/Commands" },
+
+  "$defs": {
+    "Commands": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identificativo del comando"
+        },
+        "name": {
+          "type": "string",
+          "description": "Nome del comando da visualizzare in game."
+        },
+        "cmd_description": {
+          "type": "string"
+        },
+        "cmd": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Comando da effettuare"
+        },
+        "alias": {
+          "type": "array",
+          "description": "Alias del comando, si può scrivere al posto della parola sopra.",
+          "items": {"type": "string"}
+        }
+      },
+
+      "required": ["id","name","cmd_description","cmd"]
+    }
+  }
+}

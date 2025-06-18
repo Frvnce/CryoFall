@@ -3,6 +3,38 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
+        <entry key="SchemaCharacters">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="SchemaCharacters" />
+              <option name="relativePathToSchema" value="CryoFall/Data/Characters.schema.json" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="CryoFall/Data/Characters.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
+        <entry key="SchemaCommands">
+          <value>
+            <SchemaInfo>
+              <option name="name" value="SchemaCommands" />
+              <option name="relativePathToSchema" value="CryoFall/Data/Commands.schema.json" />
+              <option name="applicationDefined" value="true" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value="CryoFall/Data/Commands.json" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
         <entry key="SchemaDialogue">
           <value>
             <SchemaInfo>
@@ -28,10 +60,10 @@
               <option name="patterns">
                 <list>
                   <Item>
-                    <option name="path" value="CryoFall/Data/Item.schema.json" />
+                    <option name="path" value="CryoFall/Data/Item.json" />
                   </Item>
                   <Item>
-                    <option name="path" value="CryoFall/Data/Item.json" />
+                    <option name="path" value="CryoFall/Data/Item.schema.json" />
                   </Item>
                 </list>
               </option>

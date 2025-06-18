@@ -1,0 +1,47 @@
+﻿[
+  {
+    "id": "tp",
+    "name": "Teletrasporto",
+    "cmd_description": "Utilizza il teletrasporto per andare in un'altra stanza.",
+    "cmd": "teletrasporta <room>",
+    "alias": ["tp"]
+  },
+  {
+    "id": "move",
+    "name": "Spostamento",
+    "cmd_description": "Spostati nelle direzioni disponibili.",
+    "cmd": "muoviti <direction>",
+    "alias": ["move"]
+  },
+  {
+    "id": "help",
+    "name": "Aiuto",
+    "cmd_description": "Utilizza il comando per mostrare i vari comandi e le loro spiegazioni.",
+    "cmd": "help"
+  },
+  {
+    "id": "use",
+    "name": "Usa",
+    "cmd_description": "Usa l'oggetto che hai in mano",
+    "cmd": "usa"
+  },
+  {
+    "id": "remove",
+    "name": "Lascia",
+    "cmd_description": "Rimuovi l'oggetto che hai in mano e lo posizioni nella stanza",
+    "cmd": "lascia"
+  },
+  {
+    "id": "visualizeInventory",
+    "name": "Visualizza Inventario",
+    "cmd_description": "Visualizzi il tuo inventario.",
+    "cmd": "inventario",
+    "alias": ["inv","inventory"]
+  },
+  {
+    "id": "analyze",
+    "name": "Analizza",
+    "cmd_description": "Analizza un oggetto o una stanza in cerca di dettagli.",
+    "cmd": "analizza <something>"
+  }
+]

@@ -1,0 +1,29 @@
+﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "Characters.schema.json",
+  "title": "Characters CryoFall",
+  "type": "array",
+
+  "items": { "$ref": "#/$defs/Characters" },
+
+  "$defs": {
+    "Characters": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "Nome": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Nome visualizzato nei dialoghi"
+        },
+        "PlaceHolder": {
+          "type": "string",
+          "description": "Placeholder associato (es. <robotName>)"
+        }
+      },
+
+      "required": ["Nome", "PlaceHolder"]
+    }
+  }
+}

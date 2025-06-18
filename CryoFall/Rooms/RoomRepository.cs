@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
+using CryoFall.Rooms;
 
 namespace CryoFall.Utils
 {
@@ -29,7 +26,7 @@ namespace CryoFall.Utils
         List<string>? Items,
         List<string>? Persons
     );
-
+    
     /// <summary>
     /// Repository per l'accesso alle stanze definite in room.json.
     /// </summary>
@@ -44,6 +41,48 @@ namespace CryoFall.Utils
             _byId = rooms.ToDictionary(r => r.Id, StringComparer.OrdinalIgnoreCase);
         }
 
+        public List<Room> GetAllRoomsObjects()
+        {
+            List<Room> rooms = new();
+            foreach (var room in _allRooms)
+            {
+                rooms.Add(new Room(room.Id, room.Name, room.Description, room.IsLocked, room.UnlockKeyId, room.AdjacentRooms, room.Items, room.Persons));
+            }
+            return rooms;
+        }
+
+        public List<Room> GetAllNearRooms(List<Room> rooms,RoomsManager manager)
+        {
+            for (var i = 0; i < rooms.Count; i++)
+            {
+                var leftRoom = _allRooms[i].AdjacentRooms.West;
+                var rightRoom = _allRooms[i].AdjacentRooms.East;
+                var lowerRoom = _allRooms[i].AdjacentRooms.South;
+                var upperRoom = _allRooms[i].AdjacentRooms.North;
+
+                if (leftRoom != null)
+                {
+                    rooms[i].NearRooms.LeftRoom = manager.FindRoom(leftRoom);
+                }
+
+                if (rightRoom != null)
+                {
+                    rooms[i].NearRooms.RightRoom = manager.FindRoom(rightRoom);
+                }
+
+                if (upperRoom != null)
+                {
+                    rooms[i].NearRooms.UpperRoom = manager.FindRoom(upperRoom);
+                }
+
+                if (lowerRoom != null)
+                {
+                    rooms[i].NearRooms.LowerRoom = manager.FindRoom(lowerRoom);
+                }
+            }
+            return rooms;
+        }
+        
         /// <summary>
         /// Carica il file "room.json" dalla cartella Data/ (output directory).
         /// </summary>

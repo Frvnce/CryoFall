@@ -5,15 +5,10 @@ namespace CryoFall.Utils;
 public static class ConsoleStylingWrite
 {
     //Ottenere il file dei dialoghi.
-    private static readonly DialogueRepository Repo = DialogueRepository.Load();
+    private static readonly DialogueRepository RepoDialogue = DialogueRepository.Load();
     
+    private static Dictionary<string, string> PlaceHoldersNames = CharacterRepository.PlaceholdersNames;
     
-    private static readonly Dictionary<string, string> Vars = 
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            ["robotName"]  = "AX-7"
-            // aggiungi altri segnaposto qui o in runtime
-        };
     private static readonly Regex PhRegex =
         new(@"<(?<key>[^>]+)>", RegexOptions.Compiled);
     private static readonly Regex TagRegex =
@@ -132,7 +127,7 @@ public static class ConsoleStylingWrite
 
     public static string GetPlaceHolders(string name)
     {
-        var result = Vars.GetValueOrDefault(name);
+        var result = PlaceHoldersNames.GetValueOrDefault(name);
         return String.IsNullOrEmpty(result)? "" : result;
     }
     
@@ -146,7 +141,7 @@ public static class ConsoleStylingWrite
     /// <param name="liveWriting"></param>
     public static void StartDialogue(string id, int msToWaitForLine = 1000, bool liveWriting = true)
     {
-        if (!Repo.TryGet(id, out var current))
+        if (!RepoDialogue.TryGet(id, out var current))
         {
             Console.WriteLine($"[ERRORE] ID '{id}' non trovato nei dialoghi");
             return;
@@ -165,11 +160,11 @@ public static class ConsoleStylingWrite
             if (current.Choices is { Count: > 0 })
             {
                 int pick = ShowMenu(current.Choices);
-                current  = Repo.Get(current.Choices[pick].Next);
+                current  = RepoDialogue.Get(current.Choices[pick].Next);
             }
             else if (!string.IsNullOrEmpty(current.Next)) //Altrimenti, se non c'è. Stampa semplicemente il prossimo dialogo.
             {
-                current = Repo.Get(current.Next);
+                current = RepoDialogue.Get(current.Next);
                 
             }
             else //se non esiste un prossimo dialogo, finisce e prosegue con il gioco.
@@ -193,7 +188,7 @@ public static class ConsoleStylingWrite
         {
             string key = m.Groups["key"].Value;
 
-            if (Vars.TryGetValue(key, out var val))
+            if (PlaceHoldersNames.TryGetValue(key, out var val))
                 return Markup.Escape(val);   // protegge solo il valore
 
             return m.Value;                  // se chiave mancante, lascia <chiave>
@@ -207,7 +202,7 @@ public static class ConsoleStylingWrite
     /// <param name="value"></param>
     public static void SetPlaceholder(string key, string value)
     {
-        Vars[key] = value;
+        PlaceHoldersNames[key] = value;
     }
 
 
@@ -218,20 +213,22 @@ public static class ConsoleStylingWrite
     /// </summary>
     private static int ShowMenu(IReadOnlyList<Choice> choices)
     {
-        //Creo la selezione
+        // 1. Label “visibili” dopo ReplacePlaceholders
+        var display = choices
+            .Select(c => ReplacePlaceholders(c.Label))
+            .ToList();                         // indice i ↔ choices[i]
+
+        // 2. Prompt Spectre
         var prompt = new SelectionPrompt<string>()
             .Title(ChooseAnOptionTitle)
-            .AddChoices(choices.Select(c => ReplacePlaceholders(c.Label)));
+            .AddChoices(display);
 
-        //stampo la selezione
         string selected = AnsiConsole.Prompt(prompt);
 
-        // Ottengo il numero della scelta in base a ciò che è stato scelto, così da riportarlo e far proseguire il testo.
-        int index = choices
-            .Select((c, i) => new {c.Label, Index = i})
-            .First(t => t.Label == selected)
-            .Index;
-
+        // 3. Ricava l’indice dalla lista display
+        int index = display.IndexOf(selected);   // sempre ≥0 perché arriva dal Prompt
+        
         return index;
     }
+
 }

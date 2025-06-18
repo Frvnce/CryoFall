@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using CryoFall.Items;
 
 namespace CryoFall.Utils
 {
@@ -75,5 +76,16 @@ namespace CryoFall.Utils
         /// Elenco completo di tutti gli item (utile per debug, editor, ecc.).
         /// </summary>
         public IReadOnlyList<ItemDefinition> AllItems => _allItems;
+        
+        
+        public List<Item> GetAllItemsFromJson()
+        {
+            List<Item> itemsList = new();
+            foreach (var item in _allItems)
+            {
+                itemsList.Add(new Item(item.Id,item.Name,item.Description,item.Weight,item.IsPickable,item.IsUsable,item.IsAnalyzable,item.Color));
+            }
+            return itemsList;
+        }
     }
 }

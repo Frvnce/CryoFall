@@ -29,8 +29,8 @@
       "next": "sceltaNome"
       },
       {
-       "label": "Voglio conoscere la storia di [bold]CryoFall[/]",
-        "next": "CryoFallStory001"
+       "label": "Voglio usare un nome casuale.",
+        "next": "introNomeScelto"
       }
     ]
   },
@@ -154,7 +154,7 @@
     "character": "intro",
     "kind": "intro",
     "text": "Tu sei uno dei pochi scelti. Mentre sali la passerella verso CryoFall, senti alle tue spalle il boato della folla e capisci che, da questo istante, ogni respiro sarà anche per chi non è potuto partire.",
-    "next": "intro"
+    "next": "introNomeScelto"
   },
   {
     "id": "introIbernazione",

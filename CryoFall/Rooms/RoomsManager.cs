@@ -1,4 +1,6 @@
-﻿namespace CryoFall.Rooms
+﻿using CryoFall.Items;
+
+namespace CryoFall.Rooms
 {
     /// <summary>
     /// Gestisce l’insieme di tutte le <see cref="Room"/> conosciute dal gioco:
@@ -7,12 +9,17 @@
     public class RoomsManager
     {
         // ─── Lista interna delle stanze ─────────────────────────────────────
-        private readonly List<Room> _rooms = new();
+        private List<Room> _rooms = new();
 
-        /// <summary>
-        /// Restituisce una vista in sola lettura sulle stanze attualmente registrate.
-        /// </summary>
-        public IReadOnlyList<Room> Rooms => _rooms;
+        public List<Room> GetRooms()
+        {
+            return _rooms;
+        }
+
+        public void SetRooms(List<Room> rooms)
+        {
+            _rooms = rooms;
+        }
 
         // ─── Operazioni principali ─────────────────────────────────────────
         /// <summary>
@@ -46,14 +53,30 @@
         public bool RemoveRoom(Room room) => _rooms.Remove(room);
 
         /// <summary>
-        /// Cerca una stanza per nome (case-insensitive).
+        /// Cerca una stanza per Id (case-insensitive).
         /// </summary>
-        /// <param name="name">Nome della stanza da cercare.</param>
+        /// <param name="id">Id della stanza da cercare.</param>
         /// <returns>
         /// L’istanza di <see cref="Room"/> trovata, oppure <c>null</c> se non esiste.
         /// </returns>
-        public Room? FindRoom(string name) =>
-            _rooms.FirstOrDefault(r =>
-                r.NameOfTheRoom.Equals(name, StringComparison.OrdinalIgnoreCase));
+        public Room? FindRoom(string id)
+        {
+            Room room = null;
+            foreach (var r in _rooms)
+            {
+                if (r.Id == id) room = r;
+            }
+            return room;
+        }
+
+        public Room AddItemsInRoom(Room room, ItemsManager manager)
+        {
+            foreach (var item in room.ItemsString)
+            {
+                room.AddItem(manager.FindItem(item));
+            }
+            return room;
+        }
+            
     }
 }

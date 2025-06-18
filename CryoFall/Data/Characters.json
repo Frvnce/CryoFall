@@ -1,0 +1,14 @@
+﻿[
+  {
+    "Nome": "Roberto",
+    "PlaceHolder": "playerName"
+  },
+  {
+    "Nome": "AX-47",
+    "PlaceHolder": "robotName"
+  },
+  {
+    "Nome": "Lena",
+    "PlaceHolder": "mainHelper"
+  }
+]
