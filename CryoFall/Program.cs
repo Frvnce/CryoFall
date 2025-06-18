@@ -24,8 +24,17 @@ class Program
         ConsoleStylingWrite.StartDialogue("introIbernazione");
         
         //TODO Inizio gioco, scelta di dove andare, raccogliere oggetti ecc.
-        
-        
+
+        bool endGame = true;
+        while (endGame)
+        {
+            if (player.CurrentRoom == roomsManager.FindRoom("ibernazione"))
+            {
+                
+            }
+            
+            endGame = false;
+        }
         
     }
 }
