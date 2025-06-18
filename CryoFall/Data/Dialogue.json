@@ -437,8 +437,142 @@
     "speakerName": "<robotName>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Lo scoprirai presto, ora devi andare, ci vediamo alla fine di tutto! Ricordati di prendere il [bold]Codice d'accesso[/] per uscire!"
+    "text": "Lo scoprirai presto, ora devi andare, ci vediamo alla fine di tutto! Ricordati di prendere il [bold]Codice d'accesso[/] per uscire!",
+    "next": "end"
+  },
+  {
+    "id": "assistente_002",
+    "room": "intro",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ehm... pronto? PRONTOOOO???? C'è qualcuno? Oh no... ho rotto qualcosa??",
+    "next": "main_009"
+  },
+  {
+    "id": "main_009",
+    "room": "intro",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "dialogue",
+    "text": "Senti questa voce, un po' stridula, un po' robotica, come se provenisse da dentro di te...",
+    "next": "main_010"
+  },
+  {
+    "id": "main_010",
+    "room": "intro",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "COSA? Chi è? Cosa succede?",
+    "next": "assistente_003"
+  },
+  {
+    "id": "assistente_003",
+    "room": "intro",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "O-oh ciao! Io sono... aspetta... come mi chiamo? Eh?! Mi serve [#FF0000 bold]aiuto[/] subitooo D:",
+    "next": "assistente_004"
+  },
+  {
+    "id": "assistente_004",
+    "room": "intro",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "<nome_inserito>...Ah sì? Mi fido! Ok ok… panico panico! Corri nella Stanza Tecnica che stiamo per morire tutti!!! Digita [#808080 bold]HELP[/] per aiutarti nei movimenti! O almeno credo...",
+    "next": "main_011"
+  },
+  {
+    "id": "main_011",
+    "room": "intro",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Ok... Stanza Tecnica... ma chi sei tu esattamente?",
+    "next": "assistente_005"
+  },
+  {
+    "id": "assistente_005",
+    "room": "intro",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Eh... bella domanda! Sono tipo... il tuo aiuto digitale!",
+    "next": "assistente_006"
+  },
+  {
+    "id": "assistente_006",
+    "room": "intro",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Comunque tranquillo, ti guiderò io! ...credo. Basta che non mi chiedi cose troppo difficili, ok?",
+    "next": "main_012"
+  },
+  {
+    "id": "main_012",
+    "room": "intro",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Non è molto rassicurante, ma... ok. Vado.",
+    "next": "assistente_007"
+  },
+  {
+    "id": "assistente_007",
+    "room": "intro",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Bravo! E non dimenticare: se ti perdi o ti senti solo... ehm, sono sempre qui! Nella tua testa! Che inquietante.",
+    "next": "main_013"
+  },
+  {
+    "id": "main_013",
+    "room": "intro",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Forse dovrei usare il comando [#808080 bold]HELP[/] come mi ha suggerito <nome_inserito>",
+    "next": "end"
+  },
+  {
+    "id": "atto1_001",
+    "room": "stanza_tecnica",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Entri nella Stanza Tecnica. L’ambiente è claustrofobico. Cavi penzolano dal soffitto. Un neon trema. Schermi sfarfallanti mostrano codici rossi d’emergenza. Un condotto d’aria è parzialmente aperto.",
+    "next": "assistente_008"
+  },
+  {
+    "id": "assistente_008",
+    "room": "stanza_tecnica",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ehi… che posto cariiino ( ˶ˆᗜˆ˵ ) ",
+    "next": "assistente_009"
+  },
+  {
+    "id": "assistente_009",
+    "room": "stanza_tecnica",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ah no... è diverso da come me lo ricordavo. È assolutamente orrendo. Stai attento, ok?",
+    "next": "main_014"
+  },
+  {
+    "id": "main_014",
+    "room": "stanza_tecnica",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "C'è un terminale acceso laggiù... forse posso interagirci.",
+    "next": "end"
   }
-  
-  
 ]

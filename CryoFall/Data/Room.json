@@ -54,7 +54,7 @@
     "adjacentRooms": {
       "north": "zona_carburante_nord",
       "south": "corridoio_ovest_2",
-      "east": "sala_comune",
+      "east": "corridoio_nord",
       "west": null
     },
     "items": [],
@@ -66,8 +66,8 @@
     "room_description": "Tratto buio del corridoio, con segni di corrosione e qualche traccia di liquido scuro sul pavimento.",
     "isLocked": false,
     "adjacentRooms": {
-      "north": "zona_carburante_sud",
-      "south": "corridoio_ovest_2",
+      "north": "corridoio_ovest_2",
+      "south": "zona_carburante_sud",
       "east": null,
       "west": null
     },
@@ -100,8 +100,8 @@
     "adjacentRooms": {
       "north": "corridoio_ovest_4",
       "south": null,
-      "east": null,
-      "west": "corridoio_sud"
+      "east": "corridoio_sud",
+      "west": null
     },
     "items": [],
     "persons": []
@@ -127,7 +127,7 @@
     "isLocked": true,
     "unlockKeyId": "chiave_magnetica_livello_5",
     "adjacentRooms": {
-      "north": "corridoio_nord",
+      "north": "corridoio_centrale",
       "south": null,
       "east": null,
       "west": "corridoio_sud"
@@ -142,8 +142,8 @@
     ]
   },
   {
-    "id": "corridoio_nord",
-    "name": "Corridoio Nord",
+    "id": "corridoio_centrale",
+    "name": "Corridoio Centrale",
     "room_description": "Corridoio centrale del complesso, con pannelli di controllo spenti e tubazioni integrate nelle pareti.",
     "isLocked": false,
     "adjacentRooms": {
@@ -162,8 +162,22 @@
     "isLocked": false,
     "adjacentRooms": {
       "north": null,
-      "south": "corridoio_nord",
+      "south": "corridoio_centrale",
       "east": "corridoio_est",
+      "west": "corridoio_nord"
+    },
+    "items": [],
+    "persons": []
+  },
+  {
+    "id": "corridoio_nord",
+    "name": "Corridoio Nord",
+    "room_description": "Descrizione",
+    "isLocked": false,
+    "adjacentRooms": {
+      "north": null,
+      "south": null,
+      "east": "sala_comune",
       "west": "corridoio_ovest_3"
     },
     "items": [],

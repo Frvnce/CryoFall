@@ -18,7 +18,7 @@
             "enum":  ["intro","ibernazione","east_corridoio","stanza_tecnica"]},
         "speakerName": 
         { "type": "string",
-          "enum":  ["Introduzione","Narratore","<playerName>","<mainHelper>","<robotName>","<secondHelper>"]},
+          "enum":  ["Introduzione","Narratore","<playerName>","<mainHelper>","<robotName>","<secondHelper>","<assistant>"]},
         "character": {
           "type": "string",
           "enum": ["intro","main", "helper", "enemy", "narrator"]
