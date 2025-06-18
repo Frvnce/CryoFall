@@ -1,2 +1,66 @@
 ﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "item.schema.json",
+  "title": "File items CryoFall",
+  "type": "array",
+
+  "items": { "$ref": "#/$defs/item" },
+
+  "$defs": {
+    "item": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "description": "Identificatore univoco dell'item"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Nome leggibile per l'interfaccia"
+        },
+        "item_description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Descrizione visualizzata all'utente"
+        },
+        "weight": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Peso in unità arbitrarie, ≥ 0"
+        },
+        "isPickable": {
+          "type": "boolean",
+          "description": "Se true, il giocatore può raccoglierlo (Inventory.Add verrà chiamato)"
+        },
+        "isUsable": {
+          "type": "boolean",
+          "description": "Se true, l'item può essere utilizzato (chiamata a Use())"
+        },
+        "isAnalyzable": {
+          "type": "boolean",
+          "description": "Se true, il giocatore può analizzare l'item per ottenere dettagli aggiuntivi"
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^#([A-Fa-f0-9]{6})$",
+          "description": "Codice colore esadecimale a 6 cifre (es. \"#808080\")"
+        }
+      },
+
+      "required": [
+        "id",
+        "name",
+        "description",
+        "weight",
+        "isPickable",
+        "isUsable",
+        "isAnalyzable",
+        "color"
+      ]
+    }
+  }
 }

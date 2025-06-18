@@ -1,2 +1,87 @@
 ﻿{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "room.schema.json",
+  "title": "File stanze CryoFall",
+  "type": "array",
+
+  "items": { "$ref": "#/$defs/room" },
+
+  "$defs": {
+    "room": {
+      "type": "object",
+      "additionalProperties": false,
+
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "description": "Identificativo univoco della stanza"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Nome leggibile della stanza"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Descrizione testuale della stanza"
+        },
+        "isLocked": {
+          "type": "boolean",
+          "description": "Se true, per entrare serve una chiave"
+        },
+        "unlockKeyId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "description": "ID dell'item che sblocca la stanza"
+        },
+        "adjacentRooms": {
+          "$ref": "#/$defs/adjacent"
+        },
+        "items": {
+          "type": "array",
+          "description": "Lista di ID item (da item.json) presenti inizialmente",
+          "items": { "type": "string" }
+        },
+        "persons": {
+          "type": "array",
+          "description": "Nomi dei personaggi presenti nella stanza",
+          "items": { "type": "string" }
+        }
+      },
+
+      "required": [
+        "id",
+        "name",
+        "description",
+        "isLocked",
+        "adjacentRooms"
+      ],
+
+      "if": {
+        "properties": { "isLocked": { "const": true } }
+      },
+      "then": {
+        "required": ["unlockKeyId"]
+      },
+      "else": {
+        "not": {
+          "required": ["unlockKeyId"]
+        }
+      }
+    },
+
+    "adjacent": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "north": { "type": ["string", "null"], "description": "ID stanza a nord o null" },
+        "south": { "type": ["string", "null"], "description": "ID stanza a sud o null" },
+        "east":  { "type": ["string", "null"], "description": "ID stanza a est o null" },
+        "west":  { "type": ["string", "null"], "description": "ID stanza a ovest o null" }
+      },
+      "required": ["north", "south", "east", "west"]
+    }
+  }
 }

@@ -1,2 +1,142 @@
-﻿{
-}
+﻿[
+  {
+    "id": "terminale_emergenza",
+    "name": "Terminale di Emergenza",
+    "item_description": "Un terminale per inviare segnali di emergenza.",
+    "weight": 5,
+    "isPickable": false,
+    "isUsable": false,
+    "isAnalyzable": true,
+    "color": "#808080"
+  },
+  {
+    "id": "codice_accesso",
+    "name": "Codice di Accesso",
+    "item_description": "Un codice di accesso che sblocca la porta della Sala di Ibernazione",
+    "weight": 0.5,
+    "isPickable": true,
+    "isUsable": true,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "kit_medico_base",
+    "name": "Kit Medico Base",
+    "item_description": "Fornitura di primo soccorso per ripristinare salute.",
+    "weight": 2,
+    "isPickable": true,
+    "isUsable": false,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "tuta_spaziale_danneggiata",
+    "name": "Tuta Spaziale Danneggiata",
+    "item_description": "Tuta protettiva con guasti multipli.",
+    "weight": 8,
+    "isPickable": true,
+    "isUsable": false,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "mappa_olografica",
+    "name": "Mappa Olografica",
+    "item_description": "Proiezione tridimensionale delle mappe del complesso.",
+    "weight": 1,
+    "isPickable": true,
+    "isUsable": true,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "estintore",
+    "name": "Estintore",
+    "item_description": "Dispositivo portatile per estinguere fiamme.",
+    "weight": 4,
+    "isPickable": false,
+    "isUsable": false,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "terminale_semi_funzionante",
+    "name": "Terminale Semi-funzionante",
+    "item_description": "Un terminale danneggiato con funzionalità parziali.",
+    "weight": 30,
+    "isPickable": false,
+    "isUsable": true,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "chiave_magnetica_livello_5",
+    "name": "Chiave Magnetica di Livello 5",
+    "item_description": "Credenziale magnetica per porte di sicurezza livello 5.",
+    "weight": 0.5,
+    "isPickable": true,
+    "isUsable": true,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "mano_ax_7",
+    "name": "Mano di AX-7",
+    "item_description": "Protesi robotica dell'unità AX-7.",
+    "weight": 3,
+    "isPickable": true,
+    "isUsable": true,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "frammento_tessuto_blu",
+    "name": "Frammento di Tessuto Blu",
+    "item_description": "Pezzetto di tessuto di fibra sconosciuta.",
+    "weight": 0.1,
+    "isPickable": true,
+    "isUsable": false,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "dispositivo_teletrasporto",
+    "name": "Dispositivo di Teletrasporto",
+    "item_description": "Modulo portatile per teletrasporti a corto raggio.",
+    "weight": 2,
+    "isPickable": true,
+    "isUsable": true,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "terminale_sistema",
+    "name": "Terminale di Sistema",
+    "item_description": "Nodo centrale per il controllo dei sottosistemi.",
+    "weight": 30,
+    "isPickable": false,
+    "isUsable": true,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "chiave_magnetica_livello_10",
+    "name": "Chiave Magnetica di Livello 10",
+    "item_description": "Credenziale magnetica per porte di sicurezza livello 10.",
+    "weight": 0.5,
+    "isPickable": true,
+    "isUsable": true,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "emettitore_energia",
+    "name": "Emettitore di Energia",
+    "item_description": "Unità di generazione di potenza portatile.",
+    "weight": 4,
+    "isPickable": true,
+    "isUsable": false,
+    "isAnalyzable": false,
+    "color": "#808080"
+  }
+]
