@@ -681,19 +681,19 @@
     "character": "narrator",
     "kind": "narration",
     "text": "Ti avvicini al Terminale Semi-Funzionante. Sullo schermo lampeggia la scritta: [#FF1134 bold]EMERGENZA – USARE CHIAVE SOLO PER...[/] [italic](Dati corrotti)[/]",
-    "next": "main_014.1"
+    "next": "main_015"
   },
   {
-    "id": "main_014.1",
+    "id": "main_015",
     "room": "stanza_tecnica",
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
     "text": "Una chiave? Ma per cosa?",
-    "next": "assistente_009.1"
+    "next": "assistente_010"
   },
   {
-    "id": "assistente_009.1",
+    "id": "assistente_010",
     "room": "stanza_tecnica",
     "speakerName": "<assistant>",
     "character": "helper",
@@ -711,16 +711,16 @@
     "next": "waitForCmd"
   },
   {
-    "id": "main_015",
+    "id": "main_016",
     "room": "stanza_tecnica",
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "dialogue",
     "text": "Aspetta un attimo... c'è qualcosa lì dentro. Sembra una carta magnetica?",
-    "next": "assistente_010"
+    "next": "assistente_011"
   },
   {
-    "id": "assistente_010",
+    "id": "assistente_011",
     "room": "stanza_tecnica",
     "speakerName": "<assistant>",
     "character": "helper",
@@ -744,19 +744,19 @@
     "character": "narrator",
     "kind": "narration",
     "text": "Ritorni nel corridoio. Le luci d’emergenza tremolano. Il silenzio è interrotto solo dal tuo respiro.",
-    "next": "assistente_011"
+    "next": "assistente_012"
   },
   {
-    "id": "assistente_011",
+    "id": "assistente_012",
     "room": "corridoio_ovest_2",
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
     "text": "Ok... niente panico... adesso, se non sbaglio, devi andare a Sud... o era Est? No, Sud! Sono sicuro!",
-    "next": "main_016"
+    "next": "main_017"
   },
   {
-    "id": "main_016",
+    "id": "main_017",
     "room": "corridoio_ovest_4",
     "speakerName": "<assistant>",
     "character": "helper",
@@ -774,7 +774,7 @@
     "next": "waitForCmd"
   },
   {
-    "id": "atto1_006.1",
+    "id": "atto1_007",
     "room": "corridoio_sud",
     "speakerName": "Narratore",
     "character": "narrator",
@@ -783,7 +783,7 @@
     "next": "assistente_012"
   },
   {
-    "id": "assistente_012",
+    "id": "assistente_013",
     "room": "corridoio_sud",
     "speakerName": "<assistant>",
     "character": "helper",
@@ -792,7 +792,7 @@
     "next": "waitForCmd"
   },
   {
-    "id": "main_017",
+    "id": "main_018",
     "room": "corridoio_sud",
     "speakerName": "<playerName>",
     "character": "main",
@@ -801,34 +801,34 @@
     "next": "waitForCmd"
   },
   {
-    "id": "atto1_007",
-    "room": "zona_di_scarico",
-    "speakerName": "Narratore",
-    "character": "narrator",
-    "kind": "narration",
-    "text": "La Chiave Magnetica apre l'accesso. La porta scorre con un suono metallico. Un freddo pungente ti investe.",
-    "next": "assistente_013"
-  },
-  {
-    "id": "assistente_013",
-    "room": "zona_di_scarico",
-    "speakerName": "<assistant>",
-    "character": "helper",
-    "kind": "dialogue",
-    "text": "Ecco, bravo! Sei entrato! Ora... wow, fa freddo qui! Spero tu abbia messo il cappotto... ehm... spaziale?",
-    "next": "atto1_008"
-  },
-  {
     "id": "atto1_008",
     "room": "zona_di_scarico",
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "L’ambiente è metallico e arrugginito. Gocciolii ritmici accompagnano un silenzio irreale. La porta si chiude alle tue spalle.",
-    "next": "main_018"
+    "text": "La Chiave Magnetica apre l'accesso. La porta scorre con un suono metallico. Un freddo pungente ti investe.",
+    "next": "assistente_014"
   },
   {
-    "id": "main_018",
+    "id": "assistente_014",
+    "room": "zona_di_scarico",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ecco, bravo! Sei entrato! Ora... wow, fa freddo qui! Spero tu abbia messo il cappotto... ehm... spaziale?",
+    "next": "atto1_009"
+  },
+  {
+    "id": "atto1_009",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "L’ambiente è metallico e arrugginito. Gocciolii ritmici accompagnano un silenzio irreale. La porta si chiude alle tue spalle.",
+    "next": "main_019"
+  },
+  {
+    "id": "main_019",
     "room": "zona_di_scarico",
     "speakerName": "<playerName>",
     "character": "main",
@@ -837,7 +837,7 @@
     "next": "waitForCmd"
   },
   {
-    "id": "atto1_009",
+    "id": "atto1_010",
     "room": "zona_di_scarico",
     "speakerName": "Narratore",
     "character": "narrator",
@@ -855,7 +855,7 @@
     "next": "main_019"
   },
   {
-    "id": "main_019",
+    "id": "main_020",
     "room": "zona_di_scarico",
     "speakerName": "<playerName>",
     "character": "main",
@@ -869,7 +869,7 @@
     "speakerName": "<robotName>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Sistema... di sicurezza... malfunzionamento... ho perso... la mia mano... cercando di salvarli...",
+    "text": "Sistema... di sicurezza... malfunzionamento... ho perso... la mia mano... cercando di salvarli...Dottore Marcus...Dott.ssa Sarah...risucchiati",
     "next": "ax7_003"
   },
   {
@@ -879,26 +879,266 @@
     "character": "helper",
     "kind": "dialogue",
     "text": "Serve... la mia mano... per sbloccare... i protocolli... vi prego...",
-    "next": "assistente_014"
+    "next": "assistente_015"
   },
   {
-    "id": "assistente_014",
+    "id": "assistente_015",
     "room": "zona_di_scarico",
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Ehm... non voglio sembrare paranoico... ma... ti sembra... affidabile? Perché a me no. Ehi AX, sei sicuro che non stai tipo... esagerando?",
-    "next": "main_020"
+    "text": "Marcus e Sarah... S-sono m-m-morti? Non è possibile!! Hm... non voglio sembrare paranoico... ma <robotName>... ti sembra... affidabile? Perché a me no. Ehi <robotName>, sei sicuro che sia successo esattamente ciò che dici?",
+    "next": "ax7_004"
   },
   {
-    "id": "main_020",
+    "id": "ax7_004",
+    "room": "zona_di_scarico",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Il sistema di sicurezza ha malfunzionato e io... io ho perso la mia mano cercando di salvarli! Le mie funzioni sono compromesse!",
+    "next": "main_021"
+  },
+  {
+    "id": "main_021",
     "room": "zona_di_scarico",
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Quindi la mano è da qualche parte qui... Devo trovarla. Ma... posso davvero fidarmi di lui?",
+    "text": "Marcus e Sarah... Cosa è successo? Com'è possibile che siano stati risucchiati nel vuoto? Qualcosa non mi torna... Devo trovare la mano, dovrebbe essere qui da qualche parte qui... Devo trovarla. Ma... posso davvero fidarmi di lui?",
     "next": "waitForCmd"
+  },
+  {
+    "id": "atto1_011",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Frugando tra i detriti noti una grata di ventilazione sollevata. Dietro di essa… qualcosa di metallico.",
+    "next": "main_022"
+  },
+  {
+    "id": "main_022",
+    "room": "zona_di_scarico",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "C'è... una mano. Una mano robotica.",
+    "next": "assistente_016"
+  },
+  {
+    "id": "assistente_016",
+    "room": "zona_di_scarico",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ew ( ꩜ ᯅ ꩜;)! Ma che schifo... cioè, non fraintendermi, sono utili le mani, però... che schifo.",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto1_012",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "La prendi. È pesante. Sulla superficie ci sono... graffi profondi. E sangue. Sangue umano, fresco.",
+    "next": "main_023"
+  },
+  {
+    "id": "main_023",
+    "room": "zona_di_scarico",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Questo sangue... AX-7 ha detto di averla persa cercando di salvarli. Ma questi graffi sembrano... una lotta.",
+    "next": "main_024"
+  },
+  {
+    "id": "main_024",
+    "room": "zona_di_scarico",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "C’è qualcosa incastrato nel pugno... un pezzo di tessuto. Sembra... un camice?",
+    "next": "waitforCmd"
+  },
+  {
+    "id": "assistente_017",
+    "room": "zona_di_scarico",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ehm. Ok. Forse è il caso di... correre? Tipo via. Adesso. Subito. Naaah sto scherzando! Forse. O forse no. NON SO COSA PENSARE (•᷄ࡇ•᷅)",
+    "next": "atto1_013"
+  },
+  {
+    "id": "atto1_013",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "AX-7 ti guarda. O meglio, ti 'scansiona'.",
+    "next": "ax7_005"
+  },
+  {
+    "id": "ax7_005",
+    "room": "zona_di_scarico",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Avete trovato la mia mano? Vi prego... consegnatemela. Devo sbloccare i protocolli di emergenza.",
+    "next": "scelta_mano"
+  },
+  {
+    "id": "scelta_mano",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Cosa vuoi fare?",
+    "choices": [
+      {
+        "label": "Consegnagli la mano.",
+        "next": "ax7_esecuzione"
+      },
+      {
+        "label": "Tieni la mano con te.",
+        "next": "ax7_sospetto"
+      }
+    ]
+  },
+  {
+    "id": "ax7_esecuzione",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Appena AX-7 riattacca la sua mano, i suoi LED lampeggiano rapidamente. La botola sotto di te si apre con un rumore sordo.",
+    "next": "ax7_006"
+  },
+  {
+    "id": "ax7_006",
+    "room": "zona_di_scarico",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Grazie, Comandante. Ora siete... non più necessari.",
+    "next": "atto1_gameover"
+  },
+  {
+    "id": "atto1_gameover",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "La botola si spalanca. Vieni risucchiato nel vuoto dello spazio. AX-7 ti osserva in silenzio.",
+    "next": "end"
+  },
+  {
+    "id": "ax7_sospetto",
+    "room": "zona_di_scarico",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Mi dispiace... non posso fidarmi. Non ancora.",
+    "next": "assistente_018"
+  },
+  {
+    "id": "assistente_018",
+    "room": "zona_di_scarico",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Uff... grazie al cielo! Non so perché, ma quel robot mi dava i brividi (╯°□°╯)",
+    "next": "atto1_014"
+  },
+  {
+    "id": "atto1_014",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "AX-7 si blocca per un momento, poi si alza. Con movimenti innaturalmente rapidi si dirige verso un pannello sul muro.",
+    "next": "ax7_007"
+  },
+  {
+    "id": "ax7_007",
+    "room": "zona_di_scarico",
+    "speakerName": "<robotName>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Allora agirò in autonomia.",
+    "next": "atto1_015"
+  },
+  {
+    "id": "atto1_015",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Le porte della Zona di Scarico si chiudono. Sei in trappola. Ma nel silenzio... noti un armadietto d’emergenza aperto.",
+    "next": "main_025"
+  },
+  {
+    "id": "main_025",
+    "room": "zona_di_scarico",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "C’è qualcosa dentro... un dispositivo? COSA ASPETTI? ANALIZZA LA STANZA",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto2_001",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Estrai il dispositivo dall’armadietto. Sul lato c'è scritto: [bold]“U.S.O. D’EMERGENZA – destinazioni visitate.”[/]",
+    "next": "assistente_019"
+  },
+  {
+    "id": "assistente_019",
+    "room": "zona_di_scarico",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Wooooow!! È un teletrasportatore portatile! Ok, ora pensaci bene… dove vuoi andare?",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto2_002",
+    "room": "stanza_scelta",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Appari nel <Stanza_Scelta>.",
+    "next": "assistente_020"
+  },
+  {
+    "id": "assistente_020",
+    "room": "stanza_scelta",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Oddio...Dove siamo? Chi sei? CHI SONO??... Ah no, che stupidino...tu sei <playerName> e io <assistant> (－‸ლ).",
+    "next": "main_026"
+  },
+  {
+    "id": "main_026",
+    "room": "stanza_scelta",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Dai non fare lo scemo, non è il momento."
+  },
+  {
+    "id": "",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "kind": "intro",
+    "text": ""
   }
-
 
 ]
