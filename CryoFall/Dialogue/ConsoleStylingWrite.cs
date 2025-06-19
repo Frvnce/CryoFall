@@ -23,6 +23,8 @@ public static class ConsoleStylingWrite
     private static readonly string ColorEnemyCharacter = "#9e2416 bold";
     private static readonly string ColorNarratorCharacter = "#dedddc bold italic";
     private static readonly string ColorIntroCharacter = "#dedddc bold";
+    private static readonly string ColorFriendCharacter = "#ffea99 bold italic";
+    private static readonly string ColorMalfunctioningCharacter = "#ff7e42 bold italic";
     
     //Vari testi preSalvati.
     private static readonly string ChooseAnOptionTitle = "[bold #f1f1f1]Scegli un'opzione:[/] ";
@@ -93,6 +95,8 @@ public static class ConsoleStylingWrite
             "helper"   => ColorHelperCharacter,
             "enemy"    => ColorEnemyCharacter,
             "intro"    => ColorIntroCharacter,
+            "friend"   => ColorFriendCharacter,
+            "malfunctioning" => ColorMalfunctioningCharacter,
             _          => ColorNarratorCharacter
         };
 

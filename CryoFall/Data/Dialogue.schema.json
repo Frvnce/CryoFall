@@ -15,13 +15,13 @@
         "id":      { "type": "string" },
         "room":    
           { "type": "string",
-            "enum":  ["intro","ibernazione","east_corridoio","stanza_tecnica","corridoio_ovest_2","corridoio_ovest_4","zona_di_scarico","zona_carburante_sud","corridoio_sud","stanza_scelta"]},
+            "enum":  ["intro","ibernazione","corriodio_est","stanza_tecnica","corridoio_ovest_2","corridoio_ovest_4","zona_di_scarico","zona_carburante_sud","corridoio_sud","stanza_scelta","corridoio_ovest_3","zona_controllo","zona_carburante_nord","armeria", "infermeria"]},
         "speakerName": 
         { "type": "string",
           "enum":  ["Introduzione","Narratore","<playerName>","<mainHelper>","<robotName>","<secondHelper>","<assistant>"]},
         "character": {
           "type": "string",
-          "enum": ["intro","main", "helper", "enemy", "narrator"]
+          "enum": ["intro","main", "helper", "enemy", "narrator","friend","malfunctioning"]
         },
         "kind": {
           "type": "string",

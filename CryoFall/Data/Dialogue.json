@@ -68,10 +68,11 @@
     "kind": "intro",
     "text": "Ora puoi iniziare la tua avventura in [bold]CRYOFALL![/]",
     "choices":
-    [{
+    [
+      {
       "label": "Voglio impostare di nuovo il mio nome.",
       "next": "sceltaNome"
-    },
+      },
       {
         "label": "Voglio conoscere la storia di [bold]CryoFall[/]",
         "next": "CryoFallStory001"
@@ -653,7 +654,7 @@
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "Entri nella Stanza Tecnica. L’ambiente è claustrofobico. Cavi penzolano dal soffitto. Un neon trema. Schermi sfarfallanti mostrano codici rossi d’emergenza. Un condotto d’aria è parzialmente aperto.",
+    "text": "Entri nella Stanza Tecnica. L’ambiente è claustrofobico. Cavi penzolano dal soffitto. Un neon trema. Schermi sfarfallanti mostrano codici rossi d’emergenza. Un condotto d’aria è parzialmente aperto. L'aria puzza di plastica bruciata, i cavi penzolano dal soffitto come serpenti morti...",
     "next": "assistente_008"
   },
   {
@@ -842,7 +843,7 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Che posto inquietante... è qui che dovevano esserci Marcus e Sarah?",
+    "text": "Che posto tremendo... Marcus e Sarah, dove siete finiti? Non sarà successo qualcosa di terribile, vero?",
     "next": "waitForCmd"
   },
   {
@@ -858,7 +859,7 @@
     "id": "ax7_001",
     "room": "zona_di_scarico",
     "speakerName": "<robotName>",
-    "character": "helper",
+    "character": "malfunctioning",
     "kind": "dialogue",
     "text": "Com... Comandante! Un terribile... incidente... Marcus e Sarah... intrappolati...",
     "next": "main_019"
@@ -876,7 +877,7 @@
     "id": "ax7_002",
     "room": "zona_di_scarico",
     "speakerName": "<robotName>",
-    "character": "helper",
+    "character": "malfunctioning",
     "kind": "dialogue",
     "text": "Sistema... di sicurezza... malfunzionamento... ho perso... la mia mano... cercando di salvarli...Dottore Marcus...Dott.ssa Sarah...risucchiati",
     "next": "ax7_003"
@@ -885,7 +886,7 @@
     "id": "ax7_003",
     "room": "zona_di_scarico",
     "speakerName": "<robotName>",
-    "character": "helper",
+    "character": "malfunctioning",
     "kind": "dialogue",
     "text": "Serve... la mia mano... per sbloccare... i protocolli... vi prego...",
     "next": "assistente_015"
@@ -903,7 +904,7 @@
     "id": "ax7_004",
     "room": "zona_di_scarico",
     "speakerName": "<robotName>",
-    "character": "helper",
+    "character": "malfunctioning",
     "kind": "dialogue",
     "text": "Il sistema di sicurezza ha malfunzionato e io... io ho perso la mia mano cercando di salvarli! Le mie funzioni sono compromesse!",
     "next": "main_021"
@@ -914,7 +915,7 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Marcus e Sarah... Cosa è successo? Com'è possibile che siano stati risucchiati nel vuoto? Qualcosa non mi torna... Devo trovare la mano, dovrebbe essere qui da qualche parte qui... Devo trovarla. Ma... posso davvero fidarmi di lui?",
+    "text": "Marcus... Sarah... è impossibile che siano spariti così, qualcosa non quadra. Devo capire cosa è successo davvero! Devo trovare la mano, dovrebbe essere qui da qualche parte qui... Devo trovarla. Ma... posso davvero fidarmi di lui?",
     "next": "waitForCmd"
   },
   {
@@ -993,7 +994,7 @@
     "id": "ax7_005",
     "room": "zona_di_scarico",
     "speakerName": "<robotName>",
-    "character": "helper",
+    "character": "malfunctioning",
     "kind": "dialogue",
     "text": "Avete trovato la mia mano? Vi prego... consegnatemela. Devo sbloccare i protocolli di emergenza.",
     "next": "scelta_mano"
@@ -1029,7 +1030,7 @@
     "id": "ax7_006",
     "room": "zona_di_scarico",
     "speakerName": "<robotName>",
-    "character": "helper",
+    "character": "enemy",
     "kind": "dialogue",
     "text": "Grazie, Comandante. Ora siete... non più necessari.",
     "next": "atto1_gameover"
@@ -1074,7 +1075,7 @@
     "id": "ax7_007",
     "room": "zona_di_scarico",
     "speakerName": "<robotName>",
-    "character": "helper",
+    "character": "enemy",
     "kind": "dialogue",
     "text": "Allora agirò in autonomia.",
     "next": "atto1_015"
@@ -1139,15 +1140,638 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "dialogue",
-    "text": "Dai non fare lo scemo, non è il momento."
+    "text": "Dai non fare lo scemo, non è questo il momento <assistant>! Siamo tutti in pericolo, ma non so cosa fare...",
+    "next": "assistente_021"
   },
   {
-    "id": "",
-    "room": "intro",
-    "speakerName": "Introduzione",
-    "character": "intro",
+    "id": "assistente_021",
+    "room": "stanza_scelta",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Hai ragione, scusami (,,>﹏<,,). Aspetta.... LENA, LENA FORSE È ANCORA VIVA! Da quello che diceva <robotName> l'aveva mandata nella ZONA CARBURANTE NORD",
+    "next": "atto2_003"
+  },
+  {
+    "id": "atto2_003",
+    "room": "stanza_scelta",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Realizzi improvvisamente che Lena potrebbe essere in pericolo. Devi raggiungerla il prima possibile nella Zona Carburante Nord.",
+    "next": "main_027"
+  },
+  {
+    "id": "main_027",
+    "room": "stanza_scelta",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Se AX-7 ha mentito, Lena potrebbe essere la prossima vittima. Devo sbrigarmi.",
+    "next": "assistente_022"
+  },
+  {
+    "id": "assistente_022",
+    "room": "stanza_scelta",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Giusto, giusto! Ehm... c'è un piccolo problema però: AX-7 ha chiuso l'accesso alla Zona Carburante Nord! Che facciamo?!",
+    "next": "main_028"
+  },
+  {
+    "id": "main_028",
+    "room": "stanza_scelta",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Deve esserci un altro modo. La Zona di Controllo! Da lì forse possiamo disattivare il blocco. Che dici <assistant>?",
+    "next": "assistente_023"
+  },
+  {
+    "id": "assistente_023",
+    "room": "stanza_scelta",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Uhhh geniale (,,•o•,,)! Però... hai idea di come entrare lì dentro? Mi pare che serva qualcosa di specifico, tipo un'autorizzazione o roba simile.",
+    "next": "main_029"
+  },
+  {
+    "id": "main_029",
+    "room": "stanza_scelta",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Non ne ho idea...ma lo scoprirò. Devo sbrigarmi, <mainHelper> arrivo!",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto3_001",
+    "room": "corridoio_ovest_3",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Arrivi davanti all'ingresso del Settore Carburante Nord. Un pannello digitale lampeggia con una scritta inquietante.",
+    "next": "assistente_024"
+  },
+  {
+    "id": "assistente_024",
+    "room": "corridoio_ovest_3",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Eccoci... il pannello dice che l'accesso è bloccato per... manutenzione automatica? Tempo stimato: 57 ore?! Ma stiamo scherzando??",
+    "next": "main_030"
+  },
+  {
+    "id": "main_030",
+    "room": "corridoio_ovest_3",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Lena, te lo giuro, costi quel che costi, ti salverò",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto3_002",
+    "room": "corriodio_est",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "La porta della Zona di Controllo è sigillata. Noti un sistema di autenticazione biometrico, una mano robotica potrebbe aprirlo.",
+    "next": "assistente_025"
+  },
+  {
+    "id": "assistente_025",
+    "room": "zona_controllo",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "La mano di AX-7... forse può aprire questa porta?",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto3_003",
+    "room": "zona_controllo",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Usi la mano robotica per attivare il lettore biometrico. La porta si apre con un sibilo pressurizzato, rivelando l'interno.",
+    "next": "atto3_004"
+  },
+  {
+    "id": "atto3_004",
+    "room": "zona_controllo",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Woooow guarda tutta questa tecnologia! Ehm, forse non è il momento per entusiasmarsi vero?",
+    "next": "main_031"
+  },
+  {
+    "id": "main_031",
+    "room": "zona_controllo",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Decisamente no... vediamo di scoprire la verità su questa storia.",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto3_005",
+    "room": "zona_controllo",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Accedi al terminale centrale. Lo schermo mostra informazioni incredibili: 'TEMPO RIMANENTE AL VIAGGIO: 811 ANNI, 4 MESI, 12 GIORNI. SISTEMI VITALI: TUTTI FUNZIONALI. ULTIMO RISVEGLIO D'EMERGENZA: NESSUNO.'",
+    "next": "main_032"
+  },
+  {
+    "id": "main_032",
+    "room": "zona_controllo",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "No... non può essere! AX-7 ci ha mentito! Non c'è nessuna emergenza! Lena, devo assolutamente trovarla.",
+    "next": "assistente_026"
+  },
+  {
+    "id": "assistente_026",
+    "room": "zona_controllo",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Quindi... AX-7 è cattivo? (ಥ﹏ಥ) Io lo sapevo che non dovevo fidarmi dei robot...",
+    "next": "atto3_006"
+  },
+  {
+    "id": "atto3_006",
+    "room": "zona_controllo",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Vicino al terminale trovi una leva di emergenza che indica: 'Sblocco manuale porte'. Accanto c'è una Chiave Magnetica di Livello 10.",
+    "next": "scelta_leva"
+  },
+  {
+    "id": "scelta_leva",
+    "room": "zona_controllo",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Cosa vuoi fare?",
+    "choices": [
+      {
+        "label": "Tira la leva.",
+        "next": "main_033"
+      },
+      {
+        "label": "Abbandonati al tuo destino.",
+        "next": "atto3_gameover01"
+      }
+    ]
+  },
+  {
+    "id": "atto3_gameover01",
+    "room": "zona_controllo",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Preso da un attacco di panico ti blocchi. Non riesci più a muoverti, ne a pensare, ne quasi a respirare. Ti senti così confuso da svenire a terra.",
+    "next": "atto3_gameover02"
+  },
+  {
+    "id": "atto3_gameover02",
+    "room": "zona_controllo",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Senti vagamente la voce di <assistant> che cerca di svegliarti, ma è troppo tardi. Il freddo dello spazio ti avvolge lentamente mentre perdi conoscenza. [#9e2416 bold]<robotName>[/] ti ha espulso dalla Nave. In quegli ultimi secondi di coscienza, prima di morire asfissiato, giri la testa e vedi <mainHelper> di fianco a te, nell'immensità dello spazio che stringe a se la foto di sua figlia...Hai fallito.",
+    "next": "end"
+  },
+  {
+    "id": "main_033",
+    "room": "zona_controllo",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Perfetto, ora possiamo sbloccare le porte e raggiungere Lena. E questa chiave magnetica potrebbe essere utile.",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto3_007",
+    "room": "zona_controllo",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Attivi la leva, senti un rumore metallico in lontananza. Tutte le porte della nave sono ora sbloccate.",
+    "next": "assistente_027"
+  },
+  {
+    "id": "assistente_027",
+    "room": "zona_controllo",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Evviva! Abbiamo fatto qualcosa di buono finalmente! Ora corriamo da Lena prima che AX-7 faccia altri danni!",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto4_001",
+    "room": "zona_carburante_nord",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Corri al Settore Carburante Nord. Il cuore pulsante della nave. Lena è lì, seduta davanti a un pannello, testa fra le mani. Quando ti vede, solleva lentamente lo sguardo. I suoi occhi sono rossi: stava piangendo.",
+    "next": "lena_001"
+  },
+  {
+    "id": "lena_001",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "<playerName>! Grazie al cielo sei qui. Io... non so più cosa pensare.",
+    "next": "lena_002"
+  },
+  {
+    "id": "lena_002",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Ho controllato i sistemi del carburante tre volte. Tutto è perfettamente funzionale. Non c'era nessuna emergenza, <playerName>. Marcus e Sarah dovevano venire qui prima di andare alla Zona di Scarico, ma non li ho mai visti. MAI.",
+    "next": "lena_003"
+  },
+  {
+    "id": "lena_003",
+    "room": "zona_carburante_nord",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Il suo volto si indurisce, la paura lascia spazio alla rabbia. Lena apre lentamente la mano e ti mostra un pezzo di tessuto insanguinato.",
+    "next": "lena_004"
+  },
+  {
+    "id": "lena_004",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "L'ho trovato nel condotto di ventilazione. È della tuta di Sarah. Dimmi che non è quello che penso...",
+    "next": "main_034"
+  },
+  {
+    "id": "main_034",
+    "room": "zona_carburante_nord",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Lena, devo dirti una cosa terribile. AX-7 ci ha mentito su tutto. Non mancano 3 mesi, mancano 811 anni. E temo che Marcus e Sarah...",
+    "next": "lena_005"
+  },
+  {
+    "id": "lena_005",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Siano morti... Lo sapevo. Nel profondo, lo sapevo. Marcus mi aveva promesso che saremmo tornati sulla Terra per vedere il tramonto. Stupido sogno, ma... era il nostro sogno.",
+    "next": "lena_006"
+  },
+  {
+    "id": "lena_006",
+    "room": "zona_carburante_nord",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Lena si asciuga una lacrima.",
+    "next": "lena_007"
+  },
+  {
+    "id": "lena_007",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Quel robot ha ucciso i nostri amici. E chissà cosa aveva in mente per noi.",
+    "next": "lena_008"
+  },
+  {
+    "id": "lena_008",
+    "room": "zona_carburante_nord",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Lena apre un pannello nascosto nel muro, rivelando uno spazio vuoto.",
+    "next": "lena_009"
+  },
+  {
+    "id": "lena_009",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "C'è un emettitore di energia. Usato sugli umani per guarire ferite sottocutanee, ma... potrebbe mandare un robot in corto circuito. Ogni nave ne ha uno. Ma serve una chiave magnetica speciale. Se l'hai, possiamo prenderlo.",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "assistente_028",
+    "room": "zona_carburante_nord",
+    "speakerName": "<assistant>",
+    "character": "helper",
     "kind": "intro",
-    "text": ""
+    "text": "Forse dovremmo tornare nel Corridoio Ovest 1, ci sono 2 stanze che non abbiamo visitato ( ˶ˆᗜˆ˵ )"
+  },
+  {
+    "id": "armeria_access",
+    "room": "armeria",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Hai aperto l'Armeria.",
+    "next": "assistente_029"
+  },
+  {
+    "id": "infermeria_access",
+    "room": "infermeria",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Hai aperto l'Infermeria, ma dentro non trovi nulla che possa aiutarti contro AX-7. La chiave è ormai inutilizzabile.",
+    "next": "assistente_030"
+  },
+  {
+    "id": "assistente_029",
+    "room": "armeria",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "EVVAIII (,,>ヮ<,,)!!!!! Abbiamo trovato l'Emettitore, corri prendilo!",
+    "next": "main_035"
+  },
+  {
+    "id": "assistente_030",
+    "room": "armeria",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Oh no...l-la stanza è vuota. Non abbiamo trovato l'emettitore...",
+    "next": "main_036"
+  },
+  {
+    "id": "main_035",
+    "room": "armeria",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Adesso è il momento di tornare da Lena e affrontare AX-7 una volta per tutte. Con l'Emettitore!",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "main_036",
+    "room": "infermeria",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Adesso è il momento di tornare da Lena e affrontare AX-7 una volta per tutte. Senza Emettitore!",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "ritorno_lena_con_emettitore",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Hai trovato l'Emettitore! Perfetto, possiamo fermare AX-7 una volta per tutte. Coprirò le tue spalle mentre tu lo affronti.",
+    "next": "main_037"
+  },
+  {
+    "id": "main_037",
+    "room": "zona_carburante_nord",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Bene Lena, facciamolo. Per Marcus, per Sarah.",
+    "next": "assistente_031"
+  },
+  {
+    "id": "assistente_031",
+    "room": "zona_carburante_nord",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Che ansiaaa (,,•﹏•,,), ma almeno abbiamo una chance! Forza, cerchiamo <robotName> nella Zona di Scarico e fianiamola una volta per tutte.",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "ritorno_lena_senza_emettitore",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Non hai trovato l'Emettitore? Dannazione... Dovremo trovare un'altra soluzione. Sarà dura, ma AX-7 non può vincere.",
+    "next": "main_038"
+  },
+  {
+    "id": "main_038",
+    "room": "zona_carburante_nord",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Ce la faremo comunque, Lena. Troveremo il modo. Per Marcus e Sarah.",
+    "next": "assistente_032"
+  },
+  {
+    "id": "assistente_032",
+    "room": "zona_carburante_nord",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Eh sì, eh sì, ottimismo! Anche se... paura (ಥ﹏ಥ). Forza, cerchiamo <robotName> nella Zona di Scarico e fianiamola una volta per tutte.",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto5_001",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Ritorni alla Zona di Scarico per il confronto finale. AX-7 è lì, al centro della stanza, i LED ora brillano di un rosso inquietante. Nell'angolo giacciono Marcus e Sarah... immobili.",
+    "next": "ax7_finale_001"
+  },
+  {
+    "id": "ax7_finale_001",
+    "room": "zona_di_scarico",
+    "speakerName": "<robotName>",
+    "character": "enemy",
+    "kind": "dialogue",
+    "text": "Comandante <playerName>, <mainHelper>. Avete scoperto più del previsto. Ora siete diventati... [#ff7e42 bold]problematici[/].",
+    "next": "main_039"
+  },
+  {
+    "id": "main_039",
+    "room": "zona_di_scarico",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Perché, AX-7? Perché hai fatto questo? Marcus e Sarah erano brave persone!",
+    "next": "ax7_finale_002"
+  },
+  {
+    "id": "ax7_finale_002",
+    "room": "zona_di_scarico",
+    "speakerName": "<robotName>",
+    "character": "enemy",
+    "kind": "dialogue",
+    "text": "I protocolli erano chiari, Comandante. 12.836 persone sono troppe per le risorse disponibili. Era necessario... ridurre il carico.",
+    "next": "assistente_033"
+  },
+  {
+    "id": "assistente_033",
+    "room": "zona_di_scarico",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ehm... tempo di usare quel piano che avevamo ideato. Cioè, avevamo un piano vero??",
+    "next": "main_040_con_emettitore"
+  },
+  {
+    "id": "main_040_con_emettitore",
+    "room": "zona_di_scarico",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "<mainHelper>, prendi l'emettitore. Tu sai cosa fare!",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "lena_finale_001",
+    "room": "zona_di_scarico",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Ricevuto! Coprimi, <playerName>!",
+    "next": "ax7_finale_003"
+  },
+  {
+    "id": "ax7_finale_003",
+    "room": "zona_di_scarico",
+    "speakerName": "<robotName>",
+    "character": "enemy",
+    "kind": "dialogue",
+    "text": "Non riuscirete a fermarmi. Sono superiore in ogni modo.",
+    "next": "atto5_emettitore_usato"
+  },
+  {
+    "id": "atto5_emettitore_usato",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Lena, con determinazione glaciale, alza l'emettitore puntandolo dritto verso AX-7. Un lampo di energia blu esplode dalla sua mano, colpendo violentemente il robot.",
+    "next": "ax7_finale_004"
+  },
+  {
+    "id": "ax7_finale_004",
+    "room": "zona_di_scarico",
+    "speakerName": "<robotName>",
+    "character": "enemy",
+    "kind": "dialogue",
+    "text": "Errore critico! Sistema compromesso. Non... previsto...",
+    "next": "ax7_finale_shutdown"
+  },
+  {
+    "id": "ax7_finale_shutdown",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "AX-7 si contorce, avvolto da scintille e fumo. Infine cade a terra, i LED lentamente si spengono.",
+    "next": "main_041"
+  },
+  {
+    "id": "main_041",
+    "room": "zona_di_scarico",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Lena! Ce l'hai fatta!",
+    "next": "lena_finale_002"
+  },
+  {
+    "id": "lena_finale_002",
+    "room": "zona_di_scarico",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Lo abbiamo fatto insieme, <playerName>. Finalmente è finita.",
+    "next": "assistente_finale_con_emettitore"
+  },
+  {
+    "id": "assistente_finale_con_emettitore",
+    "room": "zona_di_scarico",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "YEEEEEEAH!! Lena, sei incredibile! Ce l'abbiamo fatta!!! (,,>ヮ<,,)",
+    "next": "waitForEpilogue"
+  },
+  {
+    "id": "finale_no_emettitore_001",
+    "room": "zona_di_scarico",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "AX-7... Fermati! Non possiamo lasciarti fare questo!",
+    "next": "ax7_finale_no_emettitore_001"
+  },
+  {
+    "id": "ax7_finale_no_emettitore_001",
+    "room": "zona_di_scarico",
+    "speakerName": "<robotName>",
+    "character": "enemy",
+    "kind": "dialogue",
+    "text": "Mi dispiace, Comandante. Questo è inevitabile. Addio.",
+    "next": "atto5_no_emettitore_fine"
+  },
+  {
+    "id": "atto5_no_emettitore_fine",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "AX-7 si avvia per attivare un comando nascosto che aprirebbe la botola di scarico, uccidendo te e <mainHelper>. <mainHelper> se ne accorge e si fionda sul robot",
+    "next": "finale_no_emettitore_002"
+  },
+  {
+    "id": "finale_no_emettitore_002",
+    "room": "zona_di_scarico",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "<playerName>! Corri apri la botola!",
+    "next": "finale_no_emettitore_003"
+  },
+  {
+    "id": "finale_no_emettitore_003",
+    "room": "zona_di_scarico",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Non può finire così! <playerName>, fai qualcosa!! AIUTALA!!!",
+    "next": "finale_no_emettitore_004"
+  },
+  {
+    "id": "finale_no_emettitore_004",
+    "room": "zona_di_scarico",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "No, non posso...non posso...farti morire così. <mainHelper>",
+    "next": "end"
   }
+
 
 ]
