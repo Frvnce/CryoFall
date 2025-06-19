@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using CryoFall.Character;
 using CryoFall.Commands;
+using CryoFall.Rooms;
 using Spectre.Console;
 namespace CryoFall.Dialogue;
 
@@ -26,9 +27,44 @@ public static class ConsoleStylingWrite
     //Vari testi preSalvati.
     private static readonly string ChooseAnOptionTitle = "[bold #f1f1f1]Scegli un'opzione:[/] ";
 
-    public static void HelperCmd(string dialogue)
+    public static void AnalyzeRoom(Room room)
     {
-        WriteDialogue("helper","help","Assistente",dialogue,false);
+        var nameRoom = room.NameOfTheRoom;
+        var descriptionRoom = room.DescriptionOfTheRoom;
+        var listOfItems = room.GetItems();
+        
+        HelperCmd("Analizzo la stanza...",true);
+        HelperCmd($"Ci troviamo in [bold]{nameRoom}[/], {descriptionRoom}",true);
+        HelperCmd("Vedo alcuni oggetti interessanti: ",true);
+        
+        Random rdm = new Random();
+        var list = GetList();
+        foreach (var item in listOfItems)
+        {
+            var number = rdm.Next(0, list.Count);
+            var randomString = list[number];
+            AnsiConsole.MarkupLine($"  [{item.Color}]{item.Name}[/]{randomString}");
+        }
+    }
+
+    private static List<string> GetList()
+    {
+        var list = new List<string>();
+        list.Add(", sembra utile, lo prendiamo?");
+        list.Add(", non so, può tornarci utile?");
+        list.Add(", carino.");
+        list.Add(", sembra inutile, tu che dici?");
+        list.Add(", wooooow, prendiamolo dai!");
+        list.Add(", mmmh, che strano");
+        list.Add(", fantastico, ne avevo uno simile a casa");
+        list.Add(", il mio ultimo padrone ci è morto...");
+
+        return list;
+    }
+    
+    public static void HelperCmd(string dialogue, bool live=false)
+    {
+        WriteDialogue("helper","help","<assistant>",dialogue,live);
     }
 
     public static void WriteCmdHelp(CommandInfo cmd)

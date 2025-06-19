@@ -22,7 +22,7 @@
           "minLength": 1,
           "description": "Nome leggibile della stanza"
         },
-        "room_description": {
+        "roomDescription": {
           "type": "string",
           "minLength": 1,
           "description": "Descrizione testuale della stanza"
@@ -54,7 +54,7 @@
       "required": [
         "id",
         "name",
-        "description",
+        "roomDescription",
         "isLocked",
         "adjacentRooms"
       ],

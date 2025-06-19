@@ -5,14 +5,14 @@ namespace CryoFall.Character;
 /// <summary>
 /// Carica i personaggi (solo Nome + PlaceHolder)
 /// e mette a disposizione il dizionario pronto:
-///     { "playerName" → "Roberto", … }
+///     {"playerName" → "Roberto",}
 /// </summary>
 public static class CharacterRepository
 {
     /// <summary>
     /// Dizionario pubblico e readonly:
-    ///     chiave  = PlaceHolder (playerName, robotName…)
-    ///     valore  = Nome visualizzato (Roberto, AX-47…)
+    ///     chiave  = PlaceHolder (playerName, robotName)
+    ///     valore  = Nome visualizzato (Roberto, AX-47)
     /// </summary>
     public static Dictionary<string, string> PlaceholdersNames { get; } = Load();
 

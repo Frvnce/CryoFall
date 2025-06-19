@@ -12,8 +12,9 @@ class Program
     private static void Main(string[] args)
     {
         //TODO Dare la scelta iniziale al giocatore se far partire una partita da zero o se caricare un salvataggio (solo se c'è già).
-        var cmdManager = new CommandManager();
         
+        #region INTRODUZIONE
+        #region Salvataggio Items e Rooms
         //Ogni file "Repository" legge il json di una determinata cosa.
         var roomRepo = RoomRepository.Load();
         var itemRepo = ItemRepository.Load();
@@ -36,34 +37,64 @@ class Program
             roomsManager.AddRoom(finalRoom);
         }
         roomsManager.SetRooms(roomRepo.GetAllNearRooms(roomsManager.GetRooms(), roomsManager)); // -> Salvo tutte le stanze qui dentro.
-        
-        // crea e avvia il CommandsManager
-        
-        
+        #endregion
+        #region DEBUG
         var live = false;
-        
+        var ms = 10;
+        #endregion
+        #region DIALOGHI E INIZIALIZZAZIONE PLAYER
         //Introduzione, dialogo a scelte multiple per spiegare la storia e far scegliere il nome al giocatore.
         ConsoleStylingWrite.StartDialogue("benvenuto",msToWaitForLine:500,live);
         
+        //Salvataggio personaggio ed inventario.
         MainCharacter player = new MainCharacter(ConsoleStylingWrite.GetPlaceHolders("playerName"), 30);
         player.CurrentRoom = roomsManager.FindRoom("sala_ibernazione");
         
         //Introduzione, primi dialoghi con robot e amici.
-        ConsoleStylingWrite.StartDialogue("introIbernazione",10,liveWriting: live);
-        bool isGameOver = false;
+        ConsoleStylingWrite.StartDialogue("introIbernazione",ms,liveWriting: live);
+        #endregion
+        #endregion
+        #region CommandsManager
+        // crea e avvia il CommandsManager
+        var cmdManager = new CommandManager();
+        #endregion
         
-        //TODO Inizio gioco, comandi usabili ecc.
+        //TODO Tutorial
+        Tutorial(cmdManager,player,roomsManager);
+        
+        
         
     }
 
-    static void ReadCmd(CommandManager cmdManager)
+    static bool ReadCmd(CommandManager cmdManager,MainCharacter player, RoomsManager rm, string cmdToWaitFor="")
     {
-        ConsoleStylingWrite.StartDialogue("benvenuto",msToWaitForLine:500);
         var cmd = "";
         do
         {
-            Console.Write("> ");
+            AnsiConsole.Markup("[bold #4287f5]>[/] ");
             cmd = Console.ReadLine();
-        } while (!cmdManager.ReadCommand(cmd));
+        } while (!cmdManager.ReadCommand(cmd, player,rm));
+
+        if (!string.IsNullOrEmpty(cmdToWaitFor))
+        {
+            return cmd == cmdToWaitFor;
+        }
+        
+        return true;
+    }
+
+    static void Tutorial(CommandManager cmdManager,MainCharacter player,RoomsManager rm)
+    {
+        bool tutorial = false;
+        
+        while (!tutorial)
+        {
+            if (!ReadCmd(cmdManager, player,rm,"help")) continue;
+            ConsoleStylingWrite.StartDialogue("tutorial_000");
+            if(!ReadCmd(cmdManager, player,rm, "analizza sala_ibernazione")) continue;
+            ConsoleStylingWrite.StartDialogue("tutorial_002");
+            //TODO Fare if per finire il gioco.
+
+        }
     }
 }

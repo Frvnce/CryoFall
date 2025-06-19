@@ -22,7 +22,7 @@
           "minLength": 1,
           "description": "Nome leggibile per l'interfaccia"
         },
-        "item_description": {
+        "itemDescription": {
           "type": "string",
           "minLength": 1,
           "description": "Descrizione visualizzata all'utente"
@@ -54,7 +54,7 @@
       "required": [
         "id",
         "name",
-        "item_description",
+        "itemDescription",
         "weight",
         "isPickable",
         "isUsable",

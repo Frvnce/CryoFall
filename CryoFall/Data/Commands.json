@@ -43,5 +43,11 @@
     "name": "Analizza",
     "cmd_description": "Analizza un oggetto o una stanza in cerca di dettagli.",
     "cmd": "analizza <qualcosa>"
+  },
+  {
+    "id": "pickup",
+    "name": "Prendi oggetto",
+    "cmd_description": "Prendi un oggetto presente nella stanza",
+    "cmd": "prendi <oggetto>"
   }
 ]

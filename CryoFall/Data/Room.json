@@ -2,7 +2,7 @@
   {
     "id": "sala_ibernazione",
     "name": "Sala Ibernazione",
-    "room_description": "Ampia sala criogenica con decine di capsule di ibernazione. Il tinotto bianco delle unità crea un bagliore spettrale sul pavimento metallico.",
+    "roomDescription": "Un'ampia sala criogenica con decine di capsule di ibernazione. \nIl tinotto bianco delle unità crea un bagliore spettrale sul pavimento metallico.",
     "isLocked": true,
     "unlockKeyId": "codice_accesso",
     "adjacentRooms": {
@@ -21,7 +21,7 @@
   {
     "id": "corridoio_ovest_1",
     "name": "Corridoio Ovest 1",
-    "room_description": "Corridoio metallico con pannelli di controllo spenti e tubazioni ai lati. Il silenzio è rotto solo dal ronzio remoto delle luci di emergenza.",
+    "roomDescription": "Corridoio metallico con pannelli di controllo spenti e tubazioni ai lati. Il silenzio è rotto solo dal ronzio remoto delle luci di emergenza.",
     "isLocked": false,
     "adjacentRooms": {
       "north": "infermeria",
@@ -35,7 +35,7 @@
   {
     "id": "corridoio_ovest_2",
     "name": "Corridoio Ovest 2",
-    "room_description": "Prolungamento del corridoio con tappeti consumati e luci d'emergenza rosse che tremolano.",
+    "roomDescription": "Prolungamento del corridoio con tappeti consumati e luci d'emergenza rosse che tremolano.",
     "isLocked": false,
     "adjacentRooms": {
       "north": "corridoio_ovest_3",
@@ -49,7 +49,7 @@
   {
     "id": "corridoio_ovest_3",
     "name": "Corridoio Ovest 3",
-    "room_description": "Sezione del corridoio con tubature esposte e pareti scrostate, semi-illuminata da faretti intermittenti.",
+    "roomDescription": "Sezione del corridoio con tubature esposte e pareti scrostate, semi-illuminata da faretti intermittenti.",
     "isLocked": false,
     "adjacentRooms": {
       "north": "zona_carburante_nord",
@@ -63,7 +63,7 @@
   {
     "id": "corridoio_ovest_4",
     "name": "Corridoio Ovest 4",
-    "room_description": "Tratto buio del corridoio, con segni di corrosione e qualche traccia di liquido scuro sul pavimento.",
+    "roomDescription": "Tratto buio del corridoio, con segni di corrosione e qualche traccia di liquido scuro sul pavimento.",
     "isLocked": false,
     "adjacentRooms": {
       "north": "corridoio_ovest_2",
@@ -77,7 +77,7 @@
   {
     "id": "stanza_tecnica",
     "name": "Stanza Tecnica",
-    "room_description": "Ambiente claustrofobico. Cavi penzolano dal soffitto. Un neon trema. Schermi sfarfallanti mostrano codici rossi d’emergenza. Tra detriti, un condotto d’aria parzialmente aperto.",
+    "roomDescription": "Ambiente claustrofobico. Cavi penzolano dal soffitto. Un neon trema. Schermi sfarfallanti mostrano codici rossi d’emergenza. Tra detriti, un condotto d’aria parzialmente aperto.",
     "isLocked": false,
     "adjacentRooms": {
       "north": null,
@@ -94,7 +94,7 @@
   {
     "id": "zona_carburante_sud",
     "name": "Zona Carburante Sud",
-    "room_description": "Sala cilindrica con grandi serbatoi di carburante. L’aria è satura di odore di solvente industriale.",
+    "roomDescription": "Sala cilindrica con grandi serbatoi di carburante. L’aria è satura di odore di solvente industriale.",
     "isLocked": true,
     "unlockKeyId": "chiave_magnetica_livello_5",
     "adjacentRooms": {
@@ -109,7 +109,7 @@
   {
     "id": "corridoio_sud",
     "name": "Corridoio Sud",
-    "room_description": "Ampio corridoio con tubazioni sospese e pareti rinforzate. Le luci di sicurezza lampeggiano in rosso.",
+    "roomDescription": "Ampio corridoio con tubazioni sospese e pareti rinforzate. Le luci di sicurezza lampeggiano in rosso.",
     "isLocked": false,
     "adjacentRooms": {
       "north": null,
@@ -123,7 +123,7 @@
   {
     "id": "zona_di_scarico",
     "name": "Zona di Scarico",
-    "room_description": "L’ambiente è freddo. Il metallo è arrugginito. Il respiro si condensa. Gocciolii ritmici accompagnano il silenzio irreale. La porta si chiude dietro al giocatore.",
+    "roomDescription": "L’ambiente è freddo. Il metallo è arrugginito. Il respiro si condensa. Gocciolii ritmici accompagnano il silenzio irreale. La porta si chiude dietro al giocatore.",
     "isLocked": true,
     "unlockKeyId": "chiave_magnetica_livello_5",
     "adjacentRooms": {
@@ -144,7 +144,7 @@
   {
     "id": "corridoio_centrale",
     "name": "Corridoio Centrale",
-    "room_description": "Corridoio centrale del complesso, con pannelli di controllo spenti e tubazioni integrate nelle pareti.",
+    "roomDescription": "Corridoio centrale del complesso, con pannelli di controllo spenti e tubazioni integrate nelle pareti.",
     "isLocked": false,
     "adjacentRooms": {
       "north": "sala_comune",
@@ -158,7 +158,7 @@
   {
     "id": "sala_comune",
     "name": "Sala Comune",
-    "room_description": "Ampia sala di riposo con sedute modulari e un grande finestrone che dà sulla sala di controllo sottostante.",
+    "roomDescription": "Ampia sala di riposo con sedute modulari e un grande finestrone che dà sulla sala di controllo sottostante.",
     "isLocked": false,
     "adjacentRooms": {
       "north": null,
@@ -172,7 +172,7 @@
   {
     "id": "corridoio_nord",
     "name": "Corridoio Nord",
-    "room_description": "Descrizione",
+    "roomDescription": "Descrizione",
     "isLocked": false,
     "adjacentRooms": {
       "north": null,
@@ -186,7 +186,7 @@
   {
     "id": "corridoio_est",
     "name": "Corridoio Est",
-    "room_description": "Stretto corridoio illuminato da linee LED bluastro, con tubazioni di raffreddamento ai lati.",
+    "roomDescription": "Stretto corridoio illuminato da linee LED bluastro, con tubazioni di raffreddamento ai lati.",
     "isLocked": false,
     "adjacentRooms": {
       "north": null,
@@ -200,7 +200,7 @@
   {
     "id": "zona_di_controllo",
     "name": "Zona di Controllo",
-    "room_description": "Devi usare la Mano di AX-7 per accedere. Luci soffuse illuminano pannelli colmi di dati e grafici in tempo reale. Al centro, una console olografica simula il viaggio della nave.",
+    "roomDescription": "Devi usare la Mano di AX-7 per accedere. Luci soffuse illuminano pannelli colmi di dati e grafici in tempo reale. Al centro, una console olografica simula il viaggio della nave.",
     "isLocked": true,
     "unlockKeyId": "mano_ax_7",
     "adjacentRooms": {
@@ -218,7 +218,7 @@
   {
     "id": "zona_carburante_nord",
     "name": "Zona Carburante Nord",
-    "room_description": "Locale di stoccaggio carburante superiore. L’aria è densa e oleosa, e il silenzio è interrotto solo dal ronzio lontano delle pompe.",
+    "roomDescription": "Locale di stoccaggio carburante superiore. L’aria è densa e oleosa, e il silenzio è interrotto solo dal ronzio lontano delle pompe.",
     "isLocked": true,
     "unlockKeyId": "event",
     "adjacentRooms": {
@@ -235,7 +235,7 @@
   {
     "id": "armeria",
     "name": "Armeria",
-    "room_description": "Stanza blindata con scaffali metallici ormai vuoti, tranne un emettitore di energia appoggiato distrattamente.",
+    "roomDescription": "Stanza blindata con scaffali metallici ormai vuoti, tranne un emettitore di energia appoggiato distrattamente.",
     "isLocked": true,
     "unlockKeyId": "chiave_magnetica_livello_10",
     "adjacentRooms": {
@@ -252,7 +252,7 @@
   {
     "id": "infermeria",
     "name": "Infermeria",
-    "room_description": "Sala medica con letti vuoti e monitor spenti. L’odore di disinfettante aleggia nell’aria.",
+    "roomDescription": "Sala medica con letti vuoti e monitor spenti. L’odore di disinfettante aleggia nell’aria.",
     "isLocked": true,
     "unlockKeyId": "chiave_magnetica_livello_10",
     "adjacentRooms": {

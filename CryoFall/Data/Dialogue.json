@@ -612,6 +612,33 @@
     "next": "waitForCmd"
   },
   {
+    "id": "tutorial_000",
+    "room": "ibernazione",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ottimo! Questa è la lista dei comandi, usala quando non sai cosa fare!",
+    "next": "tutorial_001"
+  },
+  {
+    "id": "tutorial_001",
+    "room": "ibernazione",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ora, ti consiglio di [bold]Analizzare[/] la sala di ibernazione!",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "tutorial_002",
+    "room": "ibernazione",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Wooooow, un sacco di oggetti, secondo me, possiamo prenderli.",
+    "next": "waitForCmd"
+  },
+  {
     "id": "atto1_001",
     "room": "stanza_tecnica",
     "speakerName": "Narratore",
@@ -654,19 +681,19 @@
     "character": "narrator",
     "kind": "narration",
     "text": "Ti avvicini al Terminale Semi-Funzionante. Sullo schermo lampeggia la scritta: [#FF1134 bold]EMERGENZA – USARE CHIAVE SOLO PER...[/] [italic](Dati corrotti)[/]",
-    "next": "main_014"
+    "next": "main_014.1"
   },
   {
-    "id": "main_014",
+    "id": "main_014.1",
     "room": "stanza_tecnica",
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
     "text": "Una chiave? Ma per cosa?",
-    "next": "assistente_009"
+    "next": "assistente_009.1"
   },
   {
-    "id": "assistente_009",
+    "id": "assistente_009.1",
     "room": "stanza_tecnica",
     "speakerName": "<assistant>",
     "character": "helper",
@@ -747,7 +774,7 @@
     "next": "waitForCmd"
   },
   {
-    "id": "atto1_006",
+    "id": "atto1_006.1",
     "room": "corridoio_sud",
     "speakerName": "Narratore",
     "character": "narrator",

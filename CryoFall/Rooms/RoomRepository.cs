@@ -19,7 +19,7 @@ namespace CryoFall.Rooms
     public sealed record RoomDefinition(
         string Id,
         string Name,
-        string Description,
+        string RoomDescription,
         bool IsLocked,
         string? UnlockKeyId,
         AdjacentDefinition AdjacentRooms,
@@ -46,7 +46,7 @@ namespace CryoFall.Rooms
             List<Room> rooms = new();
             foreach (var room in _allRooms)
             {
-                rooms.Add(new Room(room.Id, room.Name, room.Description, room.IsLocked, room.UnlockKeyId, room.AdjacentRooms, room.Items, room.Persons));
+                rooms.Add(new Room(room.Id, room.Name, room.RoomDescription, room.IsLocked, room.UnlockKeyId, room.AdjacentRooms, room.Items, room.Persons));
             }
             return rooms;
         }

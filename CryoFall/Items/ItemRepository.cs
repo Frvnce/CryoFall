@@ -8,7 +8,7 @@ namespace CryoFall.Items
     public sealed record ItemDefinition(
         string Id,
         string Name,
-        string Description,
+        string ItemDescription,
         double Weight,
         bool IsPickable,
         bool IsUsable,
@@ -41,7 +41,8 @@ namespace CryoFall.Items
             var json = File.ReadAllText(jsonPath);
             var options = new JsonSerializerOptions
             {
-                PropertyNameCaseInsensitive = true
+                PropertyNameCaseInsensitive = true,
+                PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
             };
 
             var items = JsonSerializer.Deserialize<List<ItemDefinition>>(json, options)
@@ -82,7 +83,7 @@ namespace CryoFall.Items
             List<Item> itemsList = new();
             foreach (var item in _allItems)
             {
-                itemsList.Add(new Item(item.Id,item.Name,item.Description,item.Weight,item.IsPickable,item.IsUsable,item.IsAnalyzable,item.Color));
+                itemsList.Add(new Item(item.Id,item.Name,item.ItemDescription,item.Weight,item.IsPickable,item.IsUsable,item.IsAnalyzable,item.Color));
             }
             return itemsList;
         }
