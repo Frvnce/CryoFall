@@ -62,22 +62,22 @@ namespace CryoFall.Rooms
 
                 if (leftRoom != null)
                 {
-                    rooms[i].NearRooms.LeftRoom = manager.FindRoom(leftRoom);
+                    rooms[i].NearRooms.OvestRoom = manager.FindRoom(leftRoom);
                 }
 
                 if (rightRoom != null)
                 {
-                    rooms[i].NearRooms.RightRoom = manager.FindRoom(rightRoom);
+                    rooms[i].NearRooms.EstRoom = manager.FindRoom(rightRoom);
                 }
 
                 if (upperRoom != null)
                 {
-                    rooms[i].NearRooms.UpperRoom = manager.FindRoom(upperRoom);
+                    rooms[i].NearRooms.NordRoom = manager.FindRoom(upperRoom);
                 }
 
                 if (lowerRoom != null)
                 {
-                    rooms[i].NearRooms.LowerRoom = manager.FindRoom(lowerRoom);
+                    rooms[i].NearRooms.SudRoom = manager.FindRoom(lowerRoom);
                 }
             }
             return rooms;

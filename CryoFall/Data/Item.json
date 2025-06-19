@@ -23,7 +23,7 @@
     "id": "kit_medico_base",
     "name": "Kit Medico Base",
     "itemDescription": "Fornitura di primo soccorso per ripristinare salute.",
-    "weight": 40,
+    "weight": 3,
     "isPickable": true,
     "isUsable": false,
     "isAnalyzable": false,

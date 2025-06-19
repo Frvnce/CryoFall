@@ -36,12 +36,13 @@ public static class ConsoleStylingWrite
         HelperCmd("Analizzo la stanza...",true);
         HelperCmd($"Ci troviamo in [bold]{nameRoom}[/], {descriptionRoom}",true);
 
-        HelperCmd($"Vedo alcune porte...\n   " +
-                  $"{(room.NearRooms.UpperRoom!=null? $"[[{room.NearRooms.UpperRoom.NameOfTheRoom}]] a [bold]Nord![/]" :"")}" +
-                  $"{(room.NearRooms.LowerRoom!=null? $"[[{room.NearRooms.LowerRoom.NameOfTheRoom}]] a [bold]Sud![/]" :"")}" +
-                  $"{(room.NearRooms.LeftRoom!=null? $"[[{room.NearRooms.LeftRoom.NameOfTheRoom}]] a [bold]Est![/]" :"")}" +
-                  $"{(room.NearRooms.RightRoom!=null? $"[[{room.NearRooms.RightRoom.NameOfTheRoom}]] a [bold]Ovest![/]" :"")}", true);
-        
+        HelperCmd($"Vedo alcune porte...\n" +
+                  $"{(room.NearRooms.NordRoom!=null? $"   [bold][[{room.NearRooms.NordRoom.NameOfTheRoom}]][/] a [bold]Nord![/]\n" :"")}" +
+                  $"{(room.NearRooms.SudRoom!=null? $"   [bold][[{room.NearRooms.SudRoom.NameOfTheRoom}]][/] a [bold]Sud![/]\n" :"")}" +
+                  $"{(room.NearRooms.EstRoom!=null? $"   [bold][[{room.NearRooms.EstRoom.NameOfTheRoom}]][/] a [bold]Est![/]\n" :"")}" +
+                  $"{(room.NearRooms.OvestRoom!=null? $"   [bold][[{room.NearRooms.OvestRoom.NameOfTheRoom}]][/] a [bold]Ovest![/]" :"")}", true);
+
+        if (room.GetItems().Count == 0) return;
         HelperCmd("Vedo alcuni oggetti interessanti: ",true);
         Random rdm = new Random();
         var list = GetList();

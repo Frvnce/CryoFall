@@ -3,7 +3,7 @@
     "id": "tp",
     "name": "Teletrasporto",
     "cmd_description": "Utilizza il teletrasporto per andare in un'altra stanza.",
-    "cmd": "teletrasporta <stanza>",
+    "cmd": "teletrasporta",
     "alias": ["tp"]
   },
   {
@@ -22,8 +22,8 @@
   {
     "id": "use",
     "name": "Usa",
-    "cmd_description": "Usa l'oggetto che hai in mano",
-    "cmd": "usa"
+    "cmd_description": "Usa l'oggetto che hai in mano in una delle 4 direzioni [bold]disponibili[/]. [italic](Nord|Sud|Est|Ovest)[/]",
+    "cmd": "usa <direzione>"
   },
   {
     "id": "remove",

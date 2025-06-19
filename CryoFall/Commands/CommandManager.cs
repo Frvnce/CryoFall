@@ -35,16 +35,23 @@ public class CommandManager
                 return Help();
             case "teletrasporta":
             case "tp":
-                if (args.Length != 2) return ErrorCmd();
-                return Teleport(args[1], true);
+                return Teleport(player,roomsManager); //Tp
             case "muoviti":
             case"move":
                 if (args.Length != 2) return ErrorCmd();
-                return Teleport(args[1]);
+                return Move(args[1],player,roomsManager,itemsManager); //Move
             case "analizza":
                 if (args.Length != 2) return ErrorCmd();
                 return AnalyzeRoom(args[1], player, roomsManager);
-            
+            case "lascia":
+                return RemoveTopItem(player);
+            case "inventario":
+            case "inv":
+            case "inventory":
+                return VisualizeInventory(player);
+            case "usa":
+                if (args.Length != 2) return ErrorCmd();
+                return UseObject(args[1],player,roomsManager,itemsManager);
             default: return ErrorCmd();
         }
     }
@@ -67,9 +74,59 @@ public class CommandManager
         return newArgs;
     }
 
+    private bool UseObject(string direction, MainCharacter p, RoomsManager rm,ItemsManager im)
+    {
+        Room finalDestination;
+        switch (direction.ToLower())
+        {
+            case "nord":
+                if (p.CurrentRoom.NearRooms.NordRoom == null) return ErrorCmd("roomDoesNotExist");
+                if (!p.CurrentRoom.NearRooms.NordRoom.IsLocked) return ErrorCmd("roomIsNotLocked");
+                finalDestination = p.CurrentRoom.NearRooms.NordRoom;
+                break;
+            case "sud":
+                if (p.CurrentRoom.NearRooms.SudRoom == null) return ErrorCmd("roomDoesNotExist");
+                if (!p.CurrentRoom.NearRooms.SudRoom.IsLocked) return ErrorCmd("roomIsNotLocked");
+                finalDestination = p.CurrentRoom.NearRooms.SudRoom;
+                break;
+            case "ovest":
+                if (p.CurrentRoom.NearRooms.OvestRoom == null) return ErrorCmd("roomDoesNotExist");
+                if (!p.CurrentRoom.NearRooms.OvestRoom.IsLocked) return ErrorCmd("roomIsNotLocked");
+                finalDestination = p.CurrentRoom.NearRooms.OvestRoom;
+                break;
+            case "est":
+                if (p.CurrentRoom.NearRooms.EstRoom == null) return ErrorCmd("roomDoesNotExist");
+                if (!p.CurrentRoom.NearRooms.EstRoom.IsLocked) return ErrorCmd("roomIsNotLocked");
+                finalDestination = p.CurrentRoom.NearRooms.EstRoom;
+                break;
+            default: return ErrorCmd("destinationError");
+        }
+        if(finalDestination.UnlockKeyId.ToLower().Replace("_","")!=p.Inventory.GetFirstItem().Id.ToLower().Replace("_","")) return ErrorCmd("incompatibleKey");
+        rm.FindRoom(finalDestination.Id).IsLocked = false;
+        ConsoleStylingWrite.HelperCmd($"[{p.Inventory.GetFirstItem().Color}]{p.Inventory.GetFirstItem().Name}[/] ha aperto la stanza [bold]{finalDestination.NameOfTheRoom}[/], ora puoi entrarci!");
+        return true;
+    }
+    
+    private bool VisualizeInventory(MainCharacter p)
+    {  
+        ConsoleStylingWrite.HelperCmd($"Ecco il tuo inventario: Capacità: [#22ff00]{p.Inventory.CurrentLoad}[/]/[#22ff00]{p.Inventory.MaxCapacity}[/] kg");
+        foreach (var item in p.Inventory.Items)
+        {
+            AnsiConsole.MarkupLine($"   [{item.Color}]{item.Name}[/]: {item.Description}");
+        }
+        ConsoleStylingWrite.HelperCmd($"Ricorda, puoi utilizzare solo l'oggetto che hai in cima alla lista!");
+
+        return true;
+    }
+
+    private bool RemoveTopItem(MainCharacter pl)
+    {
+        ConsoleStylingWrite.HelperCmd($"Beh, immagino che non ci servirà.");
+        return pl.Inventory.DropTop(pl.CurrentRoom);;
+    }
+
     /// <summary>
-    /// Teletrasporta il giocatore in una stanza.
-    /// Utilizzabile anche per muoversi nelle stanze normalmente.
+    /// Teletrasporta il giocatore in una stanza in modo casuale.
     /// </summary>
     /// <param name="destination"> La destinazione da raggiungere</param>
     /// <param name="isTeleport"> Capire se il giocatore si è teletrasportato o spostato normalmente</param>
@@ -77,9 +134,46 @@ public class CommandManager
     /// <c>True</c> se il comando è valido ed è stato eseguito correttamente;
     /// <c>False</c> altrimenti.
     /// </returns>
-    private bool Teleport(string destination,bool isTeleport = false)
+    private bool Teleport(MainCharacter p, RoomsManager rm)
     {
-        return ErrorCmd("argsError");
+           
+        return true;
+    }
+
+    private bool Move(string destination, MainCharacter p, RoomsManager rm, ItemsManager im)
+    {
+        Room finalDestination;
+        switch (destination.ToLower())
+        {
+            case "nord":
+                if (p.CurrentRoom.NearRooms.NordRoom == null) return ErrorCmd("roomDoesNotExist");
+                if (p.CurrentRoom.NearRooms.NordRoom.IsLocked) return ErrorCmd("roomIsLocked",im.FindItem(p.CurrentRoom.NearRooms.NordRoom.UnlockKeyId));
+                finalDestination = p.CurrentRoom.NearRooms.NordRoom;
+                break;
+            case "sud":
+                if (p.CurrentRoom.NearRooms.SudRoom == null) return ErrorCmd("roomDoesNotExist");
+                if (p.CurrentRoom.NearRooms.SudRoom.IsLocked) return ErrorCmd("roomIsLocked",im.FindItem(p.CurrentRoom.NearRooms.SudRoom.UnlockKeyId));
+                finalDestination = p.CurrentRoom.NearRooms.SudRoom;
+                break;
+            case "ovest":
+                if (p.CurrentRoom.NearRooms.OvestRoom == null) return ErrorCmd("roomDoesNotExist");
+                if (p.CurrentRoom.NearRooms.OvestRoom.IsLocked) return ErrorCmd("roomIsLocked",im.FindItem(p.CurrentRoom.NearRooms.OvestRoom.UnlockKeyId));
+                finalDestination = p.CurrentRoom.NearRooms.OvestRoom;
+                break;
+            case "est":
+                if (p.CurrentRoom.NearRooms.EstRoom == null) return ErrorCmd("roomDoesNotExist");
+                if (p.CurrentRoom.NearRooms.EstRoom.IsLocked) return ErrorCmd("roomIsLocked",im.FindItem(p.CurrentRoom.NearRooms.EstRoom.UnlockKeyId));
+                finalDestination = p.CurrentRoom.NearRooms.EstRoom;
+                break;
+            default: return ErrorCmd("destinationError");
+        }
+        //Spostiamo il giocatore nella finalDestination.
+        p.CurrentRoom = finalDestination;
+        ConsoleStylingWrite.HelperCmd("Ok andiamo!");
+        Thread.Sleep(1000);
+        AnalyzeRoom(p.CurrentRoom.Id,p,rm);
+        
+        return true;
     }
 
     /// <summary>
@@ -133,10 +227,12 @@ public class CommandManager
 
     /// <summary>
     /// Mostra un errore e invita il giocatore a scrivere HELP per visualizzare i comandi
+    /// Inoltre aiuta il giocatore in caso di comandi errati
     /// </summary>
     /// <param name="typeError">Il tipo di errore da mostrare</param>
+    /// <param name="item">Item che serve a mostrare il tipo di oggetto per sbloccare la porta</param>
     /// <returns></returns>
-    private bool ErrorCmd(string typeError = "cmdError")
+    private bool ErrorCmd(string typeError = "cmdError", Item? item = null)
     {
         switch (typeError)
         {
@@ -165,6 +261,22 @@ public class CommandManager
                 return false;
             case "inventoryFull":
                 AnsiConsole.MarkupLine("[bold italic]L'oggetto pesa troppo per il tuo inventario, prova a svuotarti per raccogliere l'oggetto![/]");
+                return false;
+            case "roomDoesNotExist":
+                AnsiConsole.MarkupLine("[bold italic #ff4400]La stanza che stai cercando non esiste[/]");
+                return false;
+            case "destinationError":
+                AnsiConsole.MarkupLine("[bold italic #ff4400]Destinazione errata, ricorda, puoi scrivere solo: (Nord|Sud|Est|Ovest)[/]");
+                return false;
+            case "roomIsLocked":
+                if(item!=null) 
+                    AnsiConsole.MarkupLine($"[bold italic]La stanza è bloccata! Richiede l'oggetto: [{item.Color}]{item.Name}[/][/]");
+                return false;
+            case "roomIsNotLocked":
+                AnsiConsole.MarkupLine($"[bold italic]La stanza non è chiusa a chiave![/]");
+                return false;
+            case "incompatibleKey":
+                AnsiConsole.MarkupLine("[bold italic #ff4400]L'oggetto che stai cercando di usare, non è quello giusto![/]");
                 return false;
         }
     }

@@ -35,7 +35,8 @@ namespace CryoFall.Character
             if (item is null) throw new ArgumentNullException(nameof(item));
             if (CurrentLoad + item.Weight > MaxCapacity) return false;
 
-            _stack.Add(item);
+            _stack.Insert(0,item);
+                
             return true;
         }
 
@@ -46,28 +47,15 @@ namespace CryoFall.Character
         {
             if (room is null || _stack.Count == 0) return false;
 
-            var top = _stack[^1];
-            _stack.RemoveAt(_stack.Count - 1);
+            var top = _stack[0];
+            _stack.RemoveAt(0);
             room.AddItem(top);
             return true;
         }
 
-        /// <summary>
-        /// Preleva dalla <paramref name="room"/> il primo oggetto con nome
-        /// <paramref name="itemName"/> e lo mette in cima,
-        /// se il peso restante lo consente.
-        /// </summary>
-        /*public bool TryPickUp(Room? room, string itemName)
+        public Item GetFirstItem()
         {
-            if (room is null) return false;
-
-            var candidate = room.Items.FirstOrDefault(i => i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
-            if (candidate is null) return false;
-            if (CurrentLoad + candidate.Weight > _maxCapacity) return false;
-
-            room.RemoveItem(candidate);
-            _stack.Add(candidate);
-            return true;
-        }*/
+            return _stack[0];
+        }
     }
 }

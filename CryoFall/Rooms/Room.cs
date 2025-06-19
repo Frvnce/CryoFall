@@ -8,10 +8,10 @@ namespace CryoFall.Rooms
     /// </summary>
     public struct RoomsNear
     {
-        public Room? UpperRoom;
-        public Room? LowerRoom;
-        public Room? LeftRoom;
-        public Room? RightRoom;
+        public Room? NordRoom;
+        public Room? SudRoom;
+        public Room? OvestRoom;
+        public Room? EstRoom;
     }
 
     /// <summary>

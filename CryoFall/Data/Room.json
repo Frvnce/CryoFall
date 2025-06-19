@@ -4,7 +4,7 @@
     "name": "Sala Ibernazione",
     "roomDescription": "Un'ampia sala criogenica con decine di capsule di ibernazione. \n   Il tinotto bianco delle unità crea un bagliore spettrale sul pavimento metallico.",
     "isLocked": true,
-    "unlockKeyId": "codice_accesso",
+    "unlockKeyId": "mano_ax_7",
     "adjacentRooms": {
       "north": null,
       "south": null,
@@ -21,8 +21,9 @@
   {
     "id": "corridoio_ovest_1",
     "name": "Corridoio Ovest 1",
-    "roomDescription": "Corridoio metallico con pannelli di controllo spenti e tubazioni ai lati. Il silenzio è rotto solo dal ronzio remoto delle luci di emergenza.",
-    "isLocked": false,
+    "roomDescription": "Un corridoio metallico con pannelli di controllo spenti e tubazioni ai lati. Il silenzio è rotto solo dal ronzio remoto delle luci di emergenza.",
+    "isLocked": true,
+    "unlockKeyId": "codice_di_accesso",
     "adjacentRooms": {
       "north": "infermeria",
       "south": "armeria",

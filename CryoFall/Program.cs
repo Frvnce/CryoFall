@@ -24,7 +24,6 @@ class Program
         foreach (Item item in itemRepo.GetAllItemsFromJson())
         {
             itemsManager.AddItem(item);
-            Console.WriteLine($"{item.IsPickable}");
         }
         
         //Manager di tutte le stanze presenti in gioco.
@@ -62,6 +61,7 @@ class Program
         //TODO Tutorial
         Tutorial(cmdManager,player,roomsManager,itemsManager);
         //TODO Partire con il gameplay vero e proprio.
+        GameplayAtto_01(cmdManager,player,roomsManager,itemsManager);
     }
 
     static bool ReadCmd(CommandManager cmdManager,MainCharacter player, RoomsManager rm,ItemsManager im, string cmdToWaitFor="")
@@ -84,17 +84,41 @@ class Program
     static void Tutorial(CommandManager cmdManager,MainCharacter player,RoomsManager rm,ItemsManager im)
     {
         bool tutorial = false;
-        
         while (!tutorial)
         {
+            //Comando help
             if (!ReadCmd(cmdManager, player,rm,im,"help")) continue;
+            //Comando analizza
             ConsoleStylingWrite.StartDialogue("tutorial_000");
             if(!ReadCmd(cmdManager, player,rm,im, "analizza")) continue;
+            //comando prendi oggetto
             ConsoleStylingWrite.StartDialogue("tutorial_002");
             if(!ReadCmd(cmdManager, player,rm,im, "prendi")) continue;
-            ConsoleStylingWrite.StartDialogue("tutorial_003");
+            //comando apri inventario
+            ConsoleStylingWrite.StartDialogue("tutorial_003"); 
+            if(!ReadCmd(cmdManager, player,rm,im, "inventario")) continue;
+            //comando usa
+            //ConsoleStylingWrite.StartDialogue("tutorial_004"); 
+            if(!ReadCmd(cmdManager, player,rm,im, "usa")) continue;
+            //comando lascia
+            //ConsoleStylingWrite.StartDialogue("tutorial_005"); 
+            if(!ReadCmd(cmdManager, player,rm,im, "lascia")) continue;
+            //comando muovi
+            //ConsoleStylingWrite.StartDialogue("tutorial_006"); 
+            if(!ReadCmd(cmdManager, player,rm,im, "muoviti")) continue;
+            
             //TODO Fare if per finire il gioco.
-
+            if(player.CurrentRoom!=rm.FindRoom("sala_ibernazione")) tutorial = true;
+        }
+    }
+    
+    static void GameplayAtto_01(CommandManager cmdManager,MainCharacter player,RoomsManager rm,ItemsManager im)
+    {
+        bool gameplay = false;
+        while (!gameplay)
+        {
+            ReadCmd(cmdManager, player, rm, im);
+            //TODO Fare if per finire il gioco.
         }
     }
 }
