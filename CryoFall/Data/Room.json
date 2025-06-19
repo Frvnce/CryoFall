@@ -13,8 +13,8 @@
     },
     "items": [
       "kit_medico_base",
-      "terminale_emergenza",
-      "codice_accesso"
+      "terminale_di_emergenza",
+      "codice_di_accesso"
     ],
     "persons": []
   },

@@ -113,9 +113,12 @@ namespace CryoFall.Rooms
         /// </summary>
         public Item? TakeItem(string itemName)
         {
-            var found = _items.FirstOrDefault(i =>
-                i.Name.Equals(itemName, StringComparison.OrdinalIgnoreCase));
-
+            Item found = null;
+            foreach (var itemInList in _items)
+            {
+                if (itemInList.Id.ToLower().Replace("_","") == itemName.ToLower().Replace("_","")) found = itemInList;
+            }
+            
             if (found != null) _items.Remove(found);
             return found;
         }

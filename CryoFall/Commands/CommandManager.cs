@@ -1,5 +1,6 @@
 ﻿using CryoFall.Character;
 using CryoFall.Dialogue;
+using CryoFall.Items;
 using CryoFall.Rooms;
 using Spectre.Console;
 
@@ -16,7 +17,7 @@ public class CommandManager
     /// <c>True</c> se il comando è valido ed è stato eseguito correttamente;
     /// <c>False</c> altrimenti.
     /// </returns>
-    public bool ReadCommand(string cmd,MainCharacter player,RoomsManager roomsManager)
+    public bool ReadCommand(string cmd,MainCharacter player,RoomsManager roomsManager,ItemsManager itemsManager)
     {
         var args = cmd.Split(' ');
         if (args.Length >= 2)
@@ -27,6 +28,9 @@ public class CommandManager
         
         switch (args[0].ToLower())
         {
+            case "prendi":
+                if (args.Length != 2) return ErrorCmd();
+                return TryPickUpItem(args[1], player, roomsManager, itemsManager);
             case "help":
                 return Help();
             case "teletrasporta":
@@ -109,6 +113,24 @@ public class CommandManager
         return true;
     }
 
+    private bool TryPickUpItem(string item, MainCharacter player, RoomsManager rm, ItemsManager im)
+    {
+        var itemObject = im.FindItem(item);
+        // se esiste l'item
+        if(itemObject==null)return ErrorCmd("itemNotFound");
+        //se l'item è nella stanza
+        if(!player.CurrentRoom.GetItems().Contains(itemObject))return ErrorCmd("itemNotInRoom");
+        //se l'oggetto è raccoglibile
+        if(!itemObject.IsPickable)return ErrorCmd("itemNotPickable");
+        //se l'oggetto è troppo pesante
+        if(player.Inventory.CurrentLoad + itemObject.Weight > player.Inventory.MaxCapacity)return ErrorCmd("inventoryFull"); 
+        //prova ad aggiungere l'item nell'inventario del giocatore
+        if (!player.Inventory.TryAdd(player.CurrentRoom.TakeItem(item))) return ErrorCmd("failItemAddToInventory");
+        
+        AnsiConsole.MarkupLine($"   [italic][bold {itemObject.Color}]{itemObject.Name}[/] aggiunto correttamente al tuo inventario![/]");
+        return true;
+    }
+
     /// <summary>
     /// Mostra un errore e invita il giocatore a scrivere HELP per visualizzare i comandi
     /// </summary>
@@ -128,6 +150,21 @@ public class CommandManager
             case "notInThisRoom":
                 AnsiConsole.MarkupLine("[bold italic #ff4400]Non puoi analizzare una stanza a distanza![/]");
                 //assistente ti ricorda dove ti trovi.
+                return false;
+            case "itemNotFound":
+                AnsiConsole.MarkupLine("[bold italic #ff4400]L'oggetto non esiste![/]");
+                return false;
+            case "itemNotInRoom":
+                AnsiConsole.MarkupLine("[bold italic #ff4400]L'oggetto non è in questa stanza![/]");
+                return false;
+            case "failItemAddToInventory":
+                AnsiConsole.MarkupLine("[bold italic #ff4400]Non sei riuscito a mettere l'oggetto nel tuo inventario[/]");
+                return false;
+            case "itemNotPickable":
+                AnsiConsole.MarkupLine("[bold italic]Non puoi raccogliere questo oggetto.[/]");
+                return false;
+            case "inventoryFull":
+                AnsiConsole.MarkupLine("[bold italic]L'oggetto pesa troppo per il tuo inventario, prova a svuotarti per raccogliere l'oggetto![/]");
                 return false;
         }
     }

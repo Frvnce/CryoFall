@@ -24,6 +24,7 @@ class Program
         foreach (Item item in itemRepo.GetAllItemsFromJson())
         {
             itemsManager.AddItem(item);
+            Console.WriteLine($"{item.IsPickable}");
         }
         
         //Manager di tutte le stanze presenti in gioco.
@@ -59,18 +60,18 @@ class Program
         var cmdManager = new CommandManager();
         #endregion
         //TODO Tutorial
-        Tutorial(cmdManager,player,roomsManager);
+        Tutorial(cmdManager,player,roomsManager,itemsManager);
         //TODO Partire con il gameplay vero e proprio.
     }
 
-    static bool ReadCmd(CommandManager cmdManager,MainCharacter player, RoomsManager rm, string cmdToWaitFor="")
+    static bool ReadCmd(CommandManager cmdManager,MainCharacter player, RoomsManager rm,ItemsManager im, string cmdToWaitFor="")
     {
         var cmd = "";
         do
         {
             AnsiConsole.Markup("[bold #4287f5]>[/] ");
             cmd = Console.ReadLine();
-        } while (!cmdManager.ReadCommand(cmd, player,rm));
+        } while (!cmdManager.ReadCommand(cmd, player,rm,im));
 
         if (!string.IsNullOrEmpty(cmdToWaitFor))
         {
@@ -80,16 +81,18 @@ class Program
         return true;
     }
 
-    static void Tutorial(CommandManager cmdManager,MainCharacter player,RoomsManager rm)
+    static void Tutorial(CommandManager cmdManager,MainCharacter player,RoomsManager rm,ItemsManager im)
     {
         bool tutorial = false;
         
         while (!tutorial)
         {
-            if (!ReadCmd(cmdManager, player,rm,"help")) continue;
+            if (!ReadCmd(cmdManager, player,rm,im,"help")) continue;
             ConsoleStylingWrite.StartDialogue("tutorial_000");
-            if(!ReadCmd(cmdManager, player,rm, "analizza")) continue;
+            if(!ReadCmd(cmdManager, player,rm,im, "analizza")) continue;
             ConsoleStylingWrite.StartDialogue("tutorial_002");
+            if(!ReadCmd(cmdManager, player,rm,im, "prendi")) continue;
+            ConsoleStylingWrite.StartDialogue("tutorial_003");
             //TODO Fare if per finire il gioco.
 
         }

@@ -1,6 +1,6 @@
 ﻿[
   {
-    "id": "terminale_emergenza",
+    "id": "terminale_di_emergenza",
     "name": "Terminale di Emergenza",
     "itemDescription": "Un terminale per inviare segnali di emergenza.",
     "weight": 5,
@@ -10,7 +10,7 @@
     "color": "#808080"
   },
   {
-    "id": "codice_accesso",
+    "id": "codice_di_accesso",
     "name": "Codice di Accesso",
     "itemDescription": "Un codice di accesso che sblocca la porta della Sala di Ibernazione",
     "weight": 0.5,
@@ -23,7 +23,7 @@
     "id": "kit_medico_base",
     "name": "Kit Medico Base",
     "itemDescription": "Fornitura di primo soccorso per ripristinare salute.",
-    "weight": 2,
+    "weight": 40,
     "isPickable": true,
     "isUsable": false,
     "isAnalyzable": false,

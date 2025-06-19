@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace CryoFall.Items
 {
@@ -6,14 +7,14 @@ namespace CryoFall.Items
     /// Rappresenta un singolo item come definito in item.json.
     /// </summary>
     public sealed record ItemDefinition(
-        string Id,
-        string Name,
-        string ItemDescription,
-        double Weight,
-        bool IsPickable,
-        bool IsUsable,
-        bool IsAnalyzable,
-        string Color
+            [property: JsonPropertyName("id")]            string Id,
+            [property: JsonPropertyName("name")]          string Name,
+            [property: JsonPropertyName("itemDescription")] string ItemDescription,
+            [property: JsonPropertyName("weight")]        double Weight,
+            [property: JsonPropertyName("isPickable")]    bool IsPickable,
+            [property: JsonPropertyName("isUsable")]      bool IsUsable,
+            [property: JsonPropertyName("isAnalyzable")]  bool IsAnalyzable,
+            [property: JsonPropertyName("color")]         string Color
     );
 
     /// <summary>

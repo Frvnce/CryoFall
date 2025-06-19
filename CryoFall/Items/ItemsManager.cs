@@ -62,7 +62,7 @@
             Item item = null;
             foreach (var itemInList in _items)
             {
-                if (itemInList.Id == id) item = itemInList;
+                if (itemInList.Id.ToLower().Replace("_","") == id.ToLower().Replace("_","")) item = itemInList;
             }
             return item;
         }

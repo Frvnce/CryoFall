@@ -635,7 +635,16 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Wooooow, un sacco di oggetti, secondo me, possiamo prenderli.",
+    "text": "Wooooow, un sacco di oggetti, secondo me, possiamo prenderli. Dai prendili, [bold]PRENDILIII![/]",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "tutorial_003",
+    "room": "ibernazione",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ok ottimo, ora prova ad aprire il tuo [bold]inventario[/] e controllare l'oggetto!",
     "next": "waitForCmd"
   },
   {

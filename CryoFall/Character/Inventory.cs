@@ -11,7 +11,7 @@ namespace CryoFall.Character
     public class Inventory(double maxCapacity)
     {
         // ─── Campi ────────────────────────────────────────────────────────
-        private readonly double _maxCapacity = maxCapacity >= 0
+        public readonly double MaxCapacity = maxCapacity >= 0
             ? maxCapacity
             : throw new ArgumentOutOfRangeException(
                   nameof(maxCapacity), "La capacità massima non può essere negativa.");
@@ -28,12 +28,12 @@ namespace CryoFall.Character
 
         // ─── Operazioni ──────────────────────────────────────────────────
         /// <summary>
-        /// Aggiunge l’item in cima se non supera <see cref="_maxCapacity"/>.
+        /// Aggiunge l’item in cima se non supera <see cref="MaxCapacity"/>.
         /// </summary>
         public bool TryAdd(Item item)
         {
             if (item is null) throw new ArgumentNullException(nameof(item));
-            if (CurrentLoad + item.Weight > _maxCapacity) return false;
+            if (CurrentLoad + item.Weight > MaxCapacity) return false;
 
             _stack.Add(item);
             return true;
