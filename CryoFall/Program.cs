@@ -58,12 +58,9 @@ class Program
         // crea e avvia il CommandsManager
         var cmdManager = new CommandManager();
         #endregion
-        
         //TODO Tutorial
         Tutorial(cmdManager,player,roomsManager);
-        
-        
-        
+        //TODO Partire con il gameplay vero e proprio.
     }
 
     static bool ReadCmd(CommandManager cmdManager,MainCharacter player, RoomsManager rm, string cmdToWaitFor="")
@@ -77,7 +74,7 @@ class Program
 
         if (!string.IsNullOrEmpty(cmdToWaitFor))
         {
-            return cmd == cmdToWaitFor;
+            return cmd.ToLower().Contains(cmdToWaitFor.ToLower());
         }
         
         return true;
@@ -91,7 +88,7 @@ class Program
         {
             if (!ReadCmd(cmdManager, player,rm,"help")) continue;
             ConsoleStylingWrite.StartDialogue("tutorial_000");
-            if(!ReadCmd(cmdManager, player,rm, "analizza sala_ibernazione")) continue;
+            if(!ReadCmd(cmdManager, player,rm, "analizza")) continue;
             ConsoleStylingWrite.StartDialogue("tutorial_002");
             //TODO Fare if per finire il gioco.
 

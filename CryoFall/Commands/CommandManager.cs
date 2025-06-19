@@ -19,26 +19,48 @@ public class CommandManager
     public bool ReadCommand(string cmd,MainCharacter player,RoomsManager roomsManager)
     {
         var args = cmd.Split(' ');
-        // La prima parola letta (Comando digitato dall'utente)
+        if (args.Length >= 2)
+        {
+            args = SplitCmd(args);
+            args[1] = args[1].ToLower();
+        }
         
-        switch (args[0])
+        switch (args[0].ToLower())
         {
             case "help":
                 return Help();
             case "teletrasporta":
             case "tp":
-                if (args.Length < 2) return ErrorCmd();
+                if (args.Length != 2) return ErrorCmd();
                 return Teleport(args[1], true);
             case "muoviti":
             case"move":
-                if (args.Length < 2) return ErrorCmd();
+                if (args.Length != 2) return ErrorCmd();
                 return Teleport(args[1]);
             case "analizza":
-                if (args.Length < 2) return ErrorCmd();
+                if (args.Length != 2) return ErrorCmd();
                 return AnalyzeRoom(args[1], player, roomsManager);
             
             default: return ErrorCmd();
         }
+    }
+
+    /// <summary>
+    /// Fa un lavoro dove imposta il secondo argomento unendo tutti gli argomenti dopo il primo.
+    /// In modo tale, il player può scrivere "analizza Sala Ibernazione" e il risultato sarà
+    /// "analizza salaibernazione", in modo tale da trovare la stanza.
+    /// </summary>
+    /// <param name="args">Il cmd splittato.</param>
+    /// <returns></returns>
+    private string[] SplitCmd(string[] args)
+    {
+        string[] newArgs = new string[2];
+        newArgs[0] = args[0];
+        for (int i = 1; i < args.Length; i++)
+        {
+            newArgs[1] += args[i];
+        }
+        return newArgs;
     }
 
     /// <summary>
@@ -80,7 +102,7 @@ public class CommandManager
     {
         var roomToAnalyze = rm.FindRoom(room);
         if (roomToAnalyze == null) return ErrorCmd("argsError");
-        if(roomToAnalyze.Id != player.CurrentRoom.Id) return ErrorCmd("roomDoesNotExist");
+        if(roomToAnalyze.Id.Replace("_","") != player.CurrentRoom.Id.Replace("_","")) return ErrorCmd("notInThisRoom");
 
         ConsoleStylingWrite.AnalyzeRoom(roomToAnalyze);
         
@@ -103,8 +125,8 @@ public class CommandManager
             case "argsError":
                 AnsiConsole.MarkupLine("[bold italic #ff4400]Argomento errato! Scrivi [#11ff11]HELP[/] per vedere la lista dei comandi e degli argomenti disponibili![/]");
                 return false;
-            case "roomDoesNotExist":
-                AnsiConsole.MarkupLine("[bold italic #ff4400]La stanza in cui ti trovi non esiste![/]");
+            case "notInThisRoom":
+                AnsiConsole.MarkupLine("[bold italic #ff4400]Non puoi analizzare una stanza a distanza![/]");
                 //assistente ti ricorda dove ti trovi.
                 return false;
         }

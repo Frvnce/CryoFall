@@ -35,8 +35,14 @@ public static class ConsoleStylingWrite
         
         HelperCmd("Analizzo la stanza...",true);
         HelperCmd($"Ci troviamo in [bold]{nameRoom}[/], {descriptionRoom}",true);
-        HelperCmd("Vedo alcuni oggetti interessanti: ",true);
+
+        HelperCmd($"Vedo alcune porte...\n   " +
+                  $"{(room.NearRooms.UpperRoom!=null? $"[[{room.NearRooms.UpperRoom.NameOfTheRoom}]] a [bold]Nord![/]" :"")}" +
+                  $"{(room.NearRooms.LowerRoom!=null? $"[[{room.NearRooms.LowerRoom.NameOfTheRoom}]] a [bold]Sud![/]" :"")}" +
+                  $"{(room.NearRooms.LeftRoom!=null? $"[[{room.NearRooms.LeftRoom.NameOfTheRoom}]] a [bold]Est![/]" :"")}" +
+                  $"{(room.NearRooms.RightRoom!=null? $"[[{room.NearRooms.RightRoom.NameOfTheRoom}]] a [bold]Ovest![/]" :"")}", true);
         
+        HelperCmd("Vedo alcuni oggetti interessanti: ",true);
         Random rdm = new Random();
         var list = GetList();
         foreach (var item in listOfItems)

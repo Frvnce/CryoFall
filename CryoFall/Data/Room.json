@@ -2,7 +2,7 @@
   {
     "id": "sala_ibernazione",
     "name": "Sala Ibernazione",
-    "roomDescription": "Un'ampia sala criogenica con decine di capsule di ibernazione. \nIl tinotto bianco delle unità crea un bagliore spettrale sul pavimento metallico.",
+    "roomDescription": "Un'ampia sala criogenica con decine di capsule di ibernazione. \n   Il tinotto bianco delle unità crea un bagliore spettrale sul pavimento metallico.",
     "isLocked": true,
     "unlockKeyId": "codice_accesso",
     "adjacentRooms": {

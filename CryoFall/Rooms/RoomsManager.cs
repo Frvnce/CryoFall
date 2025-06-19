@@ -64,7 +64,7 @@ namespace CryoFall.Rooms
             Room room = null;
             foreach (var r in _rooms)
             {
-                if (r.Id == id) room = r;
+                if (r.Id.Replace("_","") == id.Replace("_","")) room = r;
             }
             return room;
         }
