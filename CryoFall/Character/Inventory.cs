@@ -57,5 +57,18 @@ namespace CryoFall.Character
         {
             return _stack[0];
         }
+        /// <summary>Rimuove tutti gli oggetti senza restituirli ad alcuna stanza.</summary>
+        public void ClearAll()
+        {
+            // svuota internamente la pila
+            _stack.Clear();
+        }
+
+        /// <summary>Aggiunge direttamente un item in cima, ignorando il limite di capacità.</summary>
+        public void ForceAdd(Item item)
+        {
+            if (item is null) throw new ArgumentNullException(nameof(item));
+            _stack.Insert(0, item);
+        }
     }
 }

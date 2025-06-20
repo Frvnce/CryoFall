@@ -2,6 +2,7 @@
 using CryoFall.Dialogue;
 using CryoFall.Items;
 using CryoFall.Rooms;
+using CryoFall.SaveSystem;
 using Spectre.Console;
 
 namespace CryoFall.Commands;
@@ -52,9 +53,26 @@ public class CommandManager
             case "usa":
                 if (args.Length != 2) return ErrorCmd();
                 return UseObject(args[1],player,roomsManager,itemsManager);
+            case "salva":
+            {
+                var path = Path.Combine(AppContext.BaseDirectory, "saves", "save1.json");
+                SaveManager.Save(path, player, roomsManager, itemsManager);
+                ConsoleStylingWrite.HelperCmd("Partita salvata in " + path);
+                return true;
+            }
+            case "carica":
+            {
+                var path = Path.Combine(AppContext.BaseDirectory, "saves", "save1.json");
+                SaveManager.Load(path, player, roomsManager, ItemRepository);
+                ConsoleStylingWrite.HelperCmd("Partita caricata da " + path);
+                return true;
+            }
+
             default: return ErrorCmd();
         }
     }
+
+    public ItemRepository ItemRepository { get;}
 
     /// <summary>
     /// Fa un lavoro dove imposta il secondo argomento unendo tutti gli argomenti dopo il primo.

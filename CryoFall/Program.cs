@@ -3,6 +3,7 @@ using CryoFall.Commands;
 using CryoFall.Dialogue;
 using CryoFall.Items;
 using CryoFall.Rooms;
+using CryoFall.SaveSystem;
 using Spectre.Console;
 
 namespace CryoFall;
@@ -37,32 +38,71 @@ class Program
             roomsManager.AddRoom(finalRoom);
         }
         roomsManager.SetRooms(roomRepo.GetAllNearRooms(roomsManager.GetRooms(), roomsManager)); // -> Salvo tutte le stanze qui dentro.
+        
+        //setto il percorso di salvataggio
+        var savesDir = Path.Combine(AppContext.BaseDirectory, "saves");
+        Directory.CreateDirectory(savesDir);
+        var savePath = Path.Combine(savesDir, "save1.json");
+        
         #endregion
         #region DEBUG
         var live = false;
         var ms = 10;
         #endregion
         #region DIALOGHI E INIZIALIZZAZIONE PLAYER
-        //Introduzione, dialogo a scelte multiple per spiegare la storia e far scegliere il nome al giocatore.
-        ConsoleStylingWrite.StartDialogue("benvenuto",msToWaitForLine:500,live);
-        
-        //Salvataggio personaggio ed inventario.
-        MainCharacter player = new MainCharacter(ConsoleStylingWrite.GetPlaceHolders("playerName"), 30);
-        player.CurrentRoom = roomsManager.FindRoom("sala_ibernazione");
-        
-        //Introduzione, primi dialoghi con robot e amici.
-        ConsoleStylingWrite.StartDialogue("introIbernazione",ms,liveWriting: live);
-        #endregion
-        #endregion
-        #region CommandsManager
-        // crea e avvia il CommandsManager
+        MainCharacter player;
+        bool loaded = false;
+        if (File.Exists(savePath))
+        {
+            Console.Write("Trovato salvataggio! Vuoi caricare la partita? (s/n): ");
+            var ans = Console.ReadLine()?.Trim().ToLower();
+            if (ans == "s")
+            {
+                // Creo un player “vuoto” e poi lo popolo col SaveManager
+                player = new MainCharacter("PlayerTemp", 30);
+                SaveManager.Load(savePath, player, roomsManager ,itemRepo);
+                loaded = true;
+            }
+            else
+            {
+                // farà il ramo “nuova partita”
+                player = null!;
+            }
+        }
+        else
+        {
+            player = null!;
+        }
+
+        // 4) Se non ho caricato, avvio il nuovo gioco
+        if (!loaded)
+        {
+            // Dialogo e scelta del nome
+            ConsoleStylingWrite.StartDialogue("benvenuto", msToWaitForLine: 500, false);
+            var name = ConsoleStylingWrite.GetPlaceHolders("playerName");
+            player = new MainCharacter(name, 30);
+            player.CurrentRoom = roomsManager.FindRoom("sala_ibernazione");
+
+            // Intro iniziale
+            ConsoleStylingWrite.StartDialogue("introIbernazione", 10, liveWriting:false);
+        }
+
+        // 5) Avvio il CommandManager e il resto del flusso
         var cmdManager = new CommandManager();
-        #endregion
-        //TODO Tutorial
-        Tutorial(cmdManager,player,roomsManager,itemsManager);
-        //TODO Partire con il gameplay vero e proprio.
-        GameplayAtto_01(cmdManager,player,roomsManager,itemsManager);
+        if (!player.HasCompletedTutorial)
+        {
+            Tutorial(cmdManager, player, roomsManager, itemsManager);
+            player.HasCompletedTutorial = true;
+        }
+
+        // Se volete, potete anche salvare subito per test:
+        // SaveManager.Save(savePath, player, roomsManager, itemsManager);
+        SaveManager.Save(savePath, player, roomsManager, itemsManager);
+
+        GameplayAtto_01(cmdManager, player, roomsManager, itemsManager);
     }
+    #endregion
+
 
     static bool ReadCmd(CommandManager cmdManager,MainCharacter player, RoomsManager rm,ItemsManager im, string cmdToWaitFor="")
     {
@@ -81,6 +121,21 @@ class Program
         return true;
     }
 
+    static bool ReadCmdTutorial(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im, string cmdToWaitFor)
+    {
+        AnsiConsole.Markup("[bold #4287f5]>[/] ");
+        var cmd = Console.ReadLine();
+        
+        // Prima controlla se è il comando giusto
+        if (!string.IsNullOrEmpty(cmdToWaitFor) && !cmd.ToLower().Contains(cmdToWaitFor.ToLower()))
+        {
+            return false; // Comando sbagliato, non eseguire nulla
+        }
+        
+        // Se è il comando giusto, eseguilo
+        return cmdManager.ReadCommand(cmd, player, rm, im);
+    }
+
     static void Tutorial(CommandManager cmdManager,MainCharacter player,RoomsManager rm,ItemsManager im)
     {
         bool tutorial = false;
@@ -90,26 +145,54 @@ class Program
             {
                 break;
             }
+            
             //Comando help
-            if (!ReadCmd(cmdManager, player,rm,im,"help")) continue;
+            do
+            {
+                AnsiConsole.MarkupLine("[yellow]Usa il comando 'help' per vedere tutti i comandi disponibili![/]");
+            } while (!ReadCmdTutorial(cmdManager, player, rm, im, "help"));
+            
             //Comando analizza
             ConsoleStylingWrite.StartDialogue("tutorial_000");
-            if(!ReadCmd(cmdManager, player,rm,im, "analizza")) continue;
+            do
+            {
+                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'analizza' per continuare il tutorial![/]");
+            } while(!ReadCmdTutorial(cmdManager, player, rm, im, "analizza"));
+            
             //comando prendi oggetto
             ConsoleStylingWrite.StartDialogue("tutorial_002");
-            if(!ReadCmd(cmdManager, player,rm,im, "prendi")) continue;
+            do
+            {
+                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'prendi' per continuare il tutorial![/]");
+            } while(!ReadCmdTutorial(cmdManager, player, rm, im, "prendi")); //fixare il fatto che se prendo un oggetto diverso dalla chiave mi vada avanti
+            
             //comando apri inventario
-            ConsoleStylingWrite.StartDialogue("tutorial_003"); 
-            if(!ReadCmd(cmdManager, player,rm,im, "inventario")) continue;
+            ConsoleStylingWrite.StartDialogue("tutorial_003");
+            do
+            {
+                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'inventario' per continuare il tutorial![/]");
+            } while(!ReadCmdTutorial(cmdManager, player, rm, im, "inventario"));
+            
             //comando usa
-            ConsoleStylingWrite.StartDialogue("tutorial_004"); 
-            if(!ReadCmd(cmdManager, player,rm,im, "usa")) continue;
+            ConsoleStylingWrite.StartDialogue("tutorial_004");
+            do
+            {
+                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'usa' per continuare il tutorial![/]");
+            } while(!ReadCmdTutorial(cmdManager, player, rm, im, "usa"));
+            
             //comando lascia
-            ConsoleStylingWrite.StartDialogue("tutorial_005"); 
-            if(!ReadCmd(cmdManager, player,rm,im, "lascia")) continue;
+            ConsoleStylingWrite.StartDialogue("tutorial_005");
+            do
+            {
+                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'lascia' per continuare il tutorial![/]");
+            } while(!ReadCmdTutorial(cmdManager, player, rm, im, "lascia"));
+            
             //comando muovi
-            ConsoleStylingWrite.StartDialogue("tutorial_006"); 
-            if(!ReadCmd(cmdManager, player,rm,im, "muoviti")) continue;
+            ConsoleStylingWrite.StartDialogue("tutorial_006");
+            do
+            {
+                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'muoviti' per continuare il tutorial![/]");
+            } while(!ReadCmdTutorial(cmdManager, player, rm, im, "muoviti"));
             
             //TODO Fare if per finire il gioco.
             if(player.CurrentRoom!=rm.FindRoom("sala_ibernazione")) tutorial = true;
@@ -117,53 +200,66 @@ class Program
         ConsoleStylingWrite.StartDialogue("tutorial_007"); 
     }
     
-    static void GameplayAtto_01(CommandManager cmdManager,MainCharacter player,RoomsManager rm,ItemsManager im)
+    static void GameplayAtto_01(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
     {
-        List<Room> roomsVisitated = new List<Room>();
-        List<Item> itemsInInventory = new List<Item>();
+        // Uso HashSet per poter sfruttare Add(...) che restituisce bool
+        var itemsInInventory = new HashSet<string>();
         bool gameplay = false;
+
         while (!gameplay)
         {
             ReadCmd(cmdManager, player, rm, im);
-            if (player.CurrentRoom == rm.FindRoom("stanza_tecnica") && !roomsVisitated.Contains(rm.FindRoom("stanza_tecnica")))
+
+            // STANZA TECNICA
+            if (player.CurrentRoom.Id == "stanza_tecnica"
+                && player.VisitedRoomIds.Add("stanza_tecnica"))
             {
                 ConsoleStylingWrite.StartDialogue("atto1_001");
-                roomsVisitated.Add(rm.FindRoom("stanza_tecnica"));
             }
 
-            if (player.CurrentRoom == rm.FindRoom("corridoio_ovest_2") &&
-                roomsVisitated.Contains(rm.FindRoom("stanza_tecnica")))
+            // CORRIDOIO OVEST 2 (dopo stanza_tecnica)
+            if (player.CurrentRoom.Id == "corridoio_ovest_2"
+                && player.VisitedRoomIds.Contains("stanza_tecnica")
+                && player.VisitedRoomIds.Add("corridoio_ovest_2"))
             {
                 ConsoleStylingWrite.StartDialogue("assistente_012");
             }
-            if (player.CurrentRoom == rm.FindRoom("corridoio_ovest_4") &&
-                !roomsVisitated.Contains(rm.FindRoom("corridoio_ovest_4"))&&
-                roomsVisitated.Contains(rm.FindRoom("stanza_tecnica")))
+
+            // CORRIDOIO OVEST 4 (dopo stanza_tecnica)
+            if (player.CurrentRoom.Id == "corridoio_ovest_4"
+                && player.VisitedRoomIds.Contains("stanza_tecnica")
+                && player.VisitedRoomIds.Add("corridoio_ovest_4"))
             {
-                roomsVisitated.Add(rm.FindRoom("corridoio_ovest_4"));
                 ConsoleStylingWrite.StartDialogue("main_017");
             }
-            
-            if (player.CurrentRoom == rm.FindRoom("corridoio_sud") &&
-                !roomsVisitated.Contains(rm.FindRoom("corridoio_sud")))
+
+            // CORRIDOIO SUD
+            if (player.CurrentRoom.Id == "corridoio_sud"
+                && player.VisitedRoomIds.Add("corridoio_sud"))
             {
-                roomsVisitated.Add(rm.FindRoom("corridoio_sud"));
                 ConsoleStylingWrite.StartDialogue("assistente_013");
             }
-            if (player.CurrentRoom == rm.FindRoom("zona_di_scarico") &&
-                !roomsVisitated.Contains(rm.FindRoom("zona_di_scarico")))
+
+            // ZONA DI SCARICO
+            if (player.CurrentRoom.Id == "zona_di_scarico"
+                && player.VisitedRoomIds.Add("zona_di_scarico"))
             {
-                roomsVisitated.Add(rm.FindRoom("zona_di_scarico"));
                 ConsoleStylingWrite.StartDialogue("assistente_014");
             }
-            if (player.Inventory.Items.Contains(im.FindItem("mano_ax_7")) &&
-                !itemsInInventory.Contains(im.FindItem("mano_ax_7")))
+
+            // PRIMO PICK-UP di "mano_ax_7"
+            var ax7 = im.FindItem("mano_ax_7");
+            if (ax7 != null
+                && player.Inventory.Items.Contains(ax7)
+                && itemsInInventory.Add(ax7.Id))
             {
                 ConsoleStylingWrite.StartDialogue("atto1_012");
-                itemsInInventory.Add(im.FindItem("mano_ax_7"));
             }
-            
-            //TODO Fare if per finire il gioco.
+
+            // TODO: condizione di uscita dal loop
+            // if (player.CurrentRoom.Id == "uscita") gameplay = true;
         }
     }
+
 }
+#endregion

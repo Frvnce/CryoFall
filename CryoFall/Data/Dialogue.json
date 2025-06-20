@@ -880,7 +880,7 @@
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "L’ambiente è metallico e arrugginito. Gocciolii ritmici accompagnano un silenzio irreale. La porta si chiude alle tue spalle.",
+    "text": "La porta si chiude alle tue spalle.",
     "next": "main_019"
   },
   {
