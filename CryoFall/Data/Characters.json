@@ -14,5 +14,13 @@
   {
     "Nome": "Assistente",
     "PlaceHolder": "assistant"
+  },
+  {
+    "Nome": "Marcus",
+    "PlaceHolder": "secondHelper"
+  },
+  {
+    "Nome": "Sarah",
+    "PlaceHolder": "thirdHelper"
   }
 ]

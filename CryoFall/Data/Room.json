@@ -124,7 +124,7 @@
   {
     "id": "zona_di_scarico",
     "name": "Zona di Scarico",
-    "roomDescription": "L’ambiente è freddo. Il metallo è arrugginito. Il respiro si condensa. Gocciolii ritmici accompagnano il silenzio irreale. La porta si chiude dietro al giocatore.",
+    "roomDescription": "L’ambiente è freddo. Il metallo è arrugginito. Il respiro si condensa. Gocciolii ritmici accompagnano il silenzio irreale.",
     "isLocked": true,
     "unlockKeyId": "chiave_magnetica_livello_5",
     "adjacentRooms": {

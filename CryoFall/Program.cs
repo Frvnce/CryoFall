@@ -86,6 +86,10 @@ class Program
         bool tutorial = false;
         while (!tutorial)
         {
+            if (player.CurrentRoom != rm.FindRoom("sala_ibernazione"))
+            {
+                break;
+            }
             //Comando help
             if (!ReadCmd(cmdManager, player,rm,im,"help")) continue;
             //Comando analizza
@@ -98,26 +102,67 @@ class Program
             ConsoleStylingWrite.StartDialogue("tutorial_003"); 
             if(!ReadCmd(cmdManager, player,rm,im, "inventario")) continue;
             //comando usa
-            //ConsoleStylingWrite.StartDialogue("tutorial_004"); 
+            ConsoleStylingWrite.StartDialogue("tutorial_004"); 
             if(!ReadCmd(cmdManager, player,rm,im, "usa")) continue;
             //comando lascia
-            //ConsoleStylingWrite.StartDialogue("tutorial_005"); 
+            ConsoleStylingWrite.StartDialogue("tutorial_005"); 
             if(!ReadCmd(cmdManager, player,rm,im, "lascia")) continue;
             //comando muovi
-            //ConsoleStylingWrite.StartDialogue("tutorial_006"); 
+            ConsoleStylingWrite.StartDialogue("tutorial_006"); 
             if(!ReadCmd(cmdManager, player,rm,im, "muoviti")) continue;
             
             //TODO Fare if per finire il gioco.
             if(player.CurrentRoom!=rm.FindRoom("sala_ibernazione")) tutorial = true;
         }
+        ConsoleStylingWrite.StartDialogue("tutorial_007"); 
     }
     
     static void GameplayAtto_01(CommandManager cmdManager,MainCharacter player,RoomsManager rm,ItemsManager im)
     {
+        List<Room> roomsVisitated = new List<Room>();
+        List<Item> itemsInInventory = new List<Item>();
         bool gameplay = false;
         while (!gameplay)
         {
             ReadCmd(cmdManager, player, rm, im);
+            if (player.CurrentRoom == rm.FindRoom("stanza_tecnica") && !roomsVisitated.Contains(rm.FindRoom("stanza_tecnica")))
+            {
+                ConsoleStylingWrite.StartDialogue("atto1_001");
+                roomsVisitated.Add(rm.FindRoom("stanza_tecnica"));
+            }
+
+            if (player.CurrentRoom == rm.FindRoom("corridoio_ovest_2") &&
+                roomsVisitated.Contains(rm.FindRoom("stanza_tecnica")))
+            {
+                ConsoleStylingWrite.StartDialogue("assistente_012");
+            }
+            if (player.CurrentRoom == rm.FindRoom("corridoio_ovest_4") &&
+                !roomsVisitated.Contains(rm.FindRoom("corridoio_ovest_4"))&&
+                roomsVisitated.Contains(rm.FindRoom("stanza_tecnica")))
+            {
+                roomsVisitated.Add(rm.FindRoom("corridoio_ovest_4"));
+                ConsoleStylingWrite.StartDialogue("main_017");
+            }
+            
+            if (player.CurrentRoom == rm.FindRoom("corridoio_sud") &&
+                !roomsVisitated.Contains(rm.FindRoom("corridoio_sud")))
+            {
+                roomsVisitated.Add(rm.FindRoom("corridoio_sud"));
+                ConsoleStylingWrite.StartDialogue("assistente_013");
+            }
+            if (player.CurrentRoom == rm.FindRoom("zona_di_scarico") &&
+                !roomsVisitated.Contains(rm.FindRoom("zona_di_scarico")))
+            {
+                roomsVisitated.Add(rm.FindRoom("zona_di_scarico"));
+                ConsoleStylingWrite.StartDialogue("assistente_014");
+            }
+            if (player.Inventory.Items.Contains(im.FindItem("mano_ax_7")) &&
+                !itemsInInventory.Contains(im.FindItem("mano_ax_7")))
+            {
+                ConsoleStylingWrite.StartDialogue("atto1_012");
+                itemsInInventory.Add(im.FindItem("mano_ax_7"));
+            }
+            
             //TODO Fare if per finire il gioco.
         }
     }

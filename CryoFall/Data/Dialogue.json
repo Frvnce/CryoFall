@@ -609,7 +609,7 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Forse dovrei usare il comando [#808080 bold]HELP[/] come mi ha suggerito <assistente>",
+    "text": "Forse dovrei usare il comando [#808080 bold]HELP[/] come mi ha suggerito <assistant>",
     "next": "waitForCmd"
   },
   {
@@ -649,6 +649,42 @@
     "next": "waitForCmd"
   },
   {
+    "id": "tutorial_004",
+    "room": "ibernazione",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Bene, adesso proviamo ad utilizzare l'oggetto nella direzione della porta! [italic](Est)[/]",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "tutorial_005",
+    "room": "ibernazione",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Bene, ottimo lavoro, prima di uscire da qui, [bold]lascia[/]re l'oggetto!",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "tutorial_006",
+    "room": "ibernazione",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Bene, è il momento di uscire da qui! Muoviti verso [italic]est[/]",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "tutorial_007",
+    "room": "ibernazione",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ce l'abbiamo fatta! Forza, abbiamo tante cose da fare, <robotName> ci ha detto di andare nella [bold]stanza tecnica[/], dovrebbe essere alla fine di questo corridoio, andiamo!",
+    "next": "waitForCmd"
+  },
+  {
     "id": "atto1_001",
     "room": "stanza_tecnica",
     "speakerName": "Narratore",
@@ -657,6 +693,7 @@
     "text": "Entri nella Stanza Tecnica. L’ambiente è claustrofobico. Cavi penzolano dal soffitto. Un neon trema. Schermi sfarfallanti mostrano codici rossi d’emergenza. Un condotto d’aria è parzialmente aperto. L'aria puzza di plastica bruciata, i cavi penzolano dal soffitto come serpenti morti...",
     "next": "assistente_008"
   },
+  
   {
     "id": "assistente_008",
     "room": "stanza_tecnica",
@@ -682,7 +719,16 @@
     "character": "main",
     "kind": "thought",
     "text": "C'è un terminale acceso laggiù... forse posso interagirci.",
-    "next": "waitForCmd"
+    "choices": [
+      {
+        "label": "Avvicinati al terminale e prova ad usarlo.",
+        "next": "atto1_002"
+      },
+      {
+        "label": "Ignora il terminale.",
+        "next": "atto1_003"
+      }
+    ]
   },
   {
     "id": "atto1_002",
@@ -718,7 +764,7 @@
     "character": "narrator",
     "kind": "narration",
     "text": "Un improvviso colpo d’aria ti fa voltare. Il condotto parzialmente aperto ora è ben visibile. Noti qualcosa incastrato al suo interno.",
-    "next": "waitForCmd"
+    "next": "main_016"
   },
   {
     "id": "main_016",
@@ -763,7 +809,7 @@
     "character": "helper",
     "kind": "dialogue",
     "text": "Ok... niente panico... adesso, se non sbaglio, devi andare a Sud... o era Est? No, Sud! Sono sicuro!",
-    "next": "main_017"
+    "next": "waitForCmd"
   },
   {
     "id": "main_017",
@@ -771,8 +817,8 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Questa dovrebbe essere la Zona Carburante Sud, per raggiungere la Zona di Scarico devi passare da qui!",
-    "next": "doorLocked"
+    "text": "Questa dovrebbe essere la porta per la Zona Carburante Sud, per raggiungere la Zona di Scarico devi passare da qui! Andiamoci!",
+    "next": "waitForCmd"
   },
   {
     "id": "atto1_006",
@@ -799,7 +845,7 @@
     "character": "helper",
     "kind": "dialogue",
     "text": "Oooh, bella atmosfera... se ti piacciono le stanze da film horror.",
-    "next": "waitForCmd"
+    "next": "main_018"
   },
   {
     "id": "main_018",
@@ -843,8 +889,8 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Che posto tremendo... Marcus e Sarah, dove siete finiti? Non sarà successo qualcosa di terribile, vero?",
-    "next": "waitForCmd"
+    "text": "Che posto tremendo... <secondHelper> e <thirdHelper>, dove siete finiti? Non sarà successo qualcosa di terribile, vero?",
+    "next": "atto1_010"
   },
   {
     "id": "atto1_010",
@@ -861,8 +907,8 @@
     "speakerName": "<robotName>",
     "character": "malfunctioning",
     "kind": "dialogue",
-    "text": "Com... Comandante! Un terribile... incidente... Marcus e Sarah... intrappolati...",
-    "next": "main_019"
+    "text": "Com... Comandante! Un terribile... incidente... <secondHelper> e <thirdHelper>... intrappolati...",
+    "next": "main_020"
   },
   {
     "id": "main_020",
@@ -915,8 +961,8 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Marcus... Sarah... è impossibile che siano spariti così, qualcosa non quadra. Devo capire cosa è successo davvero! Devo trovare la mano, dovrebbe essere qui da qualche parte qui... Devo trovarla. Ma... posso davvero fidarmi di lui?",
-    "next": "waitForCmd"
+    "text": "<secondHelper>... <thirdHelper>... è impossibile che siano spariti così, qualcosa non quadra. Devo capire cosa è successo davvero! Devo trovare la mano, dovrebbe essere qui da qualche parte qui... Devo trovarla. Ma... posso davvero fidarmi di lui?",
+    "next": "atto1_011"
   },
   {
     "id": "atto1_011",
@@ -942,7 +988,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Ew ( ꩜ ᯅ ꩜;)! Ma che schifo... cioè, non fraintendermi, sono utili le mani, però... che schifo.",
+    "text": "Ew! Ma che schifo... cioè, non fraintendermi, sono utili le mani, però... che schifo.",
     "next": "waitForCmd"
   },
   {
@@ -970,7 +1016,7 @@
     "character": "main",
     "kind": "thought",
     "text": "C’è qualcosa incastrato nel pugno... un pezzo di tessuto. Sembra... un camice?",
-    "next": "waitforCmd"
+    "next": "assistente_017"
   },
   {
     "id": "assistente_017",
@@ -978,7 +1024,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Ehm. Ok. Forse è il caso di... correre? Tipo via. Adesso. Subito. Naaah sto scherzando! Forse. O forse no. NON SO COSA PENSARE (•᷄ࡇ•᷅)",
+    "text": "Ehm. Ok. Forse è il caso di... correre? Tipo via. Adesso. Subito. Naaah sto scherzando! Forse. O forse no. NON SO COSA PENSARE",
     "next": "atto1_013"
   },
   {
@@ -1095,7 +1141,7 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "C’è qualcosa dentro... un dispositivo? COSA ASPETTI? ANALIZZA LA STANZA",
+    "text": "C’è qualcosa dentro... un dispositivo? COSA ASPETTI? PRENDILO!",
     "next": "waitForCmd"
   },
   {
@@ -1104,7 +1150,7 @@
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "Estrai il dispositivo dall’armadietto. Sul lato c'è scritto: [bold]“U.S.O. D’EMERGENZA – destinazioni visitate.”[/]",
+    "text": "Estrai il dispositivo dall’armadietto. Sul lato c'è scritto: [bold]\"U.S.O. D’EMERGENZA – destinazioni casuali.\"[/]",
     "next": "assistente_019"
   },
   {
@@ -1113,7 +1159,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Wooooow!! È un teletrasportatore portatile! Ok, ora pensaci bene… dove vuoi andare?",
+    "text": "Wooooow!! È un teletrasportatore portatile! Ok, ora pensaci bene... dove vuoi andare?",
     "next": "waitForCmd"
   },
   {
