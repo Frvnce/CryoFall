@@ -2,50 +2,47 @@
 using CryoFall.Items;
 using CryoFall.Rooms;
 using CryoFall.Character;
-using System.Text.Json.Serialization;
-using CryoFall.SaveSystem;
 
 namespace CryoFall.SaveSystem
 {
+    /// <summary>
+    /// Gestisce il salvataggio e il caricamento del gioco su file
+    /// </summary>
     public static class SaveManager
     {
         private static readonly JsonSerializerOptions JsonOptions = new()
         {
-            WriteIndented = true,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            WriteIndented = true, // formattazione leggibile
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase // camelCase nei nomi JSON
         };
 
-        public static void Save(string path,
-                                MainCharacter player,
-                                RoomsManager roomsManager,
-                                ItemsManager itemsManager)
+        public static void Save(string path, MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager)
         {
+            // prepara dati di salvataggio
             var data = new SaveGameData
             {
                 PlayerCurrentRoomId = player.CurrentRoom.Id,
                 PlayerInventoryIds  = player.Inventory.Items.Select(i => i.Id).ToList(),
-                IsTutorialCompleted   = player.HasCompletedTutorial,
-                VisitedRoomIds        = player.VisitedRoomIds.ToList()
+                IsTutorialCompleted = player.HasCompletedTutorial,
+                VisitedRoomIds      = player.VisitedRoomIds.ToList()
             };
 
+            // aggiunge lo stato di ogni stanza
             foreach (var room in roomsManager.GetRooms())
             {
                 var rsd = new RoomSaveData
                 {
-                    RoomId       = room.Id,
-                    IsLocked     = room.IsLocked,
-                    ItemIdsInRoom= room.GetItems().Select(i => i.Id).ToList()
+                    RoomId        = room.Id,
+                    IsLocked      = room.IsLocked,
+                    ItemIdsInRoom = room.GetItems().Select(i => i.Id).ToList()
                 };
                 data.Rooms.Add(rsd);
             }
 
-            File.WriteAllText(path, JsonSerializer.Serialize(data, JsonOptions));
+            File.WriteAllText(path, JsonSerializer.Serialize(data, JsonOptions)); // Scrive file JSON
         }
 
-        public static void Load(string path,
-                                MainCharacter player,
-                                RoomsManager roomsManager,
-                                ItemRepository itemRepo)
+        public static void Load(string path, MainCharacter player, RoomsManager roomsManager, ItemRepository itemRepo)
         {
             if (!File.Exists(path))
                 throw new FileNotFoundException($"Save file non trovato: {path}");
@@ -53,17 +50,19 @@ namespace CryoFall.SaveSystem
             var json = File.ReadAllText(path);
             var data = JsonSerializer.Deserialize<SaveGameData>(json, JsonOptions)
                        ?? throw new InvalidDataException("Salvataggio corrotto");
+
+            // ripristina tutorial e stanze visitate
             player.HasCompletedTutorial = data.IsTutorialCompleted;
             player.VisitedRoomIds.Clear();
             foreach (var id in data.VisitedRoomIds)
                 player.VisitedRoomIds.Add(id);
 
-            // 1) Ripristino stanza corrente del giocatore
+            // imposta stanza corrente
             var startRoom = roomsManager.FindRoom(data.PlayerCurrentRoomId)
                             ?? throw new InvalidOperationException("Room salvata non trovata");
             player.CurrentRoom = startRoom;
 
-            // 2) Ripristino inventario
+            // ricostruisce inventario
             player.Inventory.ClearAll();
             foreach (var itemId in data.PlayerInventoryIds)
             {
@@ -76,20 +75,18 @@ namespace CryoFall.SaveSystem
                 }
             }
 
-            // 3) Ripristino stato di tutte le stanze
+            // ripristina stato oggetti e blocchi in ogni stanza
             foreach (var roomSave in data.Rooms)
             {
                 var room = roomsManager.FindRoom(roomSave.RoomId);
-                if (room == null)
-                    continue;
+                if (room == null) continue;
 
                 room.IsLocked = roomSave.IsLocked;
 
-                // svuota tutti gli item correnti
+                // aggiorna oggetti nella stanza
                 foreach (var it in room.GetItems().ToList())
                     room.RemoveItem(it);
 
-                // reinserisci quelli salvati
                 foreach (var itemId in roomSave.ItemIdsInRoom)
                 {
                     if (itemRepo.TryGet(itemId, out var def))

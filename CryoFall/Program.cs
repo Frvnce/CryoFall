@@ -74,14 +74,14 @@ class Program
             player = null!;
         }
 
-        // 4) Se non ho caricato, avvio il nuovo gioco
+        // se non ho caricato, avvio il nuovo gioco
         if (!loaded)
         {
-            // Dialogo e scelta del nome
+            // dialogo e scelta del nome iniziale
             ConsoleStylingWrite.StartDialogue("benvenuto", msToWaitForLine: 500, false);
             var name = ConsoleStylingWrite.GetPlaceHolders("playerName");
             player = new MainCharacter(name, 30);
-            player.CurrentRoom = roomsManager.FindRoom("sala_ibernazione");
+            player.CurrentRoom = roomsManager.FindRoom("sala_ibernazione") ?? throw new InvalidOperationException();
 
             // Intro iniziale
             ConsoleStylingWrite.StartDialogue("introIbernazione", 10, liveWriting:false);
@@ -94,10 +94,6 @@ class Program
             Tutorial(cmdManager, player, roomsManager, itemsManager);
             player.HasCompletedTutorial = true;
         }
-
-        // Se volete, potete anche salvare subito per test:
-        // SaveManager.Save(savePath, player, roomsManager, itemsManager);
-        SaveManager.Save(savePath, player, roomsManager, itemsManager);
 
         GameplayAtto_01(cmdManager, player, roomsManager, itemsManager);
     }
@@ -121,7 +117,7 @@ class Program
         return true;
     }
 
-    static bool ReadCmdTutorial(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im, string cmdToWaitFor)
+    static bool ReadCmdTutorial(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im, string cmdToWaitFor) //funzione per verificare limitare input nel tutorial
     {
         AnsiConsole.Markup("[bold #4287f5]>[/] ");
         var cmd = Console.ReadLine();
@@ -257,7 +253,6 @@ class Program
             }
 
             // TODO: condizione di uscita dal loop
-            // if (player.CurrentRoom.Id == "uscita") gameplay = true;
         }
     }
 

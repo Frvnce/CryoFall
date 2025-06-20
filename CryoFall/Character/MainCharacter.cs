@@ -16,8 +16,8 @@ public class MainCharacter(string name, int maxCapacity)
         get => _name;
         init => _name = value ?? throw new ArgumentNullException(nameof(value));
     }
-    public bool HasCompletedTutorial { get; set; } = false;
-    public HashSet<string> VisitedRoomIds { get; } = new HashSet<string>();
+    public bool HasCompletedTutorial { get; set; } = false; // tutorial completato o no
+    public HashSet<string> VisitedRoomIds { get; } = new HashSet<string>(); // stanze visitate
     private readonly string _name = name;
 
     /// <summary>
