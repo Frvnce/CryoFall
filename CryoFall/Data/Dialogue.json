@@ -22,7 +22,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Oh no!! La porta è bloccata (◞‸◟,). Hai qualche chiave per aprirla?",
+    "text": "Oh no!! La porta è bloccata. Hai qualche chiave per aprirla?",
     "next": "waitForCmd"
   },
   {
@@ -31,7 +31,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "ദ്ദി •⩊• ) Hai sbloccato la porta!!"
+    "text": "Hai sbloccato la porta!!"
   },
   {
     "id": "benvenuto",
@@ -690,7 +690,7 @@
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "Entri nella Stanza Tecnica. L’ambiente è claustrofobico. Cavi penzolano dal soffitto. Un neon trema. Schermi sfarfallanti mostrano codici rossi d’emergenza. Un condotto d’aria è parzialmente aperto. L'aria puzza di plastica bruciata, i cavi penzolano dal soffitto come serpenti morti...",
+    "text": "",
     "next": "assistente_008"
   },
   
@@ -700,7 +700,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Ehi... che posto cariiino ( ˶ˆᗜˆ˵ ) ",
+    "text": "Ehi... che posto cariiino :D",
     "next": "assistente_009"
   },
   {
@@ -799,7 +799,7 @@
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "Ritorni nel corridoio. Le luci d’emergenza tremolano. Il silenzio è interrotto solo dal tuo respiro.",
+    "text": "",
     "next": "assistente_012"
   },
   {
@@ -835,7 +835,7 @@
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "Raggiungi il Corridoio Sud. Le pareti sono rinforzate. Le luci lampeggiano in rosso.",
+    "text": "",
     "next": "assistente_012"
   },
   {
@@ -853,7 +853,7 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "dialogue",
-    "text": "Eccola. La porta per la Zona di Scarico. Vediamo se questa chiave funziona...",
+    "text": "Eccola. La porta per la Zona di Scarico. Coraggio <playerName>, puoi farcela...",
     "next": "waitForCmd"
   },
   {
@@ -1078,7 +1078,7 @@
     "speakerName": "<robotName>",
     "character": "enemy",
     "kind": "dialogue",
-    "text": "Grazie, Comandante. Ora siete... non più necessari.",
+    "text": "Grazie, Comandante. Ora sei... non più necessario.",
     "next": "atto1_gameover"
   },
   {
@@ -1164,11 +1164,11 @@
   },
   {
     "id": "atto2_002",
-    "room": "stanza_scelta",
+    "room": "sala_comune",
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "Appari nel <Stanza_Scelta>.",
+    "text": "Appari nella Sala Comune della Nave.",
     "next": "assistente_020"
   },
   {
@@ -1195,7 +1195,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Hai ragione, scusami. Aspetta.... LENA, LENA FORSE È ANCORA VIVA! Da quello che diceva <robotName> l'aveva mandata nella ZONA CARBURANTE NORD",
+    "text": "Hai ragione, scusami. Aspetta.... <mainHelper>, <mainHelper> FORSE È ANCORA VIVA! Da quello che diceva <robotName> l'aveva mandata nella ZONA CARBURANTE NORD",
     "next": "atto2_003"
   },
   {
@@ -1204,7 +1204,7 @@
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "Realizzi improvvisamente che Lena potrebbe essere in pericolo. Devi raggiungerla il prima possibile nella Zona Carburante Nord.",
+    "text": "Realizzi improvvisamente che <mainHelper> potrebbe essere in pericolo. Devi raggiungerla il prima possibile nella Zona Carburante Nord.",
     "next": "main_027"
   },
   {
@@ -1213,7 +1213,7 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Se <robotName> ha mentito, Lena potrebbe essere la prossima vittima. Devo sbrigarmi.",
+    "text": "Se <robotName> ha mentito, <mainHelper> potrebbe essere la prossima vittima. Devo sbrigarmi.",
     "next": "assistente_022"
   },
   {
@@ -1276,7 +1276,7 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Lena, te lo giuro, costi quel che costi, ti salverò",
+    "text": "<mainHelper>, te lo giuro, costi quel che costi, ti salverò",
     "next": "waitForCmd"
   },
   {
@@ -1348,7 +1348,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Quindi... AX-7 è cattivo? (ಥ﹏ಥ) Io lo sapevo che non dovevo fidarmi dei robot...",
+    "text": "Quindi... AX-7 è cattivo? Io lo sapevo che non dovevo fidarmi dei robot...",
     "next": "atto3_006"
   },
   {
@@ -1420,7 +1420,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Evviva! Abbiamo fatto qualcosa di buono finalmente! Ora corriamo da Lena prima che AX-7 faccia altri danni!",
+    "text": "Evviva! Abbiamo fatto qualcosa di buono finalmente! Ora corriamo da <mainHelper> prima che AX-7 faccia altri danni!",
     "next": "waitForCmd"
   },
   {
@@ -1492,8 +1492,107 @@
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "Lena si asciuga una lacrima.",
-    "next": "lena_007"
+    "text": "Però <robotName> non è programmato per mentire, come faccio a sapere se non sei tu quello a mentire?",
+    "next": "lena_diffidente_001"
+  },
+  {
+    "id": "lena_diffidente_001",
+    "room": "zona_carburante_nord",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Ma <mainHelper>! Ci conosciamo da una vita, abbiamo passato anni ad aiutare nella costruzione di questa nave...come fai a non fidarti di me?",
+    "next": "lena_diffidente_002"
+  },
+  {
+    "id": "lena_diffidente_002",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Visto le circostanze non puoi biasimarmi <playerName>. Perdonami ma non posso fidarmi ciecamente. Ah però ci sarebbe qualcosa che potresti fare per me. Se mi aiuterai saprò che mi posso fidare di te.",
+    "next": "lena_diffidente_003"
+  },
+  {
+    "id": "lena_diffidente_003",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Ho perso una foto per me davvero importante, è una foto di mia figlia. Per favore aiutami a trovarla. Se lo farai ti crederò",
+    "next": "end"
+  },
+  {
+    "id": "lena_diffidente_004",
+    "room": "zona_carburante_nord",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Sì, certo che ti aiuteremo <mainHelper>. Conta pure su di noi. <playerName> dai su muoviti che non abbiamo molto tempo! Trova la foto",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "lena_diffidente_005",
+    "room": "sala_comune",
+    "speakerName": "<assistant>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "ECCO LA FOTO!!! BEN FATTO! Portiamola a <mainHelper> su su!",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "lena_diffidente_006",
+    "room": "zona_carburante_nord",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Ho la foto <mainHelper>...",
+    "next": "lena_diffidente_007"
+  },
+  {
+    "id": "lena_diffidente_007",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "La mia Emily. Oh quanto mi manchi. Dammela per favore...",
+    "next": "lena_diffidente_008"
+  },
+  {
+    "id": "lena_diffidente_008",
+    "room": "zona_carburante_nord",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Cosa vuoi fare?",
+    "choices": [
+      {
+        "label": "Consegna la foto",
+        "next": "lena_007"
+      },
+      {
+        "label": "Non consegnare la foto",
+        "next": "lena_gameover_001"
+      }
+    ]
+  },
+  {
+    "id": "lena_gameover_001",
+    "room": "zona_carburante_nord",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Ma come no? Dammela!",
+    "next": "lena_gameover_002"
+  },
+  {
+    "id": "lena_gameover_002",
+    "room": "zona_carburante_nord",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Nel mentre che i due bisticciavano, non si sono accorti dell'entrata di <robotName>, che era lì pronto ad eliminarli entrambi. <robotName> emette un verso per attirare l'attenzione ma non appena i due si girano, era già troppo tardi. Con un gesto rapido e violento <robotName> prende entrambe le vostre teste e con una forza sovrumana le distrugge. Complimenti, sei morto per un bisticcio.",
+    "next": "end"
   },
   {
     "id": "lena_007",
@@ -1816,7 +1915,7 @@
     "character": "main",
     "kind": "dialogue",
     "text": "No, non posso...non posso...farti morire così. <mainHelper>",
-    "next": "end"
+    "next": ""
   }
 
 
