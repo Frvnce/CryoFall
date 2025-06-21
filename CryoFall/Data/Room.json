@@ -136,7 +136,7 @@
     "items": [
       "mano_ax_7",
       "frammento_tessuto_blu",
-      "dispositivo_teletrasporto"
+      "dispositivo_di_teletrasporto"
     ],
     "persons": [
       "<robotName>"
@@ -246,7 +246,7 @@
       "west": null
     },
     "items": [
-      "emettitore_energia"
+      "emettitore_di_energia"
     ],
     "persons": []
   },

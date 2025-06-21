@@ -181,6 +181,21 @@ public class CommandManager
         return pl.Inventory.DropTop(pl.CurrentRoom);;
     }
 
+    List<Room> GetListRooms(RoomsManager rm)
+    {
+        List<Room> rooms = new List<Room>();
+        rooms.Add(rm.FindRoom("sala_comune"));
+        rooms.Add(rm.FindRoom("corridoio_ovest_1"));
+        rooms.Add(rm.FindRoom("corridoio_ovest_2"));
+        rooms.Add(rm.FindRoom("corridoio_ovest_3"));
+        rooms.Add(rm.FindRoom("corridoio_ovest_4"));
+        rooms.Add(rm.FindRoom("stanza_tecnica"));
+        rooms.Add(rm.FindRoom("zona_carburante_sud"));
+        rooms.Add(rm.FindRoom("corridoio_nord"));
+        rooms.Add(rm.FindRoom("corridoio_est"));
+        return rooms;
+    }
+    
     /// <summary>
     /// Teletrasporta il giocatore in una stanza in modo casuale.
     /// </summary>
@@ -190,7 +205,9 @@ public class CommandManager
     /// </returns>
     private bool Teleport(MainCharacter p, RoomsManager rm)
     {
-        var room = rm.FindRoom("sala_comune");
+        var rooms = GetListRooms(rm);
+        var rdm = new Random();
+        var room = rooms[rdm.Next(0, rooms.Count)];
 
         if (room == null) return ErrorCmd("teleportNotWorking"); 
         p.CurrentRoom = room;

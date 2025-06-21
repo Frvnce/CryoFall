@@ -284,7 +284,7 @@ class Program
     static void EscapeFromRobotScene(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
     {
         var robotHand = im.FindItem("mano_ax_7");
-        var teleportDevice = im.FindItem("dispositivo_teletrasporto");
+        var teleportDevice = im.FindItem("dispositivo_di_teletrasporto");
         
         while (!ReadCmdTutorial(cmdManager, player, rm, im, "prendi") ||
                !player.Inventory.Items.Contains(robotHand))
