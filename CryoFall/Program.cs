@@ -145,49 +145,49 @@ class Program
             //Comando help
             do
             {
-                AnsiConsole.MarkupLine("[yellow]Usa il comando 'help' per vedere tutti i comandi disponibili![/]");
+                ConsoleStylingWrite.WriteTutorial("[yellow]Usa il comando 'help' per vedere tutti i comandi disponibili![/]");
             } while (!ReadCmdTutorial(cmdManager, player, rm, im, "help"));
             
             //Comando analizza
             ConsoleStylingWrite.StartDialogue("tutorial_000");
             do
             {
-                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'analizza' per continuare il tutorial![/]");
+                ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'analizza' per continuare il tutorial![/]");
             } while(!ReadCmdTutorial(cmdManager, player, rm, im, "analizza"));
             
             //comando prendi oggetto
             ConsoleStylingWrite.StartDialogue("tutorial_002");
             do
             {
-                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'prendi' per continuare il tutorial![/]");
-            } while(!ReadCmdTutorial(cmdManager, player, rm, im, "prendi")); //fixare il fatto che se prendo un oggetto diverso dalla chiave mi vada avanti
+                ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'prendi codice di accesso' per continuare il tutorial![/]");
+            } while(!ReadCmdTutorial(cmdManager, player, rm, im, "prendi") || !player.Inventory.Items.Contains(im.FindItem("codice_di_accesso"))); //fixare il fatto che se prendo un oggetto diverso dalla chiave mi vada avanti
             
             //comando apri inventario
             ConsoleStylingWrite.StartDialogue("tutorial_003");
             do
             {
-                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'inventario' per continuare il tutorial![/]");
+                ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'inventario' per continuare il tutorial![/]");
             } while(!ReadCmdTutorial(cmdManager, player, rm, im, "inventario"));
             
             //comando usa
             ConsoleStylingWrite.StartDialogue("tutorial_004");
             do
             {
-                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'usa' per continuare il tutorial![/]");
+                ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'usa' per continuare il tutorial![/]");
             } while(!ReadCmdTutorial(cmdManager, player, rm, im, "usa"));
             
             //comando lascia
             ConsoleStylingWrite.StartDialogue("tutorial_005");
             do
             {
-                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'lascia' per continuare il tutorial![/]");
+                ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'lascia' per continuare il tutorial![/]");
             } while(!ReadCmdTutorial(cmdManager, player, rm, im, "lascia"));
             
             //comando muovi
             ConsoleStylingWrite.StartDialogue("tutorial_006");
             do
             {
-                AnsiConsole.MarkupLine("[yellow]Devi usare il comando 'muoviti' per continuare il tutorial![/]");
+                ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'muoviti' per continuare il tutorial![/]");
             } while(!ReadCmdTutorial(cmdManager, player, rm, im, "muoviti"));
             
             //TODO Fare if per finire il gioco.
@@ -205,10 +205,9 @@ class Program
         while (!gameplay)
         {
             ReadCmd(cmdManager, player, rm, im);
-
             // STANZA TECNICA
             if (player.CurrentRoom.Id == "stanza_tecnica"
-                && player.VisitedRoomIds.Add("stanza_tecnica"))
+                && !player.VisitedRoomIds.Contains("stanza_tecnica"))
             {
                 ConsoleStylingWrite.StartDialogue("atto1_001");
             }
@@ -216,7 +215,7 @@ class Program
             // CORRIDOIO OVEST 2 (dopo stanza_tecnica)
             if (player.CurrentRoom.Id == "corridoio_ovest_2"
                 && player.VisitedRoomIds.Contains("stanza_tecnica")
-                && player.VisitedRoomIds.Add("corridoio_ovest_2"))
+                && !player.VisitedRoomIds.Contains("corridoio_ovest_2"))
             {
                 ConsoleStylingWrite.StartDialogue("assistente_012");
             }
@@ -224,21 +223,21 @@ class Program
             // CORRIDOIO OVEST 4 (dopo stanza_tecnica)
             if (player.CurrentRoom.Id == "corridoio_ovest_4"
                 && player.VisitedRoomIds.Contains("stanza_tecnica")
-                && player.VisitedRoomIds.Add("corridoio_ovest_4"))
+                && !player.VisitedRoomIds.Contains("corridoio_ovest_4"))
             {
                 ConsoleStylingWrite.StartDialogue("main_017");
             }
 
             // CORRIDOIO SUD
             if (player.CurrentRoom.Id == "corridoio_sud"
-                && player.VisitedRoomIds.Add("corridoio_sud"))
+                && !player.VisitedRoomIds.Contains("corridoio_sud"))
             {
                 ConsoleStylingWrite.StartDialogue("assistente_013");
             }
 
             // ZONA DI SCARICO
-            if (player.CurrentRoom.Id == "zona_di_scarico"
-                && player.VisitedRoomIds.Add("zona_di_scarico"))
+            if (player.CurrentRoom.Id == "zona_di_scarico" &&
+                !player.VisitedRoomIds.Contains("zona_di_scarico"))
             {
                 ConsoleStylingWrite.StartDialogue("assistente_014");
             }
@@ -251,8 +250,13 @@ class Program
             {
                 ConsoleStylingWrite.StartDialogue("atto1_012");
             }
-
-            // TODO: condizione di uscita dal loop
+            
+            
+            //IF sempre finale.
+            if (player.VisitedRoomIds.Add(player.CurrentRoom.Id))
+            {
+                Console.WriteLine($"{player.CurrentRoom.Id} stanza aggiunta nel while e nel file.");
+            }
         }
     }
 

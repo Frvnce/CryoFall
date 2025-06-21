@@ -42,8 +42,9 @@ public class CommandManager
                 if (args.Length != 2) return ErrorCmd();
                 return Move(args[1],player,roomsManager,itemsManager); //Move
             case "analizza":
+                if(args.Length==1)return AnalyzeRoom(player, roomsManager);
                 if (args.Length != 2) return ErrorCmd();
-                return AnalyzeRoom(args[1], player, roomsManager);
+                return AnalyzeItem(args[1],player,itemsManager);
             case "lascia":
                 return RemoveTopItem(player);
             case "inventario":
@@ -146,8 +147,6 @@ public class CommandManager
     /// <summary>
     /// Teletrasporta il giocatore in una stanza in modo casuale.
     /// </summary>
-    /// <param name="destination"> La destinazione da raggiungere</param>
-    /// <param name="isTeleport"> Capire se il giocatore si è teletrasportato o spostato normalmente</param>
     /// <returns>
     /// <c>True</c> se il comando è valido ed è stato eseguito correttamente;
     /// <c>False</c> altrimenti.
@@ -188,10 +187,15 @@ public class CommandManager
         //Spostiamo il giocatore nella finalDestination.
         p.CurrentRoom = finalDestination;
         ConsoleStylingWrite.HelperCmd("Ok andiamo!");
-        Thread.Sleep(1000);
-        AnalyzeRoom(p.CurrentRoom.Id,p,rm);
+        Thread.Sleep(500);
         
-        return true;
+        
+        if (!p.VisitedRoomIds.Contains(p.CurrentRoom.Id))
+        {
+            return AnalyzeRoom(p,rm);
+        }
+        return AnalyzeRoomVisited(p.CurrentRoom.Id, p, rm);
+
     }
 
     /// <summary>
@@ -214,13 +218,29 @@ public class CommandManager
         return true;
     }
 
-    private bool AnalyzeRoom(string room,MainCharacter player,RoomsManager rm)
+    private bool AnalyzeItem(string item, MainCharacter p, ItemsManager im)
+    {
+        return false;
+    }
+
+    private bool AnalyzeRoom(MainCharacter player,RoomsManager rm)
+    {
+        var roomToAnalyze = rm.FindRoom(player.CurrentRoom.Id);
+        if (roomToAnalyze == null) return ErrorCmd("argsError");
+        if(roomToAnalyze.Id.Replace("_","") != player.CurrentRoom.Id.Replace("_","")) return ErrorCmd("notInThisRoom");
+
+        ConsoleStylingWrite.AnalyzeRoom(roomToAnalyze);
+        
+        return true;
+    }
+    
+    private bool AnalyzeRoomVisited(string room,MainCharacter player,RoomsManager rm)
     {
         var roomToAnalyze = rm.FindRoom(room);
         if (roomToAnalyze == null) return ErrorCmd("argsError");
         if(roomToAnalyze.Id.Replace("_","") != player.CurrentRoom.Id.Replace("_","")) return ErrorCmd("notInThisRoom");
 
-        ConsoleStylingWrite.AnalyzeRoom(roomToAnalyze);
+        ConsoleStylingWrite.AnalyzeRoomVisited(roomToAnalyze);
         
         return true;
     }

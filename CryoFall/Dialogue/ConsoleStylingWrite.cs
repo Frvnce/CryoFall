@@ -55,6 +55,17 @@ public static class ConsoleStylingWrite
             AnsiConsole.MarkupLine($"  [{item.Color}]{item.Name}[/]{randomString}");
         }
     }
+    
+    public static void AnalyzeRoomVisited(Room room)
+    {
+        var nameRoom = room.NameOfTheRoom;
+        HelperCmd($"Ci troviamo in [bold]{nameRoom}[/]",true);
+        HelperCmd($"Vedo alcune porte...\n" +
+                  $"{(room.NearRooms.NordRoom!=null? $"   [bold][[{room.NearRooms.NordRoom.NameOfTheRoom}]][/] a [bold]Nord![/]\n" :"")}" +
+                  $"{(room.NearRooms.SudRoom!=null? $"   [bold][[{room.NearRooms.SudRoom.NameOfTheRoom}]][/] a [bold]Sud![/]\n" :"")}" +
+                  $"{(room.NearRooms.EstRoom!=null? $"   [bold][[{room.NearRooms.EstRoom.NameOfTheRoom}]][/] a [bold]Est![/]\n" :"")}" +
+                  $"{(room.NearRooms.OvestRoom!=null? $"   [bold][[{room.NearRooms.OvestRoom.NameOfTheRoom}]][/] a [bold]Ovest![/]" :"")}", true);
+    }
 
     private static List<string> GetList()
     {
@@ -76,14 +87,11 @@ public static class ConsoleStylingWrite
         WriteDialogue("helper","help","<assistant>",dialogue,live);
     }
 
-    public static void WriteCmdHelp(CommandInfo cmd)
+    public static void WriteTutorial(string dialogue)
     {
-        
-        //WriteDialogue("helper","help",$"{cmd.Name}",$"{cmd.Description} \n \t[bold]Comando:[/] [bold]{cmd.Cmd}[/]\n",false);
-        WriteDialogue("helper","help",$"{cmd.Cmd}",$"{cmd.Description}",false);
-        
+        var name = "[bold][[[yellow]Tutorial[/]]]:[/]";
+        AnsiConsole.MarkupLine($"{name} {dialogue}");
     }
-    
     
     private static void WriteDialogue(string character, string kind, string characterName, string dialogue, bool liveWriting = true)
     {
