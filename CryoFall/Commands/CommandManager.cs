@@ -33,7 +33,7 @@ public class CommandManager
                 if (args.Length != 2) return ErrorCmd();
                 return TryPickUpItem(args[1], player, roomsManager, itemsManager);
             case "help":
-                return Help();
+                return Help(player, itemsManager);
             case "teletrasporta":
             case "tp":
                 return Teleport(player,roomsManager); //Tp
@@ -205,14 +205,20 @@ public class CommandManager
     /// <c>True</c> se il comando è valido ed è stato eseguito correttamente;
     /// <c>False</c> altrimenti.
     /// </returns>
-    private bool Help()
+    private bool Help(MainCharacter p,ItemsManager im)
     {
         ConsoleStylingWrite.HelperCmd($"Questa è la lista di tutti i comandi:");
         Console.WriteLine();
         foreach (var cmd in CommandsRepository.ById.Values)
         {
             //ConsoleStylingWrite.WriteCmdHelp(cmd);
-            AnsiConsole.MarkupLine($"   [bold #1fc459][[{cmd.Cmd}]][/]: {cmd.Description}");
+            if (cmd.Id != "tp")
+            {
+                AnsiConsole.MarkupLine($"   [bold #1fc459][[{cmd.Cmd}]][/]: {cmd.Description}");
+                continue;
+            }
+            if(cmd.Id == "tp" && p.Inventory.Items.Contains(im.FindItem("dispositivo_teletrasporto")))
+                AnsiConsole.MarkupLine($"   [bold #1fc459][[{cmd.Cmd}]][/]: {cmd.Description}");
         }
         Console.WriteLine();
         return true;

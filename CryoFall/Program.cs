@@ -215,7 +215,7 @@ class Program
             // CORRIDOIO OVEST 2 (dopo stanza_tecnica)
             if (player.CurrentRoom.Id == "corridoio_ovest_2"
                 && player.VisitedRoomIds.Contains("stanza_tecnica")
-                && !player.VisitedRoomIds.Contains("corridoio_ovest_2"))
+                && !player.VisitedRoomIds.Contains("corridoio_ovest_4"))
             {
                 ConsoleStylingWrite.StartDialogue("assistente_012");
             }
@@ -255,7 +255,7 @@ class Program
             //IF sempre finale.
             if (player.VisitedRoomIds.Add(player.CurrentRoom.Id))
             {
-                Console.WriteLine($"{player.CurrentRoom.Id} stanza aggiunta nel while e nel file.");
+                //Console.WriteLine($"{player.CurrentRoom.Id} stanza aggiunta nel while e nel file.");
             }
         }
     }
