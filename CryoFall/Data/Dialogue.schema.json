@@ -15,7 +15,7 @@
         "id":      { "type": "string" },
         "room":    
           { "type": "string",
-            "enum":  ["intro","ibernazione","corriodio_est","stanza_tecnica","corridoio_ovest_2","corridoio_ovest_4","zona_di_scarico","zona_carburante_sud","corridoio_sud","stanza_scelta","corridoio_ovest_3","zona_controllo","zona_carburante_nord","armeria", "infermeria"]},
+            "enum":  ["intro","ibernazione","corriodio_est","stanza_tecnica","corridoio_ovest_2","corridoio_ovest_4","zona_di_scarico","zona_carburante_sud","corridoio_sud","stanza_scelta","corridoio_ovest_3","zona_controllo","zona_carburante_nord","armeria", "infermeria","sala_comune"]},
         "speakerName": 
         { "type": "string",
           "enum":  ["Introduzione","Narratore","<playerName>","<mainHelper>","<robotName>","<secondHelper>","<assistant>"]},
