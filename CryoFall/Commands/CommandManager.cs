@@ -37,6 +37,7 @@ public class CommandManager
             case "teletrasporta":
             case "teletrasporto":
             case "tp":
+                if (player.Inventory.Items.Contains(itemsManager.FindItem("dispositivo_teletrasporto"))) return false;
                 return Teleport(player,roomsManager); //Tp
             case "muoviti":
             case"move":
@@ -57,25 +58,60 @@ public class CommandManager
                 return UseObject(args[1],player,roomsManager,itemsManager);
             case "salva":
             {
-                var path = Path.Combine(AppContext.BaseDirectory, "saves", "save1.json");
-                SaveManager.Save(path, player, roomsManager, itemsManager);
-                ConsoleStylingWrite.HelperCmd("Partita salvata in " + path);
+                SaveGame(player,roomsManager,itemsManager);
                 return true;
             }
             case "carica":
             {
-                var path = Path.Combine(AppContext.BaseDirectory, "saves", "save1.json");
-                SaveManager.Load(path, player, roomsManager, itemsManager);
-                ConsoleStylingWrite.HelperCmd("Partita caricata da " + path);
-                return true;
+                if(args.Length != 2) return ErrorCmd();
+                return LoadGame(player, roomsManager, itemsManager, args[1]);
             }
 
             default: return ErrorCmd();
         }
     }
 
-    public ItemRepository ItemRepository { get;}
+    bool LoadGame(MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager, string savePath)
+    {
+        var path = Path.Combine(AppContext.BaseDirectory, "saves", $"{savePath}.json");
+        if (!File.Exists(path)) return ErrorCmd("FileNotFound");
+        SaveManager.Load(path, player, roomsManager, itemsManager);
+        ConsoleStylingWrite.HelperCmd("Partita caricata da " + path);
+        Thread.Sleep(1000);
+        AnsiConsole.Clear();
+        return true;
+    }
+    
+    void SaveGame(MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager) 
+    {
+        // 1. Cartella di destinazione
+        string savesDir = Path.Combine(AppContext.BaseDirectory, "saves");
+        Directory.CreateDirectory(savesDir);
 
+        // 2. Trova il prossimo indice libero -----------------------------------
+        //    Cerca tutti i file "save*.json", estrae il numero e calcola max+1
+        int nextIndex = 1;
+
+        var files = Directory.GetFiles(savesDir, "save*.json");
+        if (files.Length > 0)
+        {
+            // "save01.json" → "01" → 1
+            nextIndex = files
+                .Select(f => Path.GetFileNameWithoutExtension(f).Substring(4)) // rimuove "save"
+                .Select(s => int.TryParse(s, out int n) ? n : 0)
+                .DefaultIfEmpty(0)
+                .Max() + 1;
+        }
+
+        // 3. Formatta l’indice con due cifre (01, 02, … 99) --------------------
+        string fileName = $"save{nextIndex:00}.json";   // usa :000 se vuoi 3 cifre
+        string path     = Path.Combine(savesDir, fileName);
+
+        // 4. Salva e avvisa l’utente -------------------------------------------
+        SaveManager.Save(path, player, roomsManager, itemsManager);
+        ConsoleStylingWrite.HelperCmd($"Partita salvata in {path}");
+    }
+    
     /// <summary>
     /// Fa un lavoro dove imposta il secondo argomento unendo tutti gli argomenti dopo il primo.
     /// In modo tale, il player può scrivere "analizza Sala Ibernazione" e il risultato sarà
@@ -330,6 +366,9 @@ public class CommandManager
                 return false;
             case "incompatibleKey":
                 AnsiConsole.MarkupLine("[bold italic #ff4400]L'oggetto che stai cercando di usare, non è quello giusto![/]");
+                return false;
+            case "FileNotFound":
+                AnsiConsole.MarkupLine("[bold italic #ff4400]Il salvataggio che stai cercando di caricare non esiste![/]");
                 return false;
         }
     }
