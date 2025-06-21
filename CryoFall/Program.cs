@@ -60,7 +60,7 @@ class Program
             {
                 // Creo un player “vuoto” e poi lo popolo col SaveManager
                 player = new MainCharacter("PlayerTemp", 30);
-                SaveManager.Load(savePath, player, roomsManager ,itemRepo);
+                SaveManager.Load(savePath, player, roomsManager, itemsManager);
                 loaded = true;
             }
             else

@@ -42,7 +42,7 @@ namespace CryoFall.SaveSystem
             File.WriteAllText(path, JsonSerializer.Serialize(data, JsonOptions)); // Scrive file JSON
         }
 
-        public static void Load(string path, MainCharacter player, RoomsManager roomsManager, ItemRepository itemRepo)
+        public static void Load(string path, MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager)
         {
             if (!File.Exists(path))
                 throw new FileNotFoundException($"Save file non trovato: {path}");
@@ -64,16 +64,20 @@ namespace CryoFall.SaveSystem
 
             // ricostruisce inventario
             player.Inventory.ClearAll();
-            foreach (var itemId in data.PlayerInventoryIds)
+
+            // itero da fondo a cima così quando ForceAdd() aggiunge ogni istanza, ricostruisco la pila nell’ordine corretto
+            for (int idx = data.PlayerInventoryIds.Count - 1; idx >= 0; idx--)
             {
-                if (itemRepo.TryGet(itemId, out var def))
+                var itemId = data.PlayerInventoryIds[idx];
+                // prendo l'istanza canonica da ItemsManager anziché ricrearne una nuova
+                var inst = itemsManager.FindItem(itemId);
+                if (inst != null)
                 {
-                    var inst = new Item(def.Id, def.Name, def.ItemDescription,
-                                        def.Weight, def.IsPickable,
-                                        def.IsUsable, def.IsAnalyzable, def.Color);
                     player.Inventory.ForceAdd(inst);
                 }
             }
+
+
 
             // ripristina stato oggetti e blocchi in ogni stanza
             foreach (var roomSave in data.Rooms)
@@ -82,22 +86,19 @@ namespace CryoFall.SaveSystem
                 if (room == null) continue;
 
                 room.IsLocked = roomSave.IsLocked;
-
-                // aggiorna oggetti nella stanza
+                // svuota
                 foreach (var it in room.GetItems().ToList())
                     room.RemoveItem(it);
 
+                // aggiungi le stesse istanze di ItemsManager
                 foreach (var itemId in roomSave.ItemIdsInRoom)
                 {
-                    if (itemRepo.TryGet(itemId, out var def))
-                    {
-                        var inst = new Item(def.Id, def.Name, def.ItemDescription,
-                                            def.Weight, def.IsPickable,
-                                            def.IsUsable, def.IsAnalyzable, def.Color);
+                    var inst = itemsManager.FindItem(itemId);
+                    if (inst != null)
                         room.AddItem(inst);
-                    }
                 }
-            } 
+            }
+
         }
     }
 }

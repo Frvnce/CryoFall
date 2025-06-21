@@ -64,7 +64,7 @@ public class CommandManager
             case "carica":
             {
                 var path = Path.Combine(AppContext.BaseDirectory, "saves", "save1.json");
-                SaveManager.Load(path, player, roomsManager, ItemRepository);
+                SaveManager.Load(path, player, roomsManager, itemsManager);
                 ConsoleStylingWrite.HelperCmd("Partita caricata da " + path);
                 return true;
             }
