@@ -18,6 +18,7 @@ public class MainCharacter(string name, int maxCapacity)
     }
     public bool HasCompletedTutorial { get; set; } = false; // tutorial completato o no
     public HashSet<string> VisitedRoomIds { get; } = new HashSet<string>(); // stanze visitate
+    public string? LastDialogueId { get; set; } = null;
     private readonly string _name = name;
 
     /// <summary>

@@ -10,6 +10,7 @@
         public List<RoomSaveData> Rooms { get; set; } = new(); // Dati salvataggio stanze
         public bool IsTutorialCompleted { get; set; } // Tutorial completato?
         public List<string> VisitedRoomIds { get; set; } = new(); // Stanze visitate
+        public string? LastDialogueId { get; set; } = null; // ultimo dialogo
     }
 
     /// <summary>

@@ -210,12 +210,16 @@ public static class ConsoleStylingWrite
     /// <param name="id"></param>
     /// <param name="msToWaitForLine"></param>
     /// <param name="liveWriting"></param>
-    public static void StartDialogue(string id, int msToWaitForLine = 1000, bool liveWriting = true)
+    public static void StartDialogue(string id, MainCharacter? player = null, int msToWaitForLine = 1000, bool liveWriting = true)
     {
         if (!RepoDialogue.TryGet(id, out var current))
         {
             Console.WriteLine($"[ERRORE] ID '{id}' non trovato nei dialoghi");
             return;
+        }
+        if (player != null && !id.Equals("waitForCmd", StringComparison.OrdinalIgnoreCase) && !id.Equals("end",StringComparison.OrdinalIgnoreCase))
+        {
+            player.LastDialogueId = id;
         }
 
         while (current is not null) //se il current.next non è null, allora continua a ciclare stampando i messaggi.

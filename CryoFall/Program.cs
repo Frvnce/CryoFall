@@ -61,6 +61,7 @@ class Program
                 // Creo un player “vuoto” e poi lo popolo col SaveManager
                 player = new MainCharacter("PlayerTemp", 30);
                 SaveManager.Load(savePath, player, roomsManager, itemsManager);
+                ConsoleStylingWrite.StartDialogue(player.LastDialogueId, player, 10, liveWriting:false);
                 loaded = true;
             }
             else
@@ -78,13 +79,13 @@ class Program
         if (!loaded)
         {
             // dialogo e scelta del nome iniziale
-            ConsoleStylingWrite.StartDialogue("benvenuto", msToWaitForLine: 500, false);
+            ConsoleStylingWrite.StartDialogue("benvenuto", null,  msToWaitForLine: 500, false);
             var name = ConsoleStylingWrite.GetPlaceHolders("playerName");
             player = new MainCharacter(name, 30);
             player.CurrentRoom = roomsManager.FindRoom("sala_ibernazione") ?? throw new InvalidOperationException();
 
             // Intro iniziale
-            ConsoleStylingWrite.StartDialogue("introIbernazione", 10, liveWriting:false);
+            ConsoleStylingWrite.StartDialogue("introIbernazione", player, 10, liveWriting:false);
         }
 
         // 5) Avvio il CommandManager e il resto del flusso
@@ -151,42 +152,42 @@ class Program
             } while (!ReadCmdTutorial(cmdManager, player, rm, im, "help"));
             
             //Comando analizza
-            ConsoleStylingWrite.StartDialogue("tutorial_000");
+            ConsoleStylingWrite.StartDialogue("tutorial_000", player);
             do
             {
                 ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'analizza' per continuare il tutorial![/]");
             } while(!ReadCmdTutorial(cmdManager, player, rm, im, "analizza"));
             
             //comando prendi oggetto
-            ConsoleStylingWrite.StartDialogue("tutorial_002");
+            ConsoleStylingWrite.StartDialogue("tutorial_002", player);
             do
             {
                 ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'prendi codice di accesso' per continuare il tutorial![/]");
             } while(!ReadCmdTutorial(cmdManager, player, rm, im, "prendi") || !player.Inventory.Items.Contains(im.FindItem("codice_di_accesso"))); //fixare il fatto che se prendo un oggetto diverso dalla chiave mi vada avanti
             
             //comando apri inventario
-            ConsoleStylingWrite.StartDialogue("tutorial_003");
+            ConsoleStylingWrite.StartDialogue("tutorial_003", player);
             do
             {
                 ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'inventario' per continuare il tutorial![/]");
             } while(!ReadCmdTutorial(cmdManager, player, rm, im, "inventario"));
             
             //comando usa
-            ConsoleStylingWrite.StartDialogue("tutorial_004");
+            ConsoleStylingWrite.StartDialogue("tutorial_004", player);
             do
             {
                 ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'usa' per continuare il tutorial![/]");
             } while(!ReadCmdTutorial(cmdManager, player, rm, im, "usa"));
             
             //comando lascia
-            ConsoleStylingWrite.StartDialogue("tutorial_005");
+            ConsoleStylingWrite.StartDialogue("tutorial_005", player);
             do
             {
                 ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'lascia' per continuare il tutorial![/]");
             } while(!ReadCmdTutorial(cmdManager, player, rm, im, "lascia"));
             
             //comando muovi
-            ConsoleStylingWrite.StartDialogue("tutorial_006");
+            ConsoleStylingWrite.StartDialogue("tutorial_006", player);
             do
             {
                 ConsoleStylingWrite.WriteTutorial("[yellow]Devi usare il comando 'muoviti' per continuare il tutorial![/]");
@@ -195,7 +196,7 @@ class Program
             //TODO Fare if per finire il gioco.
             if(player.CurrentRoom!=rm.FindRoom("sala_ibernazione")) tutorial = true;
         }
-        ConsoleStylingWrite.StartDialogue("tutorial_007"); 
+        ConsoleStylingWrite.StartDialogue("tutorial_007", player); 
     }
     
     static void GameplayAtto_01(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
@@ -211,7 +212,7 @@ class Program
             if (player.CurrentRoom.Id == "stanza_tecnica"
                 && !player.VisitedRoomIds.Contains("stanza_tecnica"))
             {
-                ConsoleStylingWrite.StartDialogue("atto1_001");
+                ConsoleStylingWrite.StartDialogue("atto1_001", player);
             }
 
             // CORRIDOIO OVEST 2 (dopo stanza_tecnica)
@@ -219,7 +220,7 @@ class Program
                 && player.VisitedRoomIds.Contains("stanza_tecnica")
                 && !player.VisitedRoomIds.Contains("corridoio_ovest_4"))
             {
-                ConsoleStylingWrite.StartDialogue("assistente_012");
+                ConsoleStylingWrite.StartDialogue("assistente_012", player);
             }
 
             // CORRIDOIO OVEST 4 (dopo stanza_tecnica)
@@ -227,21 +228,21 @@ class Program
                 && player.VisitedRoomIds.Contains("stanza_tecnica")
                 && !player.VisitedRoomIds.Contains("corridoio_ovest_4"))
             {
-                ConsoleStylingWrite.StartDialogue("main_017");
+                ConsoleStylingWrite.StartDialogue("main_017", player);
             }
 
             // CORRIDOIO SUD
             if (player.CurrentRoom.Id == "corridoio_sud"
                 && !player.VisitedRoomIds.Contains("corridoio_sud"))
             {
-                ConsoleStylingWrite.StartDialogue("assistente_013");
+                ConsoleStylingWrite.StartDialogue("assistente_013", player);
             }
 
             // ZONA DI SCARICO
             if (player.CurrentRoom.Id == "zona_di_scarico" &&
                 !player.VisitedRoomIds.Contains("zona_di_scarico"))
             {
-                ConsoleStylingWrite.StartDialogue("assistente_014");
+                ConsoleStylingWrite.StartDialogue("assistente_014", player);
                 EscapeFromRobotScene(cmdManager, player, rm, im);
                 gameplay = false;
             }
@@ -263,7 +264,7 @@ class Program
         {
             ConsoleStylingWrite.HelperCmd($"Cosa fai? prendi [{robotHand.Color}]{robotHand.Name}[/] [bold]SUBITO![/]");
         }
-        ConsoleStylingWrite.StartDialogue("atto1_012");
+        ConsoleStylingWrite.StartDialogue("atto1_012", player);
         
         while (!ReadCmdTutorial(cmdManager, player, rm, im, "prendi") ||
                !player.Inventory.Items.Contains(teleportDevice))
@@ -275,13 +276,13 @@ class Program
             }
             ConsoleStylingWrite.HelperCmd($"Cosa fai? prendi [{teleportDevice.Color}]{teleportDevice.Name}[/] [bold]SUBITO![/]");
         }
-        ConsoleStylingWrite.StartDialogue("atto2_001");
+        ConsoleStylingWrite.StartDialogue("atto2_001", player);
         while (!ReadCmdTutorial(cmdManager, player, rm, im, "teletrasporto"))
         {
             ConsoleStylingWrite.HelperCmd($"Cosa fai? Teletrasporti [bold]SUBITO![/], oh certo, non sai come fare.. magari prova ad usare il [bold italic]teletrasporto[/]");
         }
         
-        ConsoleStylingWrite.StartDialogue("assistente_020");
+        ConsoleStylingWrite.StartDialogue("assistente_020", player);
         rm.FindRoom("zona_di_scarico").UnlockKeyId = "codice_zona_scarico";
         rm.FindRoom("zona_di_scarico").IsLocked = true;
     }
