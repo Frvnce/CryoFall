@@ -216,7 +216,7 @@ public static class ConsoleStylingWrite
     /// <param name="id"></param>
     /// <param name="msToWaitForLine"></param>
     /// <param name="liveWriting"></param>
-    public static void StartDialogue(string id, MainCharacter? player = null, int msToWaitForLine = 1000, bool liveWriting = true)
+    public static void StartDialogue(string id, MainCharacter? player = null, int msToWaitForLine = 500, bool liveWriting = true)
     {
         if (!RepoDialogue.TryGet(id, out var current))
         {

@@ -47,6 +47,7 @@ namespace CryoFall.SaveSystem
 
         public static void Load(string path, MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager)
         {
+            //Console.WriteLine(path);
             if (!File.Exists(path))
                 throw new FileNotFoundException($"Save file non trovato: {path}");
 

@@ -6,6 +6,7 @@ using CryoFall.Rooms;
 using CryoFall.SaveSystem;
 using Spectre.Console;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace CryoFall;
 
@@ -14,6 +15,13 @@ class Program
     private static void Main(string[] args)
     {
         //TODO Dare la scelta iniziale al giocatore se far partire una partita da zero o se caricare un salvataggio (solo se c'è già).
+
+        #region BENVENUTO NEL GIOCO
+
+        WelcomeToCryoFall();
+
+        #endregion
+        
         
         #region INTRODUZIONE
         #region Salvataggio Items e Rooms
@@ -43,37 +51,17 @@ class Program
         //setto il percorso di salvataggio
         var savesDir = Path.Combine(AppContext.BaseDirectory, "saves");
         Directory.CreateDirectory(savesDir);
-        var savePath = Path.Combine(savesDir, "save1.json");
+        var saveDirPath = Directory.GetFiles(savesDir);
         
         #endregion
-        #region DEBUG
-        var live = false;
-        var ms = 10;
-        #endregion
         #region DIALOGHI E INIZIALIZZAZIONE PLAYER
-        MainCharacter player;
-        bool loaded = false;
-        if (File.Exists(savePath))
+        MainCharacter player = null!;
+        var loaded = false;
+        if (saveDirPath.Length>0)
         {
-            Console.Write("Trovato salvataggio! Vuoi caricare la partita? (s/n): ");
-            var ans = Console.ReadLine()?.Trim().ToLower();
-            if (ans == "s")
-            {
-                // Creo un player “vuoto” e poi lo popolo col SaveManager
-                player = new MainCharacter("PlayerTemp", 30);
-                SaveManager.Load(savePath, player, roomsManager, itemsManager);
-                ConsoleStylingWrite.StartDialogue(player.LastDialogueId, player, 10, liveWriting:false);
-                loaded = true;
-            }
-            else
-            {
-                // farà il ramo “nuova partita”
-                player = null!;
-            }
-        }
-        else
-        {
-            player = null!;
+            player = LoadSave(player, roomsManager,itemsManager,savesDir);
+            if(player != null!) loaded = true;
+            
         }
 
         // se non ho caricato, avvio il nuovo gioco
@@ -100,9 +88,47 @@ class Program
         GameplayAtto_01(cmdManager, player, roomsManager, itemsManager);
         GameplayAtto_02(cmdManager, player, roomsManager, itemsManager);
         
+        #endregion 
     }
-    #endregion
 
+    static void WelcomeToCryoFall()
+    {
+        AnsiConsole.Write(new Align(
+            new Text("┌───────────────────────────────────────────────────────────────────────────────────────────┐\n│                                                                                           │\n│      ______ .______     ____    ____  ______    _______    ___       __       __          │\n│     /      ||   _  \\    \\   \\  /   / /  __  \\  |   ____|  /   \\     |  |     |  |         │\n│    |  ,----'|  |_)  |    \\   \\/   / |  |  |  | |  |__    /  ^  \\    |  |     |  |         │\n│    |  |     |      /      \\_    _/  |  |  |  | |   __|  /  /_\\  \\   |  |     |  |         │\n│    |  `----.|  |\\  \\----.   |  |    |  `--'  | |  |    /  _____  \\  |  `----.|  `----.    │\n│     \\______|| _| `._____|   |__|     \\______/  |__|   /__/     \\__\\ |_______||_______|    │\n│                                                                                           │\n└───────────────────────────────────────────────────────────────────────────────────────────┘"),
+            HorizontalAlignment.Left,
+            VerticalAlignment.Top
+        ));
+        Console.WriteLine();
+    }
+
+    static MainCharacter LoadSave(MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager, string saveDirPath)
+    {
+        var files = Directory.GetFiles(saveDirPath);
+        string[] saves = new string[files.Length+1];
+        
+        for (int i = 0; i < files.Length; i++)
+        {
+            saves[i] = $"Si, carica il salvataggio: [bold green]{Path.GetFileNameWithoutExtension(files[i])} {File.GetLastAccessTime(files[i]):g}[/]";
+        }
+        saves[^1] = "No, voglio giocare una nuova partita";
+        
+        var ans = AnsiConsole.Prompt(
+            new SelectionPrompt<string>()
+                .Title("Trovato [bold green]salvataggio[/]! Vuoi [bold green]caricare[/] la partita?")
+                .AddChoices(saves));
+        
+        if (ans.Contains("No")) return null!;
+        // ottiene il file che ha selezionato.
+        var m = Regex.Match(ans, @"\bsave\d{2,3}\b", RegexOptions.IgnoreCase);
+        var saveFilePath = Path.Combine(AppContext.BaseDirectory, $"saves/{m.Value}.json");
+        // Creo un player “vuoto” e poi lo popolo col SaveManager
+        player = new MainCharacter("PlayerTemp", 30);
+        
+        SaveManager.Load($"{saveFilePath}", player, roomsManager, itemsManager);
+        if(player.LastDialogueId!=null)
+            ConsoleStylingWrite.StartDialogue(player.LastDialogueId, player, 300, liveWriting:false);
+        return player;
+    }
 
     static bool ReadCmd(CommandManager cmdManager,MainCharacter player, RoomsManager rm,ItemsManager im, string cmdToWaitFor="")
     {
@@ -292,7 +318,7 @@ class Program
     {
         // Uso HashSet per poter sfruttare Add(...) che restituisce bool
         var itemsInInventory = new HashSet<string>();
-        bool gameplay = false;
+        var gameplay = false;
         
         while (!gameplay)
         {

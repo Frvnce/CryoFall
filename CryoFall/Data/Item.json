@@ -61,7 +61,7 @@
   },
   {
     "id": "terminale_semi_funzionante",
-    "name": "Terminale Semi-funzionante",
+    "name": "Terminale Semi funzionante",
     "itemDescription": "Un terminale danneggiato con funzionalità parziali.",
     "weight": 30,
     "isPickable": false,
@@ -71,7 +71,7 @@
   },
   {
     "id": "chiave_magnetica_livello_5",
-    "name": "Chiave Magnetica di Livello 5",
+    "name": "Chiave Magnetica Livello 5",
     "itemDescription": "Credenziale magnetica per porte di sicurezza livello 5.",
     "weight": 0.5,
     "isPickable": true,
@@ -81,7 +81,7 @@
   },
   {
     "id": "mano_ax_7",
-    "name": "Mano di AX-7",
+    "name": "Mano AX-7",
     "itemDescription": "Protesi robotica dell'unità AX-7.",
     "weight": 3,
     "isPickable": true,
@@ -91,7 +91,7 @@
   },
   {
     "id": "frammento_tessuto_blu",
-    "name": "Frammento di Tessuto Blu",
+    "name": "Frammento Tessuto Blu",
     "itemDescription": "Pezzetto di tessuto di fibra sconosciuta.",
     "weight": 0.1,
     "isPickable": true,
@@ -100,7 +100,7 @@
     "color": "#808080"
   },
   {
-    "id": "dispositivo_teletrasporto",
+    "id": "dispositivo_di_teletrasporto",
     "name": "Dispositivo di Teletrasporto",
     "itemDescription": "Modulo portatile per teletrasporti a corto raggio.",
     "weight": 2,
@@ -110,7 +110,7 @@
     "color": "#808080"
   },
   {
-    "id": "terminale_sistema",
+    "id": "terminale_di_sistema",
     "name": "Terminale di Sistema",
     "itemDescription": "Nodo centrale per il controllo dei sottosistemi.",
     "weight": 30,
@@ -121,7 +121,7 @@
   },
   {
     "id": "chiave_magnetica_livello_10",
-    "name": "Chiave Magnetica di Livello 10",
+    "name": "Chiave Magnetica Livello 10",
     "itemDescription": "Credenziale magnetica per porte di sicurezza livello 10.",
     "weight": 0.5,
     "isPickable": true,
@@ -130,7 +130,7 @@
     "color": "#808080"
   },
   {
-    "id": "emettitore_energia",
+    "id": "emettitore_di_energia",
     "name": "Emettitore di Energia",
     "itemDescription": "Unità di generazione di potenza portatile.",
     "weight": 4,
@@ -150,7 +150,7 @@
     "color": "#9e673e"
   },
   {
-    "id": "codice_zona_scarico",
+    "id": "codice_zona_di_scarico",
     "name": "Codice Zona di Scarico",
     "itemDescription": "Un codice di accesso che sblocca la porta della zona di scarico",
     "weight": 0.5,

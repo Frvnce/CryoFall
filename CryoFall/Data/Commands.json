@@ -24,7 +24,7 @@
     "id": "load",
     "name": "Carica Partita",
     "cmd_description": "Carica uno stato di gioco salvato",
-    "cmd": "carica",
+    "cmd": "carica <save>",
     "alias": ["load"]
   },
   {
