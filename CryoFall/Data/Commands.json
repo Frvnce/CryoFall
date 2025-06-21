@@ -3,7 +3,7 @@
     "id": "tp",
     "name": "Teletrasporto",
     "cmd_description": "Utilizza il teletrasporto per andare in un'altra stanza.",
-    "cmd": "teletrasporta",
+    "cmd": "teletrasporto",
     "alias": ["tp"]
   },
   {

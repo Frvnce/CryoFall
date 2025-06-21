@@ -35,6 +35,7 @@ public class CommandManager
             case "help":
                 return Help(player, itemsManager);
             case "teletrasporta":
+            case "teletrasporto":
             case "tp":
                 return Teleport(player,roomsManager); //Tp
             case "muoviti":
@@ -153,8 +154,16 @@ public class CommandManager
     /// </returns>
     private bool Teleport(MainCharacter p, RoomsManager rm)
     {
-           
-        return true;
+        var room = rm.FindRoom("sala_comune");
+
+        if (room == null) return ErrorCmd("teleportNotWorking"); 
+        p.CurrentRoom = room;
+        
+        if (!p.VisitedRoomIds.Contains(p.CurrentRoom.Id))
+        {
+            return AnalyzeRoom(p,rm);
+        }
+        return AnalyzeRoomVisited(p.CurrentRoom.Id, p, rm);
     }
 
     private bool Move(string destination, MainCharacter p, RoomsManager rm, ItemsManager im)

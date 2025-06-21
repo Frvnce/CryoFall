@@ -96,6 +96,8 @@ class Program
         }
 
         GameplayAtto_01(cmdManager, player, roomsManager, itemsManager);
+        GameplayAtto_02(cmdManager, player, roomsManager, itemsManager);
+        
     }
     #endregion
 
@@ -240,23 +242,57 @@ class Program
                 !player.VisitedRoomIds.Contains("zona_di_scarico"))
             {
                 ConsoleStylingWrite.StartDialogue("assistente_014");
+                EscapeFromRobotScene(cmdManager, player, rm, im);
+                gameplay = false;
             }
-
-            // PRIMO PICK-UP di "mano_ax_7"
-            var ax7 = im.FindItem("mano_ax_7");
-            if (ax7 != null
-                && player.Inventory.Items.Contains(ax7)
-                && itemsInInventory.Add(ax7.Id))
-            {
-                ConsoleStylingWrite.StartDialogue("atto1_012");
-            }
-            
-            
             //IF sempre finale.
             if (player.VisitedRoomIds.Add(player.CurrentRoom.Id))
             {
                 //Console.WriteLine($"{player.CurrentRoom.Id} stanza aggiunta nel while e nel file.");
             }
+        }
+    }
+
+    static void EscapeFromRobotScene(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
+    {
+        var robotHand = im.FindItem("mano_ax_7");
+        var teleportDevice = im.FindItem("dispositivo_teletrasporto");
+        
+        while (!ReadCmdTutorial(cmdManager, player, rm, im, "prendi") ||
+               !player.Inventory.Items.Contains(robotHand))
+        {
+            ConsoleStylingWrite.HelperCmd($"Cosa fai? prendi [{robotHand.Color}]{robotHand.Name}[/] [bold]SUBITO![/]");
+        }
+        ConsoleStylingWrite.StartDialogue("atto1_012");
+        
+        while (!ReadCmdTutorial(cmdManager, player, rm, im, "prendi") ||
+               !player.Inventory.Items.Contains(teleportDevice))
+        {
+            if (player.Inventory.Items.Contains(teleportDevice))
+            {
+                ConsoleStylingWrite.HelperCmd($"Oh beh, lo hai già preso, ottimo, ora USALO!");
+                break;
+            }
+            ConsoleStylingWrite.HelperCmd($"Cosa fai? prendi [{teleportDevice.Color}]{teleportDevice.Name}[/] [bold]SUBITO![/]");
+        }
+        ConsoleStylingWrite.StartDialogue("atto2_001");
+        while (!ReadCmdTutorial(cmdManager, player, rm, im, "teletrasporto"))
+        {
+            ConsoleStylingWrite.HelperCmd($"Cosa fai? Teletrasporti [bold]SUBITO![/], oh certo, non sai come fare.. magari prova ad usare il [bold italic]teletrasporto[/]");
+        }
+        
+        ConsoleStylingWrite.StartDialogue("assistente_020");
+    }
+    
+    static void GameplayAtto_02(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
+    {
+        // Uso HashSet per poter sfruttare Add(...) che restituisce bool
+        var itemsInInventory = new HashSet<string>();
+        bool gameplay = false;
+        
+        while (!gameplay)
+        {
+            ReadCmd(cmdManager, player, rm, im);
         }
     }
 

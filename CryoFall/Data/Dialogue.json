@@ -988,7 +988,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Ew! Ma che schifo... cioè, non fraintendermi, sono utili le mani, però... che schifo.",
+    "text": "E' la sua mano sicuramente, come ci è finita li? Non importa, PRENDILA!",
     "next": "waitForCmd"
   },
   {
@@ -1105,7 +1105,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Uff... grazie al cielo! Non so perché, ma quel robot mi dava i brividi (╯°□°╯)",
+    "text": "Uff... grazie al cielo! Non so perché, ma quel robot mi dava i brividi",
     "next": "atto1_014"
   },
   {
@@ -1177,7 +1177,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Oddio...Dove siamo? Chi sei? CHI SONO??... Ah no, che stupidino...tu sei <playerName> e io <assistant> (－‸ლ).",
+    "text": "Oddio...Dove siamo? Chi sei? CHI SONO??... Ah no, che stupido...tu sei <playerName> e io <assistant>.",
     "next": "main_026"
   },
   {
@@ -1195,7 +1195,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Hai ragione, scusami (,,>﹏<,,). Aspetta.... LENA, LENA FORSE È ANCORA VIVA! Da quello che diceva <robotName> l'aveva mandata nella ZONA CARBURANTE NORD",
+    "text": "Hai ragione, scusami. Aspetta.... LENA, LENA FORSE È ANCORA VIVA! Da quello che diceva <robotName> l'aveva mandata nella ZONA CARBURANTE NORD",
     "next": "atto2_003"
   },
   {
@@ -1213,7 +1213,7 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "thought",
-    "text": "Se AX-7 ha mentito, Lena potrebbe essere la prossima vittima. Devo sbrigarmi.",
+    "text": "Se <robotName> ha mentito, Lena potrebbe essere la prossima vittima. Devo sbrigarmi.",
     "next": "assistente_022"
   },
   {
@@ -1222,7 +1222,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Giusto, giusto! Ehm... c'è un piccolo problema però: AX-7 ha chiuso l'accesso alla Zona Carburante Nord! Che facciamo?!",
+    "text": "Giusto, giusto! Ehm... c'è un piccolo problema però: <robotName> ha chiuso l'accesso alla Zona Carburante Nord! Che facciamo?!",
     "next": "main_028"
   },
   {
@@ -1240,7 +1240,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Uhhh geniale (,,•o•,,)! Però... hai idea di come entrare lì dentro? Mi pare che serva qualcosa di specifico, tipo un'autorizzazione o roba simile.",
+    "text": "Uhhh geniale! Però... hai idea di come entrare lì dentro? Mi pare che serva qualcosa di specifico, tipo un'autorizzazione o roba simile.",
     "next": "main_029"
   },
   {
