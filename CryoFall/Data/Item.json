@@ -138,5 +138,25 @@
     "isUsable": false,
     "isAnalyzable": false,
     "color": "#808080"
+  },
+  {
+    "id": "event",
+    "name": "Apertura da Zona di Controllo",
+    "itemDescription": ".",
+    "weight": 4,
+    "isPickable": false,
+    "isUsable": false,
+    "isAnalyzable": false,
+    "color": "#9e673e"
+  },
+  {
+    "id": "codice_zona_scarico",
+    "name": "Codice Zona di Scarico",
+    "itemDescription": "Un codice di accesso che sblocca la porta della zona di scarico",
+    "weight": 0.5,
+    "isPickable": true,
+    "isUsable": true,
+    "isAnalyzable": false,
+    "color": "#808080"
   }
 ]

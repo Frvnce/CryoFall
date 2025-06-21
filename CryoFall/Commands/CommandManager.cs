@@ -323,7 +323,7 @@ public class CommandManager
                 return false;
             case "roomIsLocked":
                 if(item!=null) 
-                    AnsiConsole.MarkupLine($"[bold italic]La stanza è bloccata! Richiede l'oggetto: [{item.Color}]{item.Name}[/][/]");
+                    AnsiConsole.MarkupLine($"[bold italic]La stanza è bloccata! Richiede: [{item.Color}]{item.Name}[/][/]");
                 return false;
             case "roomIsNotLocked":
                 AnsiConsole.MarkupLine($"[bold italic]La stanza non è chiusa a chiave![/]");

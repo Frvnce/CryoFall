@@ -282,6 +282,8 @@ class Program
         }
         
         ConsoleStylingWrite.StartDialogue("assistente_020");
+        rm.FindRoom("zona_di_scarico").UnlockKeyId = "codice_zona_scarico";
+        rm.FindRoom("zona_di_scarico").IsLocked = true;
     }
     
     static void GameplayAtto_02(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
