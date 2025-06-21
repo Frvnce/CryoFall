@@ -1609,7 +1609,7 @@
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "Lena apre un pannello nascosto nel muro, rivelando uno spazio vuoto.",
+    "text": "Lena ormai si fida compoletamente di te e vuole aiutarti a fermare questa minaccia.",
     "next": "lena_009"
   },
   {
@@ -1915,8 +1915,33 @@
     "character": "main",
     "kind": "dialogue",
     "text": "No, non posso...non posso...farti morire così. <mainHelper>",
-    "next": ""
+    "next": "finale_no_emettitore_005"
+  },
+  {
+    "id": "finale_no_emettitore_005",
+    "room": "zona_di_scarico",
+    "speakerName": "<mainHelper>",
+    "character": "helper",
+    "kind": "dialogue",
+    "text": "Per favore <playerName>, fallo per me. Fallo per mia figlia Emily, per favore, le devi garantire una bella vita. Fammi questo favore, prenditi cura di te",
+    "next": "finale_no_emettitore_006"
+  },
+  {
+    "id": "finale_no_emettitore_007",
+    "room": "zona_controllo",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Cosa vuoi fare?",
+    "choices": [
+      {
+        "label": "Tira la leva.",
+        "next": "main_033"
+      },
+      {
+        "label": "Abbandonati al tuo destino.",
+        "next": "atto3_gameover01"
+      }
+    ]
   }
-
-
 ]
