@@ -2,6 +2,7 @@
 using CryoFall.Items;
 using CryoFall.Rooms;
 using CryoFall.Character;
+using CryoFall.Dialogue;
 
 namespace CryoFall.SaveSystem
 {
@@ -25,7 +26,8 @@ namespace CryoFall.SaveSystem
                 PlayerInventoryIds  = player.Inventory.Items.Select(i => i.Id).ToList(),
                 IsTutorialCompleted = player.HasCompletedTutorial,
                 VisitedRoomIds = player.VisitedRoomIds.ToList(),
-                LastDialogueId = player.LastDialogueId
+                LastDialogueId = player.LastDialogueId,
+                Placeholders = ConsoleStylingWrite.GetPlaceholdersDict()
             };
 
             // aggiunge lo stato di ogni stanza
@@ -51,6 +53,7 @@ namespace CryoFall.SaveSystem
             var json = File.ReadAllText(path);
             var data = JsonSerializer.Deserialize<SaveGameData>(json, JsonOptions)
                        ?? throw new InvalidDataException("Salvataggio corrotto");
+            ConsoleStylingWrite.SetPlaceholdersDict(data.Placeholders);
 
             // ripristina tutorial e stanze visitate
             player.HasCompletedTutorial = data.IsTutorialCompleted;

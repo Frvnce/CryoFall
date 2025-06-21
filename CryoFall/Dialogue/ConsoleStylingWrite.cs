@@ -11,6 +11,12 @@ public static class ConsoleStylingWrite
     private static readonly DialogueRepository RepoDialogue = DialogueRepository.Load();
     
     private static Dictionary<string, string> PlaceHoldersNames = CharacterRepository.PlaceholdersNames;
+    public static Dictionary<string,string> GetPlaceholdersDict() =>
+        new(PlaceHoldersNames);
+
+    public static void SetPlaceholdersDict(Dictionary<string,string> dict) =>
+        PlaceHoldersNames = new(dict);
+
     
     private static readonly Regex PhRegex =
         new(@"<(?<key>[^>]+)>", RegexOptions.Compiled);

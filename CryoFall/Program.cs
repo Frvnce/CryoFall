@@ -5,6 +5,7 @@ using CryoFall.Items;
 using CryoFall.Rooms;
 using CryoFall.SaveSystem;
 using Spectre.Console;
+using System.Text.Json;
 
 namespace CryoFall;
 
