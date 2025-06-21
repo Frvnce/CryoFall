@@ -1860,8 +1860,8 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "YEEEEEEAH!! Lena, sei incredibile! Ce l'abbiamo fatta!!! (,,>ヮ<,,)",
-    "next": "waitForEpilogue"
+    "text": "YEEEEEEAH!! Lena, sei incredibile! Ce l'abbiamo fatta!!!",
+    "next": "Epilogue_Lena_001"
   },
   {
     "id": "finale_no_emettitore_001",
@@ -1927,21 +1927,150 @@
     "next": "finale_no_emettitore_006"
   },
   {
-    "id": "finale_no_emettitore_007",
-    "room": "zona_controllo",
+    "id": "finale_no_emettitore_006",
+    "room": "zona_di_scarico",
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
     "text": "Cosa vuoi fare?",
     "choices": [
       {
-        "label": "Tira la leva.",
-        "next": "main_033"
+        "label": "Tira la leva. Lena Muore.",
+        "next": "finale_no_emettitore_007"
       },
       {
-        "label": "Abbandonati al tuo destino.",
-        "next": "atto3_gameover01"
+        "label": "Non tirare la leva. Morite entrambi",
+        "next": "finale_gameover"
       }
     ]
+  },
+  {
+    "id": "finale_gameover",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Con un gesto rapido <robotName> si libera dalla presa di <mainHelper> e le tira un pugno sfondandole il cranio. Inevitabile per te è la sua stessa fine.",
+    "next": "end"
+  },
+  {
+    "id": "finale_no_emettitore_007",
+    "room": "zona_di_scarico",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "intro",
+    "text": "Corri verso il pannello di controllo della Zona di Scarico, lo apri e tiri la leva. La botola si apre. Vedi Lena aggrappata ad AX-7. La botola si richiude.",
+    "next": "Epilogue_noLena_001"
+  },
+  {
+    "id": "Epilogue_Lena_001",
+    "room": "sala_ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Tornate insieme alla Sala Ibernazione. Il terminale lampeggia: 'Tutti i Sistemi Criogenici Operativi'.",
+    "next": "lena_epilogo_001"
+  },
+  {
+    "id": "lena_epilogo_001",
+    "room": "sala_ibernazione",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Ok <playerName>... tocca a te. Vai per primo. Ti raggiungo tra pochi secondi.",
+    "next": "main_epilogo_001"
+  },
+  {
+    "id": "main_epilogo_001",
+    "room": "sala_ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Ci vediamo su Kepler... te lo prometto.",
+    "next": "epilogo_lena_bloccata"
+  },
+  {
+    "id": "epilogo_lena_bloccata",
+    "room": "sala_ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Ti sistemi nella capsula. Il processo inizia. Ma all’improvviso... un suono metallico, uno scatto elettrico. La mano di AX-7, ancora nel tuo inventario, esplode in corto circuito.",
+    "next": "lena_epilogo_002"
+  },
+  {
+    "id": "lena_epilogo_002",
+    "room": "sala_ibernazione",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "NO! Il sistema si è bloccato! Non riesco a far partire la mia capsula!",
+    "next": "main_epilogo_002"
+  },
+  {
+    "id": "main_epilogo_002",
+    "room": "sala_ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "dialogue",
+    "text": "Aspetta! C’è un modo, posso... posso uscire e—",
+    "next": "lena_epilogo_003"
+  },
+  {
+    "id": "lena_epilogo_003",
+    "room": "sala_ibernazione",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Fermati. Se esci, moriamo entrambi. Almeno uno di noi deve arrivare su Kepler.",
+    "next": "lena_epilogo_004"
+  },
+  {
+    "id": "lena_epilogo_004",
+    "room": "sala_ibernazione",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
+    "text": "Ricorda Marcus. Ricorda Sarah. Ricorda anche me... quando guarderai il cielo.",
+    "next": "epilogo_common_finale"
+  },
+  {
+    "id": "Epilogue_noLena_001",
+    "room": "sala_ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Torni alla Sala Ibernazione da solo. Le luci sembrano più fredde. La capsula ti aspetta. Solo.",
+    "next": "main_epilogo_003"
+  },
+  {
+    "id": "main_epilogo_003",
+    "room": "sala_ibernazione",
+    "speakerName": "<playerName>",
+    "character": "main",
+    "kind": "thought",
+    "text": "Lena... Marcus... Sarah... il vostro sacrificio non sarà vano.",
+    "next": "epilogo_common_finale"
+  },
+  {
+    "id": "epilogo_common_finale",
+    "room": "sala_ibernazione",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Ti distendi nella capsula. Le luci si abbassano. Il rumore dei circuiti si attenua. Il gas criogenico ti avvolge lentamente.",
+    "next": "epilogo_final_screen"
+  },
+  {
+    "id": "epilogo_final_screen",
+    "room": "sala_ibernazione",
+    "speakerName": "Sistema",
+    "character": "narrator",
+    "kind": "intro",
+    "text": "[center bold]VITTORIA[/]\n[center]L'umanità sopravviverà... forse.[/]\n[center italic]12.833 anime in attesa di un nuovo mondo.[/]",
+    "next": "end"
   }
+
+
+
 ]
