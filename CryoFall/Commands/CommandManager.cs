@@ -191,7 +191,6 @@ public class CommandManager
     List<Room> GetListRooms(RoomsManager rm)
     {
         List<Room> rooms = new List<Room>();
-        rooms.Add(rm.FindRoom("sala_comune"));
         rooms.Add(rm.FindRoom("corridoio_ovest_1"));
         rooms.Add(rm.FindRoom("corridoio_ovest_2"));
         rooms.Add(rm.FindRoom("corridoio_ovest_3"));

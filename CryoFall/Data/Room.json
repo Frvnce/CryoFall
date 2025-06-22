@@ -160,7 +160,8 @@
     "id": "sala_comune",
     "name": "Sala Comune",
     "roomDescription": "Ampia sala di riposo con sedute modulari e un grande finestrone che dà sulla sala di controllo sottostante.",
-    "isLocked": false,
+    "isLocked": true,
+    "unlockKeyId": "mano_ax_7",
     "adjacentRooms": {
       "north": null,
       "south": "corridoio_centrale",
