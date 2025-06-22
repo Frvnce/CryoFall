@@ -12,6 +12,7 @@
         public List<string> VisitedRoomIds { get; set; } = new(); // Stanze visitate
         public string? LastDialogueId { get; set; } = null; // ultimo dialogo
         public Dictionary<string,string> Placeholders { get; set; } = new();
+        public List<string> EventiAttivati { get; set; } = new(); //eventi di gioco
     }
 
     /// <summary>

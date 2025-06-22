@@ -29,7 +29,7 @@
         },
         "action": {
           "type": "string",
-          "enum": ["inputName","inputNameAssistente"]
+          "enum": ["inputName","inputNameAssistente","pullLever"]
         },
         "text":    { "type": "string" },
         "choices": {

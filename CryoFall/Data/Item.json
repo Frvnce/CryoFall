@@ -144,7 +144,7 @@
     "name": "Apertura da Zona di Controllo",
     "itemDescription": ".",
     "weight": 4,
-    "isPickable": false,
+    "isPickable": true,
     "isUsable": false,
     "isAnalyzable": false,
     "color": "#9e673e"
@@ -156,6 +156,16 @@
     "weight": 0.5,
     "isPickable": true,
     "isUsable": true,
+    "isAnalyzable": false,
+    "color": "#808080"
+  },
+  {
+    "id": "foto",
+    "name": "foto",
+    "itemDescription": "Una fotografia di Emily, la figlia di Lena.",
+    "weight": 1,
+    "isPickable": true,
+    "isUsable": false,
     "isAnalyzable": false,
     "color": "#808080"
   }

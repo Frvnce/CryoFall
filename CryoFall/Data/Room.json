@@ -167,7 +167,9 @@
       "east": "corridoio_est",
       "west": "corridoio_nord"
     },
-    "items": [],
+    "items": [
+      "foto"
+    ],
     "persons": []
   },
   {

@@ -85,9 +85,24 @@ class Program
             player.HasCompletedTutorial = true;
         }
 
-        GameplayAtto_01(cmdManager, player, roomsManager, itemsManager);
-        GameplayAtto_02(cmdManager, player, roomsManager, itemsManager);
-        
+        if (!player.EventiAttivati.Contains("atto1"))
+        {
+            GameplayAtto_01(cmdManager, player, roomsManager, itemsManager);
+            player.EventiAttivati.Add("atto1");
+        }
+
+        if (!player.EventiAttivati.Contains("atto3"))
+        {
+            GameplayAtto_03(cmdManager, player, roomsManager, itemsManager);
+            player.EventiAttivati.Add("atto3");
+        }
+
+        if (!player.EventiAttivati.Contains("atto4"))
+        {
+            GameplayAtto_04(cmdManager, player, roomsManager, itemsManager);
+            player.EventiAttivati.Add("atto4");
+        }
+
         #endregion 
     }
 
@@ -271,7 +286,7 @@ class Program
             {
                 ConsoleStylingWrite.StartDialogue("assistente_014", player);
                 EscapeFromRobotScene(cmdManager, player, rm, im);
-                gameplay = false;
+                gameplay = true;
             }
             //IF sempre finale.
             if (player.VisitedRoomIds.Add(player.CurrentRoom.Id))
@@ -314,15 +329,117 @@ class Program
         rm.FindRoom("zona_di_scarico").IsLocked = true;
     }
     
-    static void GameplayAtto_02(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
+    static void GameplayAtto_03(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
     {
-        // Uso HashSet per poter sfruttare Add(...) che restituisce bool
-        var itemsInInventory = new HashSet<string>();
         var gameplay = false;
-        
         while (!gameplay)
         {
             ReadCmd(cmdManager, player, rm, im);
+            // CORRIDOIO OVEST 3 DOPO ZONA DI SCARICO
+            if (player.CurrentRoom.Id == "corridoio_ovest_3"&&
+                player.EventiAttivati.Add("dialogo_corr_ovest_3"))
+            {
+                ConsoleStylingWrite.StartDialogue("atto3_001", player);
+            }
+                
+            //CORRIDOIO EST
+            if (player.CurrentRoom.Id == "corridoio_est" &&
+                !player.EventiAttivati.Contains("dialogo_corr_est"))
+            {
+                ConsoleStylingWrite.StartDialogue("atto3_002", player);
+                player.EventiAttivati.Add("dialogo_corr_est");
+            }
+            
+            //ZONA DI CONTROLLO
+            if (player.CurrentRoom.Id == "zona_di_controllo" && !player.VisitedRoomIds.Contains("zona_di_controllo"))
+            {
+                ConsoleStylingWrite.StartDialogue("atto3_003", player);
+                gameplay = true;
+            }
+            //IF sempre finale.
+            if (player.VisitedRoomIds.Add(player.CurrentRoom.Id))
+            {
+                //Console.WriteLine($"{player.CurrentRoom.Id} stanza aggiunta nel while e nel file.");
+            }
+        }
+    }
+    static void GameplayAtto_04(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
+    {
+        var gameplay = false;
+        var photoFound = false;
+        while (!gameplay)
+        {
+            ReadCmd(cmdManager, player, rm, im);
+            // ZONA CARBURANTE NORD - LENA - FOTO
+            if (player.CurrentRoom.Id == "zona_carburante_nord" && player.VisitedRoomIds.Contains("zona_di_controllo") &&
+                !player.EventiAttivati.Contains("lena_foto"))
+            {
+                ConsoleStylingWrite.StartDialogue("atto4_001", player);
+                if (!player.Inventory.Items.Contains(im.FindItem("foto")))
+                {
+                    ConsoleStylingWrite.StartDialogue("lena_diffidente_005", player);
+                    while (!photoFound)
+                    {
+                        ReadCmd(cmdManager, player, rm, im);
+                        if (player.Inventory.Items.Contains(im.FindItem("foto")) && player.CurrentRoom.Id == "zona_carburante_nord")
+                        {
+                            photoFound = true;
+                        }
+                    }
+                    player.EventiAttivati.Add("lena_foto");
+                }
+
+                ConsoleStylingWrite.StartDialogue("lena_diffidente_006", player);
+                player.EventiAttivati.Add("lena_foto");
+            }
+                
+            //PRENDERE EMETTITORE - ACCESSO ARMERIA
+            if (player.CurrentRoom.Id == "armeria" && !player.VisitedRoomIds.Contains("armeria")&&
+                player.EventiAttivati.Contains("lena_foto"))
+            {
+                ConsoleStylingWrite.StartDialogue("armeria_access", player);
+            }
+            if (player.Inventory.Items.Contains(im.FindItem("emettitore_di_energia")) && !player.EventiAttivati.Contains("emettitore_prendi") &&
+                player.EventiAttivati.Contains("lena_foto"))
+            {
+                ConsoleStylingWrite.StartDialogue("main_035", player);
+                player.EventiAttivati.Add("emettitore_prendi");
+            }
+            
+            //ACCESSO INFERMERIA
+            if (player.CurrentRoom.Id == "infermeria" && !player.VisitedRoomIds.Contains("infermeria") && !player.EventiAttivati.Contains("emettitore_no_prendi") &&
+                player.EventiAttivati.Contains("lena_foto"))
+            {
+                ConsoleStylingWrite.StartDialogue("infermeria_access", player);
+                player.EventiAttivati.Add("emettitore_no_prendi");
+            }
+            
+            //RITORNO CON EMETTITORE
+            if (player.CurrentRoom.Id == "zona_carburante_nord" 
+                && player.Inventory.Items.Contains(im.FindItem("emettitore_di_energia")) 
+                && !player.EventiAttivati.Contains("ritorno_con_emettitore"))
+            {
+                ConsoleStylingWrite.StartDialogue("ritorno_lena_con_emettitore", player);
+                player.EventiAttivati.Add("ritorno_con_emettitore");
+                gameplay = true;
+            }
+            
+            //RITORNO SENZA EMETTITORE
+            if (player.CurrentRoom.Id == "zona_carburante_nord" 
+                && !player.Inventory.Items.Contains(im.FindItem("emettitore_di_energia")) 
+                && !player.EventiAttivati.Contains("ritorno_senza_emettitore")
+                && player.EventiAttivati.Contains("lena_foto")
+                && player.EventiAttivati.Contains("emettitore_no_prendi"))
+            {
+                ConsoleStylingWrite.StartDialogue("ritorno_lena_senza_emettitore", player);
+                player.EventiAttivati.Add("ritorno_senza_emettitore");
+                gameplay = true;
+            }
+            //IF sempre finale.
+            if (player.VisitedRoomIds.Add(player.CurrentRoom.Id))
+            {
+                //Console.WriteLine($"{player.CurrentRoom.Id} stanza aggiunta nel while e nel file.");
+            }
         }
     }
 

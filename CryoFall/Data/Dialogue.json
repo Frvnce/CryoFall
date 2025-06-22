@@ -1322,7 +1322,7 @@
     "character": "main",
     "kind": "dialogue",
     "text": "Decisamente no... vediamo di scoprire la verità su questa storia.",
-    "next": "waitForCmd"
+    "next": "atto3_005"
   },
   {
     "id": "atto3_005",
@@ -1370,7 +1370,7 @@
     "choices": [
       {
         "label": "Tira la leva.",
-        "next": "main_033"
+        "next": "atto3_007"
       },
       {
         "label": "Abbandonati al tuo destino.",
@@ -1397,20 +1397,12 @@
     "next": "end"
   },
   {
-    "id": "main_033",
-    "room": "zona_controllo",
-    "speakerName": "<playerName>",
-    "character": "main",
-    "kind": "dialogue",
-    "text": "Perfetto, ora possiamo sbloccare le porte e raggiungere Lena. E questa chiave magnetica potrebbe essere utile.",
-    "next": "waitForCmd"
-  },
-  {
     "id": "atto3_007",
     "room": "zona_controllo",
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
+    "action": "pullLever",
     "text": "Attivi la leva, senti un rumore metallico in lontananza. Tutte le porte della nave sono ora sbloccate.",
     "next": "assistente_027"
   },
@@ -1489,9 +1481,9 @@
   {
     "id": "lena_006",
     "room": "zona_carburante_nord",
-    "speakerName": "Narratore",
-    "character": "narrator",
-    "kind": "narration",
+    "speakerName": "<mainHelper>",
+    "character": "friend",
+    "kind": "dialogue",
     "text": "Però <robotName> non è programmato per mentire, come faccio a sapere se non sei tu quello a mentire?",
     "next": "lena_diffidente_001"
   },
@@ -1519,8 +1511,8 @@
     "speakerName": "<mainHelper>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Ho perso una foto per me davvero importante, è una foto di mia figlia. Per favore aiutami a trovarla. Se lo farai ti crederò",
-    "next": "end"
+    "text": "Ho perso una foto per me davvero importante, è una foto di mia figlia Emily. Per favore aiutami a trovarla. Se lo farai ti crederò",
+    "next": "lena_diffidente_004"
   },
   {
     "id": "lena_diffidente_004",
@@ -1537,7 +1529,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "ECCO LA FOTO!!! BEN FATTO! Portiamola a <mainHelper> su su!",
+    "text": "Vai a trovare la foto <playerName>!",
     "next": "waitForCmd"
   },
   {
@@ -1619,7 +1611,7 @@
     "character": "friend",
     "kind": "dialogue",
     "text": "C'è un emettitore di energia. Usato sugli umani per guarire ferite sottocutanee, ma... potrebbe mandare un robot in corto circuito. Ogni nave ne ha uno. Ma serve una chiave magnetica speciale. Se l'hai, possiamo prenderlo.",
-    "next": "waitForCmd"
+    "next": "assistente_028"
   },
   {
     "id": "assistente_028",
@@ -1627,7 +1619,8 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "intro",
-    "text": "Forse dovremmo tornare nel Corridoio Ovest 1, ci sono 2 stanze che non abbiamo visitato ( ˶ˆᗜˆ˵ )"
+    "text": "Forse dovremmo tornare nel Corridoio Ovest 1, ci sono 2 stanze che non abbiamo visitato!!!",
+    "next": "waitForCmd"
   },
   {
     "id": "armeria_access",
@@ -1653,8 +1646,8 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "EVVAIII (,,>ヮ<,,)!!!!! Abbiamo trovato l'Emettitore, corri prendilo!",
-    "next": "main_035"
+    "text": "EVVAIII!!!!! Abbiamo trovato l'Emettitore, corri prendilo!",
+    "next": "waitForCmd"
   },
   {
     "id": "assistente_030",
@@ -1707,7 +1700,7 @@
     "speakerName": "<assistant>",
     "character": "helper",
     "kind": "dialogue",
-    "text": "Che ansiaaa (,,•﹏•,,), ma almeno abbiamo una chance! Forza, cerchiamo <robotName> nella Zona di Scarico e fianiamola una volta per tutte.",
+    "text": "Che ansiaaa, ma almeno abbiamo una chance! Forza, cerchiamo <robotName> nella Zona di Scarico e fianiamola una volta per tutte.",
     "next": "waitForCmd"
   },
   {

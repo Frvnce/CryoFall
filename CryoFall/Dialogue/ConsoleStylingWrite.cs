@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 using CryoFall.Character;
 using CryoFall.Commands;
 using CryoFall.Rooms;
@@ -234,6 +236,7 @@ public static class ConsoleStylingWrite
             {
                 case "inputName": AskPlayerPlaceHolders("playerName",current.Text); break;
                 case "inputNameAssistente": AskPlayerPlaceHolders("assistant",current.Text); break;
+                case "pullLever": OpenDoor("zona_carburante_nord"); break;
                 default: WriteDialogue(current.Character, current.Kind, current.SpeakerName,current.Text, liveWriting: liveWriting); break;
             }
             
@@ -256,6 +259,12 @@ public static class ConsoleStylingWrite
             Thread.Sleep(msToWaitForLine); //aspetta x tempo tra un dialogo e l'altro.
         }
     }
+
+    public static void OpenDoor(string roomId)
+    {
+        //fare
+    }
+
 
     /// <summary>
     /// Rimpiazza tutti i placeholder con i nomi e con gli oggetti.
