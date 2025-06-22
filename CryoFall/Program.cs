@@ -138,10 +138,11 @@ class Program
     /// <summary>
     /// Fa vedere al player una lista di salvataggi, carica il salvataggio selezionato e ripristina lo stato di gioco (player, stanze, inventario, ecc.). Se il giocatore decide di non caricare il salvataggio allora il metodo avrà return <see langword="null"/> e quindi verrà creato un nuovo gioco.
     /// </summary>
-    /// <param name="gameSaveDir">Directory contenente i file <c>save0N.json</c>.</param>
-    /// <param name="roomsManager">Runtime rooms manager da ripopolare.</param>
-    /// <param name="itemsManager">Runtime items manager da ripopolare.</param>
-    /// <returns>Un <see cref="MainCharacter"/> restaurato oppure <c>null</c> se l'utente annulla.</returns>
+    /// <param name="player">Oggetto del player</param>
+    /// <param name="roomsManager"></param>
+    /// <param name="itemsManager"></param>
+    /// <param name="saveDirPath">Cartella</param>
+    /// <returns></returns>
     static MainCharacter LoadSave(MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager, string saveDirPath)
     {
         var files = Directory.GetFiles(saveDirPath);
