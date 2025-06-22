@@ -1087,8 +1087,8 @@
     "speakerName": "Narratore",
     "character": "narrator",
     "kind": "narration",
-    "text": "La botola si spalanca. Vieni risucchiato nel vuoto dello spazio. AX-7 ti osserva in silenzio.",
-    "next": "end"
+    "text": "La botola si spalanca. Vieni risucchiato nel vuoto dello spazio. AX-7 ti osserva in silenzio. Muori",
+    "next": "GameOver"
   },
   {
     "id": "ax7_sospetto",
@@ -1394,7 +1394,7 @@
     "character": "narrator",
     "kind": "narration",
     "text": "Senti vagamente la voce di <assistant> che cerca di svegliarti, ma è troppo tardi. Il freddo dello spazio ti avvolge lentamente mentre perdi conoscenza. [#9e2416 bold]<robotName>[/] ti ha espulso dalla Nave. In quegli ultimi secondi di coscienza, prima di morire asfissiato, giri la testa e vedi <mainHelper> di fianco a te, nell'immensità dello spazio che stringe a se la foto di sua figlia...Hai fallito.",
-    "next": "end"
+    "next": "GameOver"
   },
   {
     "id": "atto3_007",
@@ -1593,7 +1593,7 @@
     "character": "narrator",
     "kind": "narration",
     "text": "Nel mentre che i due bisticciavano, non si sono accorti dell'entrata di <robotName>, che era lì pronto ad eliminarli entrambi. <robotName> emette un verso per attirare l'attenzione ma non appena i due si girano, era già troppo tardi. Con un gesto rapido e violento <robotName> prende entrambe le vostre teste e con una forza sovrumana le distrugge. Complimenti, sei morto per un bisticcio.",
-    "next": "end"
+    "next": "GameOver"
   },
   {
     "id": "lena_007",
@@ -1980,7 +1980,16 @@
     "character": "narrator",
     "kind": "narration",
     "text": "Con un gesto rapido <robotName> si libera dalla presa di <mainHelper> e le tira un pugno sfondandole il cranio. Inevitabile per te è la sua stessa fine.",
-    "next": "end"
+    "next": "GameOver"
+  },
+  {
+    "id": "GameOver",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "action": "gameOver",
+    "kind": "intro",
+    "text": "Morto!"
   },
   {
     "id": "finale_no_emettitore_007",

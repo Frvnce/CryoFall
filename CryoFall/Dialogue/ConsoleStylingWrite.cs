@@ -317,6 +317,7 @@ public static class ConsoleStylingWrite
                 case "inputName": AskPlayerPlaceHolders("playerName",current.Text); break;
                 case "inputNameAssistente": AskPlayerPlaceHolders("assistant",current.Text); break;
                 case "pullLever": OpenDoor("zona_carburante_nord",rm); break;
+                case "gameOver": GameOver(); break;
                 default: WriteDialogue(current.Character, current.Kind, current.SpeakerName,current.Text, liveWriting: liveWriting); break;
             }
             
@@ -338,6 +339,25 @@ public static class ConsoleStylingWrite
             }
             Thread.Sleep(msToWaitForLine); //aspetta x tempo tra un dialogo e l'altro.
         }
+    }
+
+    private static void GameOver()
+    {   
+        AnsiConsole.WriteLine("  ____    _    __  __ _____    _____     _______ ____  _ \n / ___|  / \\  |  \\/  | ____|  / _ \\ \\   / / ____|  _ \\| |\n| |  _  / _ \\ | |\\/| |  _|   | | | \\ \\ / /|  _| | |_) | |\n| |_| |/ ___ \\| |  | | |___  | |_| |\\ V / | |___|  _ <|_|\n \\____/_/   \\_\\_|  |_|_____|  \\___/  \\_/  |_____|_| \\_(_)");
+        AnsiConsole.WriteLine();
+        AnsiConsole.MarkupLine("[yellow]Premi un tasto per uscire...[/]");
+        Console.ReadKey(intercept: true); // aspetta che il giocatore premi un tasto.
+        Environment.Exit(0);
+    }
+
+    private static void Victory()
+    {
+        AnsiConsole.WriteLine(
+            "__     _____ _____ _____ ___  ____  ___    _    _ \n\\ \\   / /_ _|_   _|_   _/ _ \\|  _ \\|_ _|  / \\  | |\n \\ \\ / / | |  | |   | || | | | |_) || |  / _ \\ | |\n  \\ V /  | |  | |   | || |_| |  _ < | | / ___ \\|_|\n   \\_/  |___| |_|   |_| \\___/|_| \\_\\___/_/   \\_(_)");
+        AnsiConsole.WriteLine();
+        AnsiConsole.MarkupLine("[yellow]Premi un tasto per uscire...[/]");
+        Console.ReadKey(intercept: true); // aspetta che il giocatore premi un tasto.
+        Environment.Exit(0);
     }
 
     /// <summary>

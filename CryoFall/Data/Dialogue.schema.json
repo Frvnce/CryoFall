@@ -29,7 +29,7 @@
         },
         "action": {
           "type": "string",
-          "enum": ["inputName","inputNameAssistente","pullLever", "givePhoto"]
+          "enum": ["inputName","inputNameAssistente","pullLever", "givePhoto","gameOver"]
         },
         "text":    { "type": "string" },
         "choices": {
