@@ -16,8 +16,6 @@ public static class CharacterRepository
     /// </summary>
     public static Dictionary<string, string> PlaceholdersNames { get; } = Load();
 
-    // ─────────────────────────────────────────── privato ───────────────────────────────────────────
-
     private static Dictionary<string, string> Load()
     {
         string baseDir  = AppContext.BaseDirectory;                  // bin/Debug/… o publish/

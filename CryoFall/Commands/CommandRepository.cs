@@ -28,8 +28,6 @@ public static class CommandsRepository
     /// Utile per il parser dell’input dell’utente.
     /// </summary>
     public static IReadOnlyDictionary<string, CommandInfo> ByKeyword { get; } = BuildKeywordIndex(ById);
-    
-    // ───────────────────────────────────────── privato ─────────────────────────────────────────
 
     private static Dictionary<string, CommandInfo> Load()
     {
@@ -53,7 +51,10 @@ public static class CommandsRepository
             c => new CommandInfo(c.Id, c.Name, c.CmdDescription, c.Cmd, c.Alias ?? Array.Empty<string>()),
             StringComparer.OrdinalIgnoreCase);
     }
-
+    /// <summary>
+    /// Crea un indice <c>keyword → CommandInfo</c> usando sia la keyword principale (prima parola del pattern)
+    /// sia tutti gli alias definiti nel JSON.
+    /// </summary>
     private static IReadOnlyDictionary<string, CommandInfo> BuildKeywordIndex(
         IReadOnlyDictionary<string, CommandInfo> byId)
     {
@@ -73,7 +74,9 @@ public static class CommandsRepository
         return dict;
     }
 
-    // stub usato SOLO per la deserializzazione
+    /// <summary>
+    /// Record interno usato SOLO per deserializzare il JSON: contiene anche campi extra non esposti pubblicamente.
+    /// </summary>
     private sealed record CommandStub(
         string Id,
         string Name,

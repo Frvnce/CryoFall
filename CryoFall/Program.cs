@@ -13,12 +13,15 @@ namespace CryoFall;
 
 class Program
 {
+    /// <summary>
+    /// Metodo Main - gestisce l'avvio del gioco
+    /// </summary>
     private static void Main(string[] args)
     {   
-        Logger.InitNewLog();
+        Logger.InitNewLog(); // inizializza il logger
         #region BENVENUTO NEL GIOCO
 
-        WelcomeToCryoFall();
+        WelcomeToCryoFall(); // Stampa grafica ASCII iniziale
         Logger.Log("Gioco avviato");
 
         #endregion
@@ -26,8 +29,9 @@ class Program
         
         #region INTRODUZIONE
         #region Salvataggio Items e Rooms
-        //Ogni file "Repository" legge il json di una determinata cosa.
+        // Carica le informazioni delle stanze da file JSON 
         var roomRepo = RoomRepository.Load();
+        // Carica le informazioni degli oggetti da file JSON
         var itemRepo = ItemRepository.Load();
         
         //Manager di tutti gli oggetti presenti in gioco.
@@ -80,7 +84,7 @@ class Program
             ConsoleStylingWrite.StartDialogue("introIbernazione", player, msToWaitForLine:10, liveWriting:false);
         }
 
-        // 5) Avvio il CommandManager e il resto del flusso
+        // Avvio il CommandManager e il resto del flusso
         var cmdManager = new CommandManager();
         if (!player.HasCompletedTutorial)
         {
@@ -119,7 +123,9 @@ class Program
 
         #endregion 
     }
-
+    /// <summary>
+    /// Metodo WelcomeToCryoFall - Stampa la Grafica del gioco
+    /// </summary>
     static void WelcomeToCryoFall()
     {
         AnsiConsole.Write(new Align(
@@ -129,7 +135,13 @@ class Program
         ));
         Console.WriteLine();
     }
-
+    /// <summary>
+    /// Fa vedere al player una lista di salvataggi, carica il salvataggio selezionato e ripristina lo stato di gioco (player, stanze, inventario, ecc.). Se il giocatore decide di non caricare il salvataggio allora il metodo avrà return <see langword="null"/> e quindi verrà creato un nuovo gioco.
+    /// </summary>
+    /// <param name="gameSaveDir">Directory contenente i file <c>save0N.json</c>.</param>
+    /// <param name="roomsManager">Runtime rooms manager da ripopolare.</param>
+    /// <param name="itemsManager">Runtime items manager da ripopolare.</param>
+    /// <returns>Un <see cref="MainCharacter"/> restaurato oppure <c>null</c> se l'utente annulla.</returns>
     static MainCharacter LoadSave(MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager, string saveDirPath)
     {
         var files = Directory.GetFiles(saveDirPath);
@@ -167,6 +179,10 @@ class Program
         return player;
     }
 
+    /// <summary>
+    /// Legge <see cref="Console"/> input in loop finchè il comando è reputato valido da <paramref name="cmdManager"/>.  Opzionalmente aspetta per un input specifico (<paramref name="cmdToWaitFor"/>). Usato fuori dal tutorial.
+    /// </summary>
+    /// <returns><see langword="true"/> se è stato inserito un comando corretto; altrimenti <see langword="false"/>.</returns>
     static bool ReadCmd(CommandManager cmdManager,MainCharacter player, RoomsManager rm,ItemsManager im, string cmdToWaitFor="")
     {
         var cmd = "";
@@ -183,7 +199,9 @@ class Program
         
         return true;
     }
-
+    /// <summary>
+    /// Variante di <see cref="ReadCmd"/> impiegata durante il tutorial: prima verifica che l'input contenga il comando richiesto (<paramref name="cmdToWaitFor"/>) e <b>solo se</b> la verifica passa lo esegue.
+    /// </summary>
     static bool ReadCmdTutorial(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im, string cmdToWaitFor) //funzione per verificare limitare input nel tutorial
     {
         AnsiConsole.Markup("[bold #4287f5]>[/] ");
@@ -199,6 +217,9 @@ class Program
         return cmdManager.ReadCommand(cmd, player, rm, im);
     }
 
+    /// <summary>
+    /// Sequenza guidata che introduce i comandi di base (help, analizza, prendi, inventario, usa, lascia, muoviti).  Termina quando il giocatore lascia la "sala_ibernazione".
+    /// </summary>
     static void Tutorial(CommandManager cmdManager,MainCharacter player,RoomsManager rm,ItemsManager im)
     {
         bool tutorial = false;
@@ -262,7 +283,9 @@ class Program
         }
         ConsoleStylingWrite.StartDialogue("tutorial_007", player); 
     }
-    
+    /// <summary>
+    /// Gestisce la logica dell'Atto I: esplorazione iniziale e fuga dal robot.
+    /// </summary>
     static void GameplayAtto_01(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
     {
         // Uso HashSet per poter sfruttare Add(...) che restituisce bool
@@ -317,12 +340,16 @@ class Program
             }
         }
     }
-
+    /// <summary>
+    /// Minigioco di fuga: il player deve raccogliere prima la mano del robot AX‑7 e poi il dispositivo di teletrasporto, quindi usare il teletrasporto.  Tutte le istruzioni vengono forzate con
+    /// <see cref="ReadCmdTutorial"/>.
+    /// </summary>
     static void EscapeFromRobotScene(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
     {
         var robotHand = im.FindItem("mano_ax_7");
         var teleportDevice = im.FindItem("dispositivo_di_teletrasporto");
         
+        // raccogli mano
         while (!ReadCmdTutorial(cmdManager, player, rm, im, "prendi") ||
                !player.Inventory.Items.Contains(robotHand))
         {
@@ -330,6 +357,7 @@ class Program
         }
         ConsoleStylingWrite.StartDialogue("atto1_012", player);
         
+        //raccogli teletrasporto
         while (!ReadCmdTutorial(cmdManager, player, rm, im, "prendi") ||
                !player.Inventory.Items.Contains(teleportDevice))
         {
@@ -341,6 +369,8 @@ class Program
             ConsoleStylingWrite.HelperCmd($"Cosa fai? prendi [{teleportDevice.Color}]{teleportDevice.Name}[/] [bold]SUBITO![/]");
         }
         ConsoleStylingWrite.StartDialogue("atto2_001", player);
+        
+        //usa teletrasporto
         while (!ReadCmdTutorial(cmdManager, player, rm, im, "teletrasporto"))
         {
             ConsoleStylingWrite.HelperCmd($"Cosa fai? Teletrasporti [bold]SUBITO![/], oh certo, non sai come fare.. magari prova ad usare il [bold italic]teletrasporto[/]");
@@ -349,7 +379,9 @@ class Program
         ConsoleStylingWrite.StartDialogue("assistente_020", player);
         rm.FindRoom("zona_di_scarico").IsLocked = true;
     }
-    
+    /// <summary>
+    /// Atto III – il giocatore scopre la verità nella Zona di Controllo.
+    /// </summary>
     static void GameplayAtto_03(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
     {
         var gameplay = false;
@@ -389,6 +421,9 @@ class Program
             }
         }
     }
+    /// <summary>
+    /// Atto IV – Gestisce l'alleanza con Lena e la ricerca dell'emettitore.
+    /// </summary>
     static void GameplayAtto_04(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
     {
         var gameplay = false;
@@ -474,7 +509,9 @@ class Program
             }
         }
     }
-    
+    /// <summary>
+    /// Atto V – Scontro finale con AX‑7.  Il finale dipende dalla presenza dell'emettitore.
+    /// </summary>
     static void GameplayAtto_05(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
     {
         //TRUE se emittor è stato preso, FALSE se non è stato preso.

@@ -4,7 +4,7 @@ namespace CryoFall.Character;
 
 /// <summary>
 /// Rappresenta il personaggio principale controllato dal giocatore.
-/// Possiede un inventario personale.
+/// Possiede un inventario personale. Ha associato a se Hashset e altre variabili che servono per determinare lo stato di gioco
 /// </summary>
 /// <param name="name">Nome del personaggio.</param>
 /// <param name="maxCapacity">Capacità dell'inventario del personaggio</param>

@@ -8,16 +8,26 @@ using Spectre.Console;
 
 namespace CryoFall.Commands;
 
+/// <summary>
+/// Gestisce il parsing e l'esecuzione dei comandi di testo inseriti dal giocatore.
+/// Tutta la logica di alto livello («help», movimento, inventario, salvataggi...) passa da qui.
+/// Ogni metodo pubblico/privato è stato documentato in italiano secondo le linee guida del professore.
+/// </summary>
 public class CommandManager
 {
     /// <summary>
-    /// 
+    /// Analizza il comando <paramref name="cmd"/>, verifica la sintassi e invoca il metodo corrispondente.
     /// </summary>
-    /// <param name="cmd">Il comando scritto dal giocatore</param>
-    /// <param name="player"> Passa <see cref="MainCharacter"/> per gestire il giocatore </param>
+    /// <remarks>
+    /// I comandi sono case-insensitive; eventuali argomenti multipli (es. «analizza Sala Ibernazione»)
+    /// vengono normalizzati da <see cref="SplitCmd"/> così da eliminare gli spazi interni.
+    /// </remarks>
+    /// <param name="cmd">Stringa digitata dal player.</param>
+    /// <param name="player">Istanza del <see cref="MainCharacter"/>.</param>
+    /// <param name="roomsManager">Gestore stanze runtime.</param>
+    /// <param name="itemsManager">Gestore item runtime.</param>
     /// <returns>
-    /// <c>True</c> se il comando è valido ed è stato eseguito correttamente;
-    /// <c>False</c> altrimenti.
+    /// <c>true</c> se il comando è valido ed è stato eseguito correttamente; <c>false</c> in caso di errore.
     /// </returns>
     public bool ReadCommand(string cmd,MainCharacter player,RoomsManager roomsManager,ItemsManager itemsManager)
     {
@@ -71,7 +81,9 @@ public class CommandManager
             default: return ErrorCmd();
         }
     }
-
+    /// <summary>
+    /// Carica un salvataggio dal percorso ‹saves/&lt;savePath&gt;.json›.
+    /// </summary>
     bool LoadGame(MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager, string savePath)
     {
         var path = Path.Combine(AppContext.BaseDirectory, "saves", $"{savePath}.json");
@@ -83,7 +95,9 @@ public class CommandManager
         Logger.Log($"Partita caricata da {path}");
         return true;
     }
-    
+    /// <summary>
+    /// Genera un nuovo file «saveXX.json» incrementale e salva lo stato attuale.
+    /// </summary>
     void SaveGame(MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager) 
     {
         // 1. Cartella di destinazione
@@ -132,7 +146,9 @@ public class CommandManager
         }
         return newArgs;
     }
-
+    /// <summary>
+    /// Prova a utilizzare l'oggetto in cima all'inventario per aprire una porta in <paramref name="direction"/>.
+    /// </summary>
     private bool UseObject(string direction, MainCharacter p, RoomsManager rm,ItemsManager im)
     {
         if (!p.Inventory.GetFirstItem().IsUsable) return ErrorCmd("itemNotUsable");
@@ -173,7 +189,7 @@ public class CommandManager
         Logger.Log($"Il giocatore sta utilizzando {p.Inventory.GetFirstItem().Name} su {finalDestination.NameOfTheRoom}");
         return true;
     }
-    
+    /// <summary>Mostra l'inventario con capacità e descrizioni.</summary>
     private bool VisualizeInventory(MainCharacter p)
     {  
         ConsoleStylingWrite.HelperCmd($"Ecco il tuo inventario: Capacità: [#22ff00]{p.Inventory.CurrentLoad}[/]/[#22ff00]{p.Inventory.MaxCapacity}[/] kg");
@@ -185,7 +201,9 @@ public class CommandManager
         Logger.Log("Il giocatore sta visualizzando il suo inventario");
         return true;
     }
-
+    /// <summary>
+    /// Lascia l'oggetto in cima all'inventario nella stanza corrente.
+    /// </summary>
     private bool RemoveTopItem(MainCharacter pl)
     {
         ConsoleStylingWrite.HelperCmd($"Beh, immagino che non ci servirà.");
@@ -230,6 +248,9 @@ public class CommandManager
         return AnalyzeRoomVisited(p.CurrentRoom.Id, p, rm);
     }
 
+    /// <summary>
+    /// Muove il giocatore nella direzione richiesta se la porta non è bloccata.
+    /// </summary>
     private bool Move(string destination, MainCharacter p, RoomsManager rm, ItemsManager im)
     {
         Room finalDestination;

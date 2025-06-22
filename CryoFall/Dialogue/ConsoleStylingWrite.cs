@@ -8,15 +8,31 @@ using CryoFall.Rooms;
 using Spectre.Console;
 namespace CryoFall.Dialogue;
 
+/// <summary>
+/// Classe statica che gestisce TUTTE le operazioni di stampa su console con <c>Spectre.Console</c>.
+/// Responsabilità principali:
+/// <list type="bullet">
+///   <item>Riproduzione dei dialoghi con effetto «macchina da scrivere».</item>
+///   <item>Evidenziazione dei nomi dei personaggi con colori predefiniti.</item>
+///   <item>Messaggi d’aiuto e tutorial in stile differenziato.</item>
+///   <item>Sostituzione a runtime dei <c>&lt;placeholder&gt;</c> (es. &lt;playerName&gt;).</item>
+///   <item>Visualizzazione di menù di scelta interattivi.</item>
+/// </list>
+/// Tutti i membri pubblici sono documentati in italiano secondo le indicazioni del docente.
+/// </summary>
 public static class ConsoleStylingWrite
 {
-    //Ottenere il file dei dialoghi.
+    /// <summary>Repository che contiene i dialoghi caricati da <c>dialogues.json</c>.</summary>
     private static readonly DialogueRepository RepoDialogue = DialogueRepository.Load();
     
+    /// <summary>Dizionario (mutabile) dei placeholder attivi durante la sessione di gioco.</summary>
     private static Dictionary<string, string> PlaceHoldersNames = CharacterRepository.PlaceholdersNames;
+    
+    /// <summary>Restituisce una copia (read‑only) del dizionario dei placeholder.</summary>
     public static Dictionary<string,string> GetPlaceholdersDict() =>
         new(PlaceHoldersNames);
-
+    
+    /// <summary>Sostituisce in blocco il dizionario dei placeholder.</summary>
     public static void SetPlaceholdersDict(Dictionary<string,string> dict) =>
         PlaceHoldersNames = new(dict);
 
@@ -38,6 +54,9 @@ public static class ConsoleStylingWrite
     //Vari testi preSalvati.
     private static readonly string ChooseAnOptionTitle = "[bold #f1f1f1]Scegli un'opzione:[/] ";
 
+    /// <summary>
+    /// Descrive dettagliatamente la stanza corrente (prima visita): descrizione, uscite e oggetti.
+    /// </summary>
     public static void AnalyzeRoom(Room room)
     {
         var nameRoom = room.NameOfTheRoom;
@@ -64,7 +83,7 @@ public static class ConsoleStylingWrite
             AnsiConsole.MarkupLine($"  [{item.Color}]{item.Name}[/]{randomString}");
         }
     }
-    
+    /// <summary>Versione semplificata per stanze già visitate: mostra solo le uscite.</summary>
     public static void AnalyzeRoomVisited(Room room)
     {
         var nameRoom = room.NameOfTheRoom;
@@ -90,18 +109,21 @@ public static class ConsoleStylingWrite
 
         return list;
     }
-    
+    /// <summary>Messaggio dell'«assistente» (colore verde) facoltativamente con effetto macchina da scrivere.</summary>
     public static void HelperCmd(string dialogue, bool live=false)
     {
         WriteDialogue("helper","help","<assistant>",dialogue,live);
     }
-
+    /// <summary>Messaggio giallo mostrato durante il tutorial.</summary>
     public static void WriteTutorial(string dialogue)
     {
         var name = "[bold][[[yellow]Tutorial[/]]]:[/]";
         AnsiConsole.MarkupLine($"{name} {dialogue}");
     }
     
+    /// <summary>
+    /// Scrive una linea di dialogo applicando colore, regole di stile ed eventualmente l'effetto macchina da scrivere.
+    /// </summary>
     private static void WriteDialogue(string character, string kind, string characterName, string dialogue, bool liveWriting = true)
     {
         if (String.IsNullOrEmpty(dialogue)) return;
@@ -142,7 +164,9 @@ public static class ConsoleStylingWrite
         }
         AnsiConsole.Markup($"[{rules}]{thought}{finalDialogue}{thought}[/]\n");
     }
-
+    /// <summary>
+    /// Riproduce il testo con effetto macchina da scrivere, preservando correttamente i tag Spectre.Console.
+    /// </summary>
     private static void LiveWriting(string dialogue, string thought, string rules = "")
     {
         // eventuale prefisso (ad es. * se pensiero)
@@ -179,6 +203,7 @@ public static class ConsoleStylingWrite
         AnsiConsole.WriteLine();          // newline finale
     }
 
+    /// <summary>Stampa un segmento privo di tag, un carattere alla volta.</summary>
     private static void WritePlainSegment(string segment, string rules)
     {
         foreach (char c in segment)
@@ -217,6 +242,7 @@ public static class ConsoleStylingWrite
     /// un dialogo successivo. Ciò permette di ottimizzare la logica del codice e di non dover scrivere una linea di codice per ogni dialogo.
     /// </summary>
     /// <param name="id"></param>
+    /// <param name="player"></param>
     /// <param name="msToWaitForLine"></param>
     /// <param name="liveWriting"></param>
     /// <param name="loadLastDialogue"></param>
@@ -277,9 +303,7 @@ public static class ConsoleStylingWrite
     }
 
 
-    /// <summary>
-    /// Rimpiazza tutti i placeholder con i nomi e con gli oggetti.
-    /// </summary>
+    /// <summary>Sostituisce tutti i placeholder presenti in <paramref name="raw"/>.</summary>
     private static string ReplacePlaceholders(string raw)
     {
         if (string.IsNullOrEmpty(raw))
