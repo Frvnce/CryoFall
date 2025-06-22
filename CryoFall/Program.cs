@@ -397,7 +397,8 @@ class Program
             ReadCmd(cmdManager, player, rm, im);
             if (player.CurrentRoom.Id == "zona_di_scarico")
             {
-                //fine gioco gameover perchè sei tornato li e muori
+                ConsoleStylingWrite.HelperCmd("Oh no... non dovevamo entrare qui ora!");
+                ConsoleStylingWrite.StartDialogue("GameOver", player);
             }
             
             // CORRIDOIO OVEST 3 DOPO ZONA DI SCARICO
