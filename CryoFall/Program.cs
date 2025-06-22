@@ -77,7 +77,7 @@ class Program
             ConsoleStylingWrite.StartDialogue("benvenuto");
             var name = ConsoleStylingWrite.GetPlaceHolders("playerName");
             Logger.Log($"Il giocatore ha scelto il nome: {name}");
-            player = new MainCharacter(name, 30);
+            player = new MainCharacter(name, 15);
             player.CurrentRoom = roomsManager.FindRoom("sala_ibernazione") ?? throw new InvalidOperationException();
             
             // Intro iniziale
