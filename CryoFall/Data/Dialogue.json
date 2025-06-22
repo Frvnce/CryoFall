@@ -1992,6 +1992,15 @@
     "text": "Morto!"
   },
   {
+    "id": "Victory",
+    "room": "intro",
+    "speakerName": "Introduzione",
+    "character": "intro",
+    "next": "victory",
+    "kind": "intro",
+    "text": "Vinto!!"
+  },
+  {
     "id": "finale_no_emettitore_007",
     "room": "zona_di_scarico",
     "speakerName": "Narratore",
@@ -2106,7 +2115,7 @@
     "character": "narrator",
     "kind": "intro",
     "text": "[bold]VITTORIA[/]\nL'umanità sopravviverà... forse.[/]\n[italic]12.833 anime in attesa di un nuovo mondo.[/]",
-    "next": "end"
+    "next": "Victory"
   }
 
 

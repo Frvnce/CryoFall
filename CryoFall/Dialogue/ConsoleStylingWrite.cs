@@ -318,6 +318,7 @@ public static class ConsoleStylingWrite
                 case "inputNameAssistente": AskPlayerPlaceHolders("assistant",current.Text); break;
                 case "pullLever": OpenDoor("zona_carburante_nord",rm); break;
                 case "gameOver": GameOver(); break;
+                case "victory": Victory(); break;
                 default: WriteDialogue(current.Character, current.Kind, current.SpeakerName,current.Text, liveWriting: liveWriting); break;
             }
             
