@@ -74,14 +74,14 @@ class Program
         {
             Logger.Log("Parte il dialogo di benvenuto");
             // dialogo e scelta del nome iniziale
-            ConsoleStylingWrite.StartDialogue("benvenuto", null, null,  msToWaitForLine: 500, false);
+            ConsoleStylingWrite.StartDialogue("benvenuto");
             var name = ConsoleStylingWrite.GetPlaceHolders("playerName");
             Logger.Log($"Il giocatore ha scelto il nome: {name}");
             player = new MainCharacter(name, 30);
             player.CurrentRoom = roomsManager.FindRoom("sala_ibernazione") ?? throw new InvalidOperationException();
             
             // Intro iniziale
-            ConsoleStylingWrite.StartDialogue("introIbernazione", player, msToWaitForLine:10, liveWriting:false);
+            ConsoleStylingWrite.StartDialogue("introIbernazione", player);
         }
 
         // Avvio il CommandManager e il resto del flusso
@@ -168,12 +168,13 @@ class Program
         var m = Regex.Match(ans, @"\bsave\d{2,3}\b", RegexOptions.IgnoreCase);
         var saveFilePath = Path.Combine(AppContext.BaseDirectory, $"saves/{m.Value}.json");
         // Creo un player “vuoto” e poi lo popolo col SaveManager
-        player = new MainCharacter("PlayerTemp", 30);
+        player = new MainCharacter("PlayerTemp", 15);
         
         SaveManager.Load($"{saveFilePath}", player, roomsManager, itemsManager);
         if (player.LastDialogueId != null)
         {
-            ConsoleStylingWrite.StartDialogue(player.LastDialogueId, player, msToWaitForLine:300, liveWriting:false, loadLastDialogue:true);
+            AnsiConsole.MarkupLine("[bold green]Ultimo dialogo avvenuto:[/]");
+            ConsoleStylingWrite.StartDialogue(player.LastDialogueId, player, msToWaitForLine:500, liveWriting:false, loadLastDialogue:true);
         }
         Logger.Log($"Il giocatore ha scelto di caricare il salvataggio: {saveFilePath}");
         return player;

@@ -3,6 +3,7 @@ using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using CryoFall.Character;
 using CryoFall.Commands;
+using CryoFall.Items;
 using CryoFall.Logging;
 using CryoFall.Rooms;
 using Spectre.Console;
@@ -37,23 +38,48 @@ public static class ConsoleStylingWrite
         PlaceHoldersNames = new(dict);
 
     
-    private static readonly Regex PhRegex =
+    /// <summary>
+    /// Espressione regolare per identificare i segnaposto racchiusi tra < e >, 
+    /// es. <playerName>. Cattura il contenuto all'interno del tag con il gruppo "key".
+    /// </summary>
+    private static readonly Regex PhRegex = 
         new(@"<(?<key>[^>]+)>", RegexOptions.Compiled);
-    private static readonly Regex TagRegex =
+
+    /// <summary>
+    /// Espressione regolare per trovare blocchi di testo racchiusi tra tag personalizzati 
+    /// con la sintassi [qualcosa]...[/]. Esempio: [rosso]Testo[/].
+    /// Supporta multilinea.
+    /// </summary>
+    private static readonly Regex TagRegex = 
         new(@"\[[^\]]+\].*?\[\/\]", RegexOptions.Compiled | RegexOptions.Singleline);
-    
+
     //Colori vari personaggi.
     private static readonly string ColorMainCharacter = "#12e6bb bold";
     private static readonly string ColorHelperCharacter = "#05a13b bold";
     private static readonly string ColorEnemyCharacter = "#9e2416 bold";
     private static readonly string ColorNarratorCharacter = "#dedddc bold italic";
-    private static readonly string ColorIntroCharacter = "#dedddc bold";
-    private static readonly string ColorFriendCharacter = "#ffea99 bold italic";
-    private static readonly string ColorMalfunctioningCharacter = "#ff7e42 bold italic";
+    private static readonly string ColorIntroCharacter = "#dedddc bold italic";
+    private static readonly string ColorFriendCharacter = "#ffea99 bold";
+    private static readonly string ColorMalfunctioningCharacter = "#ff7e42 bold";
     
     //Vari testi preSalvati.
     private static readonly string ChooseAnOptionTitle = "[bold #f1f1f1]Scegli un'opzione:[/] ";
 
+    /// <summary>
+    /// Stampa le caratteristiche dell'item passato come parametro.
+    /// </summary>
+    /// <param name="item">Da analizzare</param>
+    public static void AnalyzeItem(Item item)
+    {
+        var nameItem = item.Name;
+        var color = item.Color;
+        var description = item.Description;
+        var weight = item.Weight;
+        
+        HelperCmd("Analizzo l'oggetto...",true);
+        HelperCmd($"[{color}]{nameItem}[/], {description} Pesa {weight}kg!");
+    }
+    
     /// <summary>
     /// Descrive dettagliatamente la stanza corrente (prima visita): descrizione, uscite e oggetti.
     /// </summary>
@@ -139,6 +165,7 @@ public static class ConsoleStylingWrite
             _          => ColorNarratorCharacter
         };
 
+        //Il tipo di dialogo, se è narrativo, allora il testo verrà impostato con lo stile italic, idem per Thought(Pensiero del giocatore)
         var rules = kind switch
         {
             "dialogue" => "",
@@ -157,11 +184,13 @@ public static class ConsoleStylingWrite
         //Stampa il nome indipendentemente se c'è il liveWriting o no.
         AnsiConsole.Markup($"[{color}][[{finalCharName}]][/]: ");
         
+        //Se liveWriting è attivo, stamperà le parole lettera per lettera.
         if (liveWriting)
         {
             LiveWriting(finalDialogue, thought, rules);
             return;
         }
+        //altrimenti le stamperà in modo normale.
         AnsiConsole.Markup($"[{rules}]{thought}{finalDialogue}{thought}[/]\n");
     }
     /// <summary>
@@ -215,24 +244,34 @@ public static class ConsoleStylingWrite
             }
             else
             {
-                // applica lo stile (italic, ecc.) al singolo carattere
+                // applica lo stile (italic, ecc.)
                 AnsiConsole.Markup($"[{rules}]{Markup.Escape(c.ToString())}[/]");
             }
-            Thread.Sleep(20);
+            Thread.Sleep(20); //Tempo tra un carattere e l'altro.
         }
     }
 
 
-
+    /// <summary>
+    /// Chiede al giocatore di rimpiazzare il placeholder con un nome.
+    /// Utilizzato per scegliere il nome del giocatore e il nome dell'assistente.
+    /// </summary>
+    /// <param name="placeHolder"></param>
+    /// <param name="dialogue"></param>
     private static void AskPlayerPlaceHolders(string placeHolder, string dialogue)
     {
         var inputName = AnsiConsole.Ask<string>(dialogue);
         SetPlaceholder(placeHolder,inputName);
     }
 
-    public static string GetPlaceHolders(string name)
+    /// <summary>
+    /// Cerca di ottenere il risultato del PlaceHolder.
+    /// </summary>
+    /// <param name="placeHolder">Il PlaceHolder che contiene la parola che si vuole ottenere</param>
+    /// <returns>Il corrispettivo del placeholder richiesto.</returns>
+    public static string GetPlaceHolders(string placeHolder)
     {
-        var result = PlaceHoldersNames.GetValueOrDefault(name);
+        var result = PlaceHoldersNames.GetValueOrDefault(placeHolder);
         return String.IsNullOrEmpty(result)? "" : result;
     }
     
@@ -241,11 +280,11 @@ public static class ConsoleStylingWrite
     /// All'interno del file json, c'è un campo chiamato "next", serve a far capire alla funzione se c'è o meno
     /// un dialogo successivo. Ciò permette di ottimizzare la logica del codice e di non dover scrivere una linea di codice per ogni dialogo.
     /// </summary>
-    /// <param name="id"></param>
+    /// <param name="id">Id del dialogo</param>
     /// <param name="player"></param>
-    /// <param name="msToWaitForLine"></param>
-    /// <param name="liveWriting"></param>
-    /// <param name="loadLastDialogue"></param>
+    /// <param name="msToWaitForLine">Tempo di attesa tra un dialogo e l'altro, di default 500ms</param>
+    /// <param name="liveWriting">Scegliere se mostrare il dialogo lettera per lettera o no.</param>
+    /// <param name="loadLastDialogue">Scegliere se caricare l'ultimo dialogo quando si carica una partita</param>
     public static void StartDialogue(string id, MainCharacter? player = null, RoomsManager? rm = null, int msToWaitForLine = 500, bool liveWriting = true, bool loadLastDialogue = false)
     {
         if (!RepoDialogue.TryGet(id, out var current))
@@ -295,11 +334,15 @@ public static class ConsoleStylingWrite
         }
     }
 
+    /// <summary>
+    /// Apre la porta tramite la scelta dal dialogo.
+    /// </summary>
+    /// <param name="nameOfTheRoom"></param>
+    /// <param name="rm"></param>
     private static void OpenDoor(string nameOfTheRoom, RoomsManager rm)
     {
         var room = rm.FindRoom(nameOfTheRoom);
         room.IsLocked = false;
-        //fare
     }
 
 
@@ -326,7 +369,7 @@ public static class ConsoleStylingWrite
     /// </summary>
     /// <param name="key"></param>
     /// <param name="value"></param>
-    public static void SetPlaceholder(string key, string value)
+    private static void SetPlaceholder(string key, string value)
     {
         PlaceHoldersNames[key] = value;
     }
@@ -352,7 +395,7 @@ public static class ConsoleStylingWrite
         string selected = AnsiConsole.Prompt(prompt);
 
         // 3. Ricava l’indice dalla lista display
-        int index = display.IndexOf(selected);   // sempre ≥0 perché arriva dal Prompt
+        int index = display.IndexOf(selected);   // sempre >=0 perché arriva dal Prompt
         
         return index;
     }

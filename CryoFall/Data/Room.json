@@ -30,7 +30,9 @@
       "east": "corridoio_ovest_2",
       "west": "sala_ibernazione"
     },
-    "items": [],
+    "items": [
+      "fotografia"
+    ],
     "persons": []
   },
   {
@@ -72,7 +74,9 @@
       "east": null,
       "west": null
     },
-    "items": [],
+    "items": [
+      "estintore_piccolo"
+    ],
     "persons": []
   },
   {
@@ -88,7 +92,8 @@
     },
     "items": [
       "terminale_semi_funzionante",
-      "chiave_magnetica_livello_5"
+      "chiave_magnetica_livello_5",
+      "tuta_da_lavoro"
     ],
     "persons": []
   },
@@ -104,7 +109,10 @@
       "east": "corridoio_sud",
       "west": null
     },
-    "items": [],
+    "items": [
+      "tuta_spaziale_danneggiata",
+      "tuta_spaziale"
+    ],
     "persons": []
   },
   {
@@ -118,7 +126,9 @@
       "east": "zona_di_scarico",
       "west": "zona_carburante_sud"
     },
-    "items": [],
+    "items": [
+      "estintore"
+    ],
     "persons": []
   },
   {

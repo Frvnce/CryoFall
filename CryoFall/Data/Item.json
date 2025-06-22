@@ -16,7 +16,7 @@
     "weight": 0.5,
     "isPickable": true,
     "isUsable": true,
-    "isAnalyzable": false,
+    "isAnalyzable": true,
     "color": "#808080"
   },
   {
@@ -26,17 +26,37 @@
     "weight": 3,
     "isPickable": true,
     "isUsable": false,
-    "isAnalyzable": false,
-    "color": "#808080"
+    "isAnalyzable": true,
+    "color": "#3AA9F2"
   },
   {
     "id": "tuta_spaziale_danneggiata",
     "name": "Tuta Spaziale Danneggiata",
     "itemDescription": "Tuta protettiva con guasti multipli.",
-    "weight": 8,
+    "weight": 7,
     "isPickable": true,
     "isUsable": false,
-    "isAnalyzable": false,
+    "isAnalyzable": true,
+    "color": "#808080"
+  },
+  {
+    "id": "tuta_spaziale",
+    "name": "Tuta Spaziale ",
+    "itemDescription": "Tuta protettiva.",
+    "weight": 10,
+    "isPickable": true,
+    "isUsable": false,
+    "isAnalyzable": true,
+    "color": "#808080"
+  },
+  {
+    "id": "tuta_da_lavoro",
+    "name": "Tuta Da Lavoro",
+    "itemDescription": "Tuta da lavoro utilizzata per manutenzione alle zone di carburante.",
+    "weight": 2,
+    "isPickable": true,
+    "isUsable": false,
+    "isAnalyzable": true,
     "color": "#808080"
   },
   {
@@ -53,11 +73,31 @@
     "id": "estintore",
     "name": "Estintore",
     "itemDescription": "Dispositivo portatile per estinguere fiamme.",
-    "weight": 4,
-    "isPickable": false,
+    "weight": 6,
+    "isPickable": true,
     "isUsable": false,
-    "isAnalyzable": false,
+    "isAnalyzable": true,
     "color": "#808080"
+  },
+  {
+    "id": "estintore_piccolo",
+    "name": "Estintore Piccolo",
+    "itemDescription": "Dispositivo portatile per estinguere fiamme.",
+    "weight": 3,
+    "isPickable": true,
+    "isUsable": false,
+    "isAnalyzable": true,
+    "color": "#808080"
+  },
+  {
+    "id": "fotografia",
+    "name": "Fotografia",
+    "itemDescription": "Una foto che mostra gli ultimi giorni sulla terra.",
+    "weight": 0.2,
+    "isPickable": true,
+    "isUsable": false,
+    "isAnalyzable": true,
+    "color": "#3AA9F2"
   },
   {
     "id": "terminale_semi_funzionante",
@@ -66,7 +106,7 @@
     "weight": 30,
     "isPickable": false,
     "isUsable": true,
-    "isAnalyzable": false,
+    "isAnalyzable": true,
     "color": "#808080"
   },
   {
@@ -76,8 +116,8 @@
     "weight": 0.5,
     "isPickable": true,
     "isUsable": true,
-    "isAnalyzable": false,
-    "color": "#808080"
+    "isAnalyzable": true,
+    "color": "#A347BA"
   },
   {
     "id": "mano_ax_7",
@@ -86,8 +126,8 @@
     "weight": 3,
     "isPickable": true,
     "isUsable": true,
-    "isAnalyzable": false,
-    "color": "#808080"
+    "isAnalyzable": true,
+    "color": "#FFA500"
   },
   {
     "id": "frammento_tessuto_blu",
@@ -96,7 +136,7 @@
     "weight": 0.1,
     "isPickable": true,
     "isUsable": false,
-    "isAnalyzable": false,
+    "isAnalyzable": true,
     "color": "#808080"
   },
   {
@@ -106,8 +146,8 @@
     "weight": 2,
     "isPickable": true,
     "isUsable": true,
-    "isAnalyzable": false,
-    "color": "#808080"
+    "isAnalyzable": true,
+    "color": "#E03C31"
   },
   {
     "id": "terminale_di_sistema",
@@ -126,8 +166,8 @@
     "weight": 0.5,
     "isPickable": true,
     "isUsable": true,
-    "isAnalyzable": false,
-    "color": "#808080"
+    "isAnalyzable": true,
+    "color": "#E03C31"
   },
   {
     "id": "emettitore_di_energia",
@@ -136,8 +176,8 @@
     "weight": 4,
     "isPickable": true,
     "isUsable": false,
-    "isAnalyzable": false,
-    "color": "#808080"
+    "isAnalyzable": true,
+    "color": "#E03C31"
   },
   {
     "id": "event",
@@ -156,17 +196,17 @@
     "weight": 0.5,
     "isPickable": true,
     "isUsable": true,
-    "isAnalyzable": false,
+    "isAnalyzable": true,
     "color": "#808080"
   },
   {
     "id": "foto",
     "name": "foto",
     "itemDescription": "Una fotografia di Emily, la figlia di Lena.",
-    "weight": 1,
+    "weight": 0.1,
     "isPickable": true,
     "isUsable": false,
-    "isAnalyzable": false,
-    "color": "#808080"
+    "isAnalyzable": true,
+    "color": "#A347BA"
   }
 ]

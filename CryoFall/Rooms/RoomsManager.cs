@@ -69,6 +69,12 @@ namespace CryoFall.Rooms
             return room;
         }
 
+        /// <summary>
+        /// Aggiunge gli item nella stanza.
+        /// </summary>
+        /// <param name="room"></param>
+        /// <param name="manager"></param>
+        /// <returns></returns>
         public Room AddItemsInRoom(Room room, ItemsManager manager)
         {
             foreach (var item in room.ItemsString)

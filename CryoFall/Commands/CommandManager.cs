@@ -38,7 +38,7 @@ public class CommandManager
             args[1] = args[1].ToLower();
         }
         
-        switch (args[0].ToLower())
+        switch (args[0].ToLower()) //Switch per tutti i comandi presenti nel gioco, alcuni di essi hanno alias.
         {
             case "prendi":
                 if (args.Length != 2) return ErrorCmd();
@@ -68,33 +68,34 @@ public class CommandManager
                 if (args.Length != 2) return ErrorCmd();
                 return UseObject(args[1],player,roomsManager,itemsManager);
             case "salva":
-            {
                 SaveGame(player,roomsManager,itemsManager);
                 return true;
-            }
             case "carica":
-            {
                 if(args.Length != 2) return ErrorCmd();
                 return LoadGame(player, roomsManager, itemsManager, args[1]);
-            }
 
-            default: return ErrorCmd();
+            default: return ErrorCmd(); //Se il comando inviato non compare qui, da errore e dice al giocatore che ha sbagliato e che dovrebbe fare "help"
         }
     }
+    
     /// <summary>
     /// Carica un salvataggio dal percorso ‹saves/&lt;savePath&gt;.json›.
     /// </summary>
     bool LoadGame(MainCharacter player, RoomsManager roomsManager, ItemsManager itemsManager, string savePath)
     {
+        //Otteniamo il path dove sono salvati i files.
         var path = Path.Combine(AppContext.BaseDirectory, "saves", $"{savePath}.json");
+        //Se la cartella non esiste, allora errore
         if (!File.Exists(path)) return ErrorCmd("FileNotFound");
+        //chiamiamo la funzione Load e carichiamo tutti i dati.
         SaveManager.Load(path, player, roomsManager, itemsManager);
         ConsoleStylingWrite.HelperCmd("Partita caricata da " + path);
         Thread.Sleep(1000);
-        AnsiConsole.Clear();
+        AnsiConsole.Clear(); //Liberiamo la console così da pulire la vecchia partita.
         Logger.Log($"Partita caricata da {path}");
         return true;
     }
+    
     /// <summary>
     /// Genera un nuovo file «saveXX.json» incrementale e salva lo stato attuale.
     /// </summary>
@@ -105,7 +106,7 @@ public class CommandManager
         Directory.CreateDirectory(savesDir);
 
         // 2. Trova il prossimo indice libero -----------------------------------
-        //    Cerca tutti i file "save*.json", estrae il numero e calcola max+1
+        //    Cerca tutti i file "save**.json", estrae il numero e calcola max+1
         int nextIndex = 1;
 
         var files = Directory.GetFiles(savesDir, "save*.json");
@@ -120,8 +121,8 @@ public class CommandManager
         }
 
         // 3. Formatta l’indice con due cifre (01, 02, … 99) --------------------
-        string fileName = $"save{nextIndex:00}.json";   // usa :000 se vuoi 3 cifre
-        string path     = Path.Combine(savesDir, fileName);
+        string fileName = $"save{nextIndex:00}.json"; //Se vogliamo si può impostare 000, se vogliamo più salvataggi (001-999)
+        string path = Path.Combine(savesDir, fileName);
 
         // 4. Salva e avvisa l’utente -------------------------------------------
         SaveManager.Save(path, player, roomsManager, itemsManager);
@@ -131,8 +132,8 @@ public class CommandManager
     
     /// <summary>
     /// Fa un lavoro dove imposta il secondo argomento unendo tutti gli argomenti dopo il primo.
-    /// In modo tale, il player può scrivere "analizza Sala Ibernazione" e il risultato sarà
-    /// "analizza salaibernazione", in modo tale da trovare la stanza.
+    /// In modo tale, il player può scrivere "analizza ChiaveMagnetica Livello 5" e il risultato sarà
+    /// "analizza chiavemagneticalivello5", in modo tale da trovare l'oggetto.
     /// </summary>
     /// <param name="args">Il cmd splittato.</param>
     /// <returns></returns>
@@ -146,6 +147,7 @@ public class CommandManager
         }
         return newArgs;
     }
+    
     /// <summary>
     /// Prova a utilizzare l'oggetto in cima all'inventario per aprire una porta in <paramref name="direction"/>.
     /// </summary>
@@ -189,7 +191,8 @@ public class CommandManager
         Logger.Log($"Il giocatore sta utilizzando {p.Inventory.GetFirstItem().Name} su {finalDestination.NameOfTheRoom}");
         return true;
     }
-    /// <summary>Mostra l'inventario con capacità e descrizioni.</summary>
+    
+    /// <summary>Mostra l'inventario con capacità, items e descrizioni.</summary>
     private bool VisualizeInventory(MainCharacter p)
     {  
         ConsoleStylingWrite.HelperCmd($"Ecco il tuo inventario: Capacità: [#22ff00]{p.Inventory.CurrentLoad}[/]/[#22ff00]{p.Inventory.MaxCapacity}[/] kg");
@@ -201,6 +204,7 @@ public class CommandManager
         Logger.Log("Il giocatore sta visualizzando il suo inventario");
         return true;
     }
+    
     /// <summary>
     /// Lascia l'oggetto in cima all'inventario nella stanza corrente.
     /// </summary>
@@ -210,6 +214,11 @@ public class CommandManager
         return pl.Inventory.DropTop(pl.CurrentRoom);;
     }
 
+    /// <summary>
+    /// Restituisce una lista di stanze che sono disponibili per il teletrasporto casuale.
+    /// </summary>
+    /// <param name="rm"></param>
+    /// <returns></returns>
     List<Room> GetListRooms(RoomsManager rm)
     {
         List<Room> rooms = new List<Room>();
@@ -254,6 +263,8 @@ public class CommandManager
     private bool Move(string destination, MainCharacter p, RoomsManager rm, ItemsManager im)
     {
         Room finalDestination;
+        //In base alla direzione data dal giocatore, i 4 punti cardinali, allora analizziamo se la stanza esiste e se è bloccata o meno, fornendo
+        // al giocatore una mano, dicendo l'oggetto che serve per sbloccare la porta.
         switch (destination.ToLower())
         {
             case "nord":
@@ -293,7 +304,8 @@ public class CommandManager
     }
 
     /// <summary>
-    ///  Verifica se il comando è valido e può essere eseguito.
+    ///  Verifica se il comando è valido, se lo è:
+    /// Stampa tutti i comandi utilizzabili dal giocatore.
     /// </summary>
     /// <returns>
     /// <c>True</c> se il comando è valido ed è stato eseguito correttamente;
@@ -305,13 +317,15 @@ public class CommandManager
         Console.WriteLine();
         foreach (var cmd in CommandsRepository.ById.Values)
         {
-            //ConsoleStylingWrite.WriteCmdHelp(cmd);
+            
             if (cmd.Id != "tp")
             {
+                //stampa tutti i comandi.
                 AnsiConsole.MarkupLine($"   [bold #1fc459][[{cmd.Cmd}]][/]: {cmd.Description}");
                 continue;
             }
-            if(cmd.Id == "tp" && p.Inventory.Items.Contains(im.FindItem("dispositivo_teletrasporto")))
+            //se è il comando TP e il giocatore ha il dispositivo di teletrasporto, ALLORA stampa anche quel comando.
+            if(cmd.Id == "tp" && p.Inventory.Items.Contains(im.FindItem("dispositivo_di_teletrasporto")))
                 AnsiConsole.MarkupLine($"   [bold #1fc459][[{cmd.Cmd}]][/]: {cmd.Description}");
         }
         Logger.Log("Il giocatore ha scritto il comando HELP e sta visualizzando i comandi");
@@ -319,38 +333,84 @@ public class CommandManager
         return true;
     }
 
+    /// <summary>
+    /// Analizza l'item, mostrando nome, descrizione e peso dell'oggetto.
+    /// </summary>
+    /// <param name="item">id dell'item</param>
+    /// <param name="p"></param>
+    /// <param name="im"></param>
+    /// <returns></returns>
     private bool AnalyzeItem(string item, MainCharacter p, ItemsManager im)
     {
+        var itemToAnalyze = im.FindItem(item); //cerca l'item nella lista di tutti gli items in gioco.
+        //se l'item è null, allora riporta errore
+        if (itemToAnalyze == null) return ErrorCmd("itemDoesNotExist");
+        //se l'item non è nell'inventario, allora da errore.
+        if (!p.Inventory.Items.Contains(itemToAnalyze)) return ErrorCmd("itemNotInInventory");
+        //se l'item non è analizzabile, allora da errrore
+        if (!itemToAnalyze.IsAnalyzable) return ErrorCmd("itemIsNotAnalyzable");
+        
+        //Stampa le varie info dell'item.
+        ConsoleStylingWrite.AnalyzeItem(itemToAnalyze);
+            
         return false;
     }
 
+    /// <summary>
+    /// Analizza la stanza per intero, mostrando descrizione e item al suo interno.
+    /// </summary>
+    /// <param name="player"></param>
+    /// <param name="rm"></param>
+    /// <returns></returns>
     private bool AnalyzeRoom(MainCharacter player,RoomsManager rm)
     {
-        var roomToAnalyze = rm.FindRoom(player.CurrentRoom.Id);
+        var roomToAnalyze = rm.FindRoom(player.CurrentRoom.Id); //Cerca la stanza
+        //se è null, allora errore
         if (roomToAnalyze == null) return ErrorCmd("argsError");
+        //se la stanza non è la stessa del giocatore, allora riporta errore.
         if(roomToAnalyze.Id.Replace("_","") != player.CurrentRoom.Id.Replace("_","")) return ErrorCmd("notInThisRoom");
-
+        
+        //da la descrizione del giocatore.
         ConsoleStylingWrite.AnalyzeRoom(roomToAnalyze);
         Logger.Log($"Il giocatore sta analizzando la stanza: NAME: {roomToAnalyze.NameOfTheRoom} ID: {roomToAnalyze.Id}");
         return true;
     }
     
+    /// <summary>
+    /// Analizza la stanza mostrando solo il nome, senza la descrizione
+    /// Utile al giocatore quando esplora una stanza già visitata in precedenza.
+    /// </summary>
+    /// <param name="room"></param>
+    /// <param name="player"></param>
+    /// <param name="rm"></param>
+    /// <returns></returns>
     private bool AnalyzeRoomVisited(string room,MainCharacter player,RoomsManager rm)
     {
-        var roomToAnalyze = rm.FindRoom(room);
+        var roomToAnalyze = rm.FindRoom(room); //Cerca la stanza
+        //se è null, allora errore
         if (roomToAnalyze == null) return ErrorCmd("argsError");
+        //se la stanza non è la stessa del giocatore, allora riporta errore.
         if(roomToAnalyze.Id.Replace("_","") != player.CurrentRoom.Id.Replace("_","")) return ErrorCmd("notInThisRoom");
 
+        //da la descrizione del giocatore.
         ConsoleStylingWrite.AnalyzeRoomVisited(roomToAnalyze);
         Logger.Log($"Il giocatore sta analizzando la stanza: NAME: {roomToAnalyze.NameOfTheRoom} ID: {roomToAnalyze.Id}");
         return true;
     }
 
+    /// <summary>
+    /// Prova a prendere un item dalla stanza.
+    /// </summary>
+    /// <param name="item">ID dell'item</param>
+    /// <param name="player">Classe player</param>
+    /// <param name="rm"></param>
+    /// <param name="im"></param>
+    /// <returns></returns>
     private bool TryPickUpItem(string item, MainCharacter player, RoomsManager rm, ItemsManager im)
     {
-        var itemObject = im.FindItem(item);
+        var itemObject = im.FindItem(item); //Cerca l'item grazie all'ItemsManager.
         // se esiste l'item
-        if(itemObject==null)return ErrorCmd("itemNotFound");
+        if(itemObject==null)return ErrorCmd("itemNotFound"); 
         //se l'item è nella stanza
         if(!player.CurrentRoom.GetItems().Contains(itemObject))return ErrorCmd("itemNotInRoom");
         //se l'oggetto è raccoglibile
@@ -403,7 +463,7 @@ public class CommandManager
                 AnsiConsole.MarkupLine("[bold italic]L'oggetto pesa troppo per il tuo inventario, prova a svuotarti per raccogliere l'oggetto![/]");
                 return false;
             case "roomDoesNotExist":
-                AnsiConsole.MarkupLine("[bold italic #ff4400]La stanza che stai cercando non esiste[/]");
+                AnsiConsole.MarkupLine("[bold italic #ff4400]Non c'è nessuna stanza li![/]");
                 return false;
             case "destinationError":
                 AnsiConsole.MarkupLine("[bold italic #ff4400]Destinazione errata, ricorda, puoi scrivere solo: (Nord|Sud|Est|Ovest)[/]");
@@ -426,6 +486,15 @@ public class CommandManager
                 return false;
             case "itemNotUsable":
                 AnsiConsole.MarkupLine("[bold italic #ff4400]L'oggetto non sembra avere uno scopo chiaro[/]");
+                return false;
+            case "itemDoesNotExist":
+                AnsiConsole.MarkupLine($"[bold italic #ff4400]L'oggetto non esiste![/]");
+                return false;
+            case "itemNotInInventory":
+                AnsiConsole.MarkupLine($"[bold italic]L'oggetto non è nel tuo inventario.[/]");
+                return false;
+            case "itemIsNotAnalyzable":
+                AnsiConsole.MarkupLine($"[bold italic]L'oggetto non è analizzabile.[/]");
                 return false;
         }
     }
