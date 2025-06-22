@@ -303,6 +303,11 @@ class Program
                 ConsoleStylingWrite.StartDialogue("atto1_001", player);
             }
 
+            if (player.Inventory.Items.Contains(im.FindItem("mappa_olografica")) && player.ActivetedEvents.Add("mappaTrovata"))
+            {
+                ConsoleStylingWrite.HelperCmd("Wow, sembra essere la mappa della nave, prova ad usarla. [italic #808080](Digita [bold]mappa[/][/]");
+            }
+
             // CORRIDOIO OVEST 2 (dopo stanza_tecnica)
             if (player.CurrentRoom.Id == "corridoio_ovest_2"
                 && player.VisitedRoomIds.Contains("stanza_tecnica")
@@ -331,7 +336,7 @@ class Program
                 !player.VisitedRoomIds.Contains("zona_di_scarico"))
             {
                 ConsoleStylingWrite.StartDialogue("assistente_014", player);
-                EscapeFromRobotScene(cmdManager, player, rm, im);
+                GameplayAtto_02(cmdManager, player, rm, im);
                 gameplay = true;
             }
             //IF sempre finale.
@@ -345,7 +350,7 @@ class Program
     /// Minigioco di fuga: il player deve raccogliere prima la mano del robot AX‑7 e poi il dispositivo di teletrasporto, quindi usare il teletrasporto.  Tutte le istruzioni vengono forzate con
     /// <see cref="ReadCmdTutorial"/>.
     /// </summary>
-    static void EscapeFromRobotScene(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
+    static void GameplayAtto_02(CommandManager cmdManager, MainCharacter player, RoomsManager rm, ItemsManager im)
     {
         var robotHand = im.FindItem("mano_ax_7");
         var teleportDevice = im.FindItem("dispositivo_di_teletrasporto");

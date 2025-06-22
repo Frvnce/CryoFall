@@ -63,10 +63,10 @@
     "id": "mappa_olografica",
     "name": "Mappa Olografica",
     "itemDescription": "Proiezione tridimensionale delle mappe del complesso.",
-    "weight": 1,
+    "weight": 2,
     "isPickable": true,
     "isUsable": true,
-    "isAnalyzable": false,
+    "isAnalyzable": true,
     "color": "#808080"
   },
   {

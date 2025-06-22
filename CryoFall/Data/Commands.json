@@ -63,5 +63,11 @@
     "name": "Prendi oggetto",
     "cmd_description": "Prendi un oggetto presente nella stanza",
     "cmd": "prendi <oggetto>"
+  },
+  {
+    "id": "map",
+    "name": "Apri la mappa",
+    "cmd_description": "Visualizza la mappa tridimensionale della nave su cui ti trovi.",
+    "cmd": "mappa"
   }
 ]

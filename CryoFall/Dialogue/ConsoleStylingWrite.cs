@@ -79,7 +79,13 @@ public static class ConsoleStylingWrite
         HelperCmd("Analizzo l'oggetto...",true);
         HelperCmd($"[{color}]{nameItem}[/], {description} Pesa {weight}kg!");
     }
-    
+
+    public static void VisualizeMap(MainCharacter p)
+    {
+        HelperCmd("Ecco la mappa: ");
+        AnsiConsole.WriteLine("                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄                                             \n                █                █          ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄                    \n                █Carburante NORD █          █             █       ▄▄▄▄▄▄▄▄▄▄▄▄▄\n                ██████████████▀▀▀█          █             █       █           █\n                             █   █▄▄▄▄▄▄▄▄▄▄█     Sala    █▄▄▄▄▄▄▄█           █\n                      Ovest 3█   ║   Nord   ║    Comune   ║  Est  ║   Zona    █\n                      ▄▄▄▄▄▄▄█   ████████████             █████████ Controllo █\n                      █Infer █   █          █             █       █           █\n                      █meria █   █          ██████═══██████       █           █\n▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄      █      █   █▀▀▀▀▀▀▀▀█      █   █            █           █\n█              █▄▄▄▄▄▄█▄▄══▄▄█═══█        █      █   █            █████████████\n█Sala          ║Ovest 1 │ Ovest 2║ Stanza █      █   █Centrale                 \n█Ibernazione   ████████▀▀══▀▀█═══█ Tecnica█      █   █                         \n████████████████      █Arm   █   ██████████ █▀▀▀▀▀═══▀▀▀▀█                     \n                      █eria  █   █          █            █                     \n                      █      █   █          █            █                     \n                      ████████   █          █    Zona    █                     \n                             █   █          █     Di     █                     \n                      Ovest 4█   █          █   Scarico  █                     \n                ▄▄▄▄▄▄▄▄▄▄▄▄▄█▄▄▄█          █            █                     \n                █Carburante SUD  █▄▄▄▄▄▄▄▄▄▄█            █                     \n                █                ║    Sud   ║            █                     \n                ██████████████████████████████████████████                     ");
+        HelperCmd($"Credo che ci troviamo in [bold]{p.CurrentRoom.NameOfTheRoom}[/]...");
+    }
     /// <summary>
     /// Descrive dettagliatamente la stanza corrente (prima visita): descrizione, uscite e oggetti.
     /// </summary>

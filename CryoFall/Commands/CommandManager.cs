@@ -73,9 +73,18 @@ public class CommandManager
             case "carica":
                 if(args.Length != 2) return ErrorCmd();
                 return LoadGame(player, roomsManager, itemsManager, args[1]);
+            case "mappa":
+                return VisualizeMap(player,itemsManager);
 
             default: return ErrorCmd(); //Se il comando inviato non compare qui, da errore e dice al giocatore che ha sbagliato e che dovrebbe fare "help"
         }
+    }
+
+    bool VisualizeMap(MainCharacter player, ItemsManager im)
+    {
+        if (!player.Inventory.Items.Contains(im.FindItem("mappa_olografica"))) return ErrorCmd("mapNotFound");
+        ConsoleStylingWrite.VisualizeMap(player);
+        return true;
     }
     
     /// <summary>
@@ -495,6 +504,9 @@ public class CommandManager
                 return false;
             case "itemIsNotAnalyzable":
                 AnsiConsole.MarkupLine($"[bold italic]L'oggetto non è analizzabile.[/]");
+                return false;
+            case "mapNotFound":
+                AnsiConsole.MarkupLine($"[bold italic #ff4400]Non hai la mappa![/]");
                 return false;
         }
     }
