@@ -350,6 +350,16 @@ public static class ConsoleStylingWrite
         Environment.Exit(0);
     }
 
+    private static void Victory()
+    {
+        AnsiConsole.WriteLine(
+            "__     _____ _____ _____ ___  ____  ___    _    _ \n\\ \\   / /_ _|_   _|_   _/ _ \\|  _ \\|_ _|  / \\  | |\n \\ \\ / / | |  | |   | || | | | |_) || |  / _ \\ | |\n  \\ V /  | |  | |   | || |_| |  _ < | | / ___ \\|_|\n   \\_/  |___| |_|   |_| \\___/|_| \\_\\___/_/   \\_(_)");
+        AnsiConsole.WriteLine();
+        AnsiConsole.MarkupLine("[yellow]Premi un tasto per uscire...[/]");
+        Console.ReadKey(intercept: true); // aspetta che il giocatore premi un tasto.
+        Environment.Exit(0);
+    }
+
     /// <summary>
     /// Apre la porta tramite la scelta dal dialogo.
     /// </summary>
