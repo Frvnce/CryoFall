@@ -1,4 +1,5 @@
 ﻿using CryoFall.Items;
+using CryoFall.Logging;
 using CryoFall.Rooms;
 using Spectre.Console;
 
@@ -52,6 +53,7 @@ namespace CryoFall.Character
             _stack.RemoveAt(0);
             room.AddItem(top);
             AnsiConsole.MarkupLine($" [italic]Hai depositato in {room.NameOfTheRoom} l'oggetto [{top.Color}]{top.Name}[/][/].");
+            Logger.Log($"Il giocatore ha tolto un oggetto dall'inventario e lo ha messo in {room.NameOfTheRoom}, l'oggetto è: {top.Name}");
             return true;
         }
 

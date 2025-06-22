@@ -7,18 +7,19 @@ using CryoFall.SaveSystem;
 using Spectre.Console;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using CryoFall.Logging;
 
 namespace CryoFall;
 
 class Program
 {
     private static void Main(string[] args)
-    {
-        //TODO Dare la scelta iniziale al giocatore se far partire una partita da zero o se caricare un salvataggio (solo se c'è già).
-
+    {   
+        Logger.InitNewLog();
         #region BENVENUTO NEL GIOCO
 
         WelcomeToCryoFall();
+        Logger.Log("Gioco avviato");
 
         #endregion
         
@@ -59,20 +60,22 @@ class Program
         var loaded = false;
         if (saveDirPath.Length>0)
         {
+            Logger.Log("File di salvataggio trovati.");
             player = LoadSave(player, roomsManager,itemsManager,savesDir);
             if(player != null!) loaded = true;
-            
         }
 
         // se non ho caricato, avvio il nuovo gioco
         if (!loaded)
         {
+            Logger.Log("Parte il dialogo di benvenuto");
             // dialogo e scelta del nome iniziale
             ConsoleStylingWrite.StartDialogue("benvenuto", null, null,  msToWaitForLine: 500, false);
             var name = ConsoleStylingWrite.GetPlaceHolders("playerName");
+            Logger.Log($"Il giocatore ha scelto il nome: {name}");
             player = new MainCharacter(name, 30);
             player.CurrentRoom = roomsManager.FindRoom("sala_ibernazione") ?? throw new InvalidOperationException();
-
+            
             // Intro iniziale
             ConsoleStylingWrite.StartDialogue("introIbernazione", player, msToWaitForLine:10, liveWriting:false);
         }
@@ -81,30 +84,35 @@ class Program
         var cmdManager = new CommandManager();
         if (!player.HasCompletedTutorial)
         {
+            Logger.Log("Il giocatore inizia il tutorial");
             Tutorial(cmdManager, player, roomsManager, itemsManager);
             player.HasCompletedTutorial = true;
         }
 
         if (!player.ActivetedEvents.Contains("atto1"))
         {
+            Logger.Log("Il giocatore si trova nell'atto1");
             GameplayAtto_01(cmdManager, player, roomsManager, itemsManager);
             player.ActivetedEvents.Add("atto1");
         }
 
         if (!player.ActivetedEvents.Contains("atto3"))
         {
+            Logger.Log("Il giocatore si trova nell'atto 3");
             GameplayAtto_03(cmdManager, player, roomsManager, itemsManager);
             player.ActivetedEvents.Add("atto3");
         }
 
         if (!player.ActivetedEvents.Contains("atto4"))
         {
+            Logger.Log("Il giocatore si trova nell'atto 4");
             GameplayAtto_04(cmdManager, player, roomsManager, itemsManager);
             player.ActivetedEvents.Add("atto4");
         }
 
         if (!player.ActivetedEvents.Contains("attoFinal"))
         {
+            Logger.Log("Il giocatore si trova nell'atto 4");
             GameplayAtto_05(cmdManager, player, roomsManager, itemsManager);
             player.ActivetedEvents.Add("attoFinal");
         }
@@ -138,7 +146,12 @@ class Program
                 .Title("Trovato [bold green]salvataggio[/]! Vuoi [bold green]caricare[/] la partita?")
                 .AddChoices(saves));
         
-        if (ans.Contains("No")) return null!;
+        Logger.Log("Giocatore sceglie se caricare un salvataggio o no.");
+        if (ans.Contains("No"))
+        {
+            Logger.Log("Il giocatore ha scelto di non caricare il salvataggio.");
+            return null!;
+        }
         // ottiene il file che ha selezionato.
         var m = Regex.Match(ans, @"\bsave\d{2,3}\b", RegexOptions.IgnoreCase);
         var saveFilePath = Path.Combine(AppContext.BaseDirectory, $"saves/{m.Value}.json");
@@ -150,7 +163,7 @@ class Program
         {
             ConsoleStylingWrite.StartDialogue(player.LastDialogueId, player, msToWaitForLine:300, liveWriting:false, loadLastDialogue:true);
         }
-            
+        Logger.Log($"Il giocatore ha scelto di caricare il salvataggio: {saveFilePath}");
         return player;
     }
 

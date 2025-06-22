@@ -1,6 +1,7 @@
 ﻿using CryoFall.Character;
 using CryoFall.Dialogue;
 using CryoFall.Items;
+using CryoFall.Logging;
 using CryoFall.Rooms;
 using CryoFall.SaveSystem;
 using Spectre.Console;
@@ -79,6 +80,7 @@ public class CommandManager
         ConsoleStylingWrite.HelperCmd("Partita caricata da " + path);
         Thread.Sleep(1000);
         AnsiConsole.Clear();
+        Logger.Log($"Partita caricata da {path}");
         return true;
     }
     
@@ -110,6 +112,7 @@ public class CommandManager
         // 4. Salva e avvisa l’utente -------------------------------------------
         SaveManager.Save(path, player, roomsManager, itemsManager);
         ConsoleStylingWrite.HelperCmd($"Partita salvata in {path}");
+        Logger.Log($"Partita salvata in {path}");
     }
     
     /// <summary>
@@ -167,6 +170,7 @@ public class CommandManager
             p.Inventory.GetFirstItem().IsUsable = false;
             ConsoleStylingWrite.HelperCmd($"Oh cavolo... credo che [{p.Inventory.GetFirstItem().Color}]{p.Inventory.GetFirstItem().Name}[/] si sia smagnetizzata... Penso che ora sia inutile.");
         }
+        Logger.Log($"Il giocatore sta utilizzando {p.Inventory.GetFirstItem().Name} su {finalDestination.NameOfTheRoom}");
         return true;
     }
     
@@ -178,7 +182,7 @@ public class CommandManager
             AnsiConsole.MarkupLine($"   [{item.Color}]{item.Name}[/]: {item.Description}");
         }
         ConsoleStylingWrite.HelperCmd($"Ricorda, puoi utilizzare solo l'oggetto che hai in cima alla lista!");
-
+        Logger.Log("Il giocatore sta visualizzando il suo inventario");
         return true;
     }
 
@@ -218,6 +222,7 @@ public class CommandManager
         if (room == null) return ErrorCmd("teleportNotWorking"); 
         p.CurrentRoom = room;
         
+        Logger.Log($"Il giocatore si è teletrasportato nella stanza: Name: {room.NameOfTheRoom} ID: {room.Id}");
         if (!p.VisitedRoomIds.Contains(p.CurrentRoom.Id))
         {
             return AnalyzeRoom(p,rm);
@@ -257,7 +262,7 @@ public class CommandManager
         ConsoleStylingWrite.HelperCmd("Ok andiamo!");
         Thread.Sleep(500);
         
-        
+        Logger.Log($"Il giocatore si è spostato nella stanza: NAME: {finalDestination.NameOfTheRoom} ID: {finalDestination.Id}");
         if (!p.VisitedRoomIds.Contains(p.CurrentRoom.Id))
         {
             return AnalyzeRoom(p,rm);
@@ -288,6 +293,7 @@ public class CommandManager
             if(cmd.Id == "tp" && p.Inventory.Items.Contains(im.FindItem("dispositivo_teletrasporto")))
                 AnsiConsole.MarkupLine($"   [bold #1fc459][[{cmd.Cmd}]][/]: {cmd.Description}");
         }
+        Logger.Log("Il giocatore ha scritto il comando HELP e sta visualizzando i comandi");
         Console.WriteLine();
         return true;
     }
@@ -304,7 +310,7 @@ public class CommandManager
         if(roomToAnalyze.Id.Replace("_","") != player.CurrentRoom.Id.Replace("_","")) return ErrorCmd("notInThisRoom");
 
         ConsoleStylingWrite.AnalyzeRoom(roomToAnalyze);
-        
+        Logger.Log($"Il giocatore sta analizzando la stanza: NAME: {roomToAnalyze.NameOfTheRoom} ID: {roomToAnalyze.Id}");
         return true;
     }
     
@@ -315,7 +321,7 @@ public class CommandManager
         if(roomToAnalyze.Id.Replace("_","") != player.CurrentRoom.Id.Replace("_","")) return ErrorCmd("notInThisRoom");
 
         ConsoleStylingWrite.AnalyzeRoomVisited(roomToAnalyze);
-        
+        Logger.Log($"Il giocatore sta analizzando la stanza: NAME: {roomToAnalyze.NameOfTheRoom} ID: {roomToAnalyze.Id}");
         return true;
     }
 
@@ -332,7 +338,7 @@ public class CommandManager
         if(player.Inventory.CurrentLoad + itemObject.Weight > player.Inventory.MaxCapacity)return ErrorCmd("inventoryFull"); 
         //prova ad aggiungere l'item nell'inventario del giocatore
         if (!player.Inventory.TryAdd(player.CurrentRoom.TakeItem(item))) return ErrorCmd("failItemAddToInventory");
-        
+        Logger.Log($"Il giocatore sta raccogliendo l'oggetto: NOME: {itemObject.Description} ID: {itemObject.Id}");
         AnsiConsole.MarkupLine($"   [italic][bold {itemObject.Color}]{itemObject.Name}[/] aggiunto correttamente al tuo inventario![/]");
         return true;
     }
@@ -346,6 +352,7 @@ public class CommandManager
     /// <returns></returns>
     private bool ErrorCmd(string typeError = "cmdError", Item? item = null)
     {
+        Logger.Log($"Errore: {typeError} nella funzione ErrorCmd");
         switch (typeError)
         {
             case "cmdError": 

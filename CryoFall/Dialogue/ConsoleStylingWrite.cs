@@ -3,6 +3,7 @@ using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using CryoFall.Character;
 using CryoFall.Commands;
+using CryoFall.Logging;
 using CryoFall.Rooms;
 using Spectre.Console;
 namespace CryoFall.Dialogue;
@@ -239,6 +240,7 @@ public static class ConsoleStylingWrite
         
         while (current is not null) //se il current.next non è null, allora continua a ciclare stampando i messaggi.
         {
+            Logger.Log($"Parte un dialogo: {current.Id}, {ReplacePlaceholders(current.SpeakerName)}.");
             switch (current.Action)
             {
                 case "inputName": AskPlayerPlaceHolders("playerName",current.Text); break;
