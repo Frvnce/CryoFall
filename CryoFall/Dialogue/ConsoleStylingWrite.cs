@@ -218,7 +218,8 @@ public static class ConsoleStylingWrite
     /// <param name="id"></param>
     /// <param name="msToWaitForLine"></param>
     /// <param name="liveWriting"></param>
-    public static void StartDialogue(string id, MainCharacter? player = null, int msToWaitForLine = 500, bool liveWriting = true)
+    /// <param name="loadLastDialogue"></param>
+    public static void StartDialogue(string id, MainCharacter? player = null, RoomsManager? rm = null, int msToWaitForLine = 500, bool liveWriting = true, bool loadLastDialogue = false)
     {
         if (!RepoDialogue.TryGet(id, out var current))
         {
@@ -230,13 +231,19 @@ public static class ConsoleStylingWrite
             player.LastDialogueId = id;
         }
 
+        // Fa partire l'ultimo dialogo SOLO se il player è in quella stanza
+        /*if (loadLastDialogue)
+        {
+            if (!current.Room.Equals(player.CurrentRoom.Id)) return;
+        }*/
+        
         while (current is not null) //se il current.next non è null, allora continua a ciclare stampando i messaggi.
         {
             switch (current.Action)
             {
                 case "inputName": AskPlayerPlaceHolders("playerName",current.Text); break;
                 case "inputNameAssistente": AskPlayerPlaceHolders("assistant",current.Text); break;
-                case "pullLever": OpenDoor("zona_carburante_nord"); break;
+                case "pullLever": OpenDoor("zona_carburante_nord",rm); break;
                 default: WriteDialogue(current.Character, current.Kind, current.SpeakerName,current.Text, liveWriting: liveWriting); break;
             }
             
@@ -260,8 +267,10 @@ public static class ConsoleStylingWrite
         }
     }
 
-    public static void OpenDoor(string roomId)
+    private static void OpenDoor(string nameOfTheRoom, RoomsManager rm)
     {
+        var room = rm.FindRoom(nameOfTheRoom);
+        room.IsLocked = false;
         //fare
     }
 

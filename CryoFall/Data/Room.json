@@ -213,7 +213,7 @@
       "west": "corridoio_est"
     },
     "items": [
-      "terminale_sistema",
+      "terminale_di_sistema",
       "chiave_magnetica_livello_10"
     ],
     "persons": []

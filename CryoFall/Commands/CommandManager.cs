@@ -37,7 +37,7 @@ public class CommandManager
             case "teletrasporta":
             case "teletrasporto":
             case "tp":
-                if (player.Inventory.Items.Contains(itemsManager.FindItem("dispositivo_teletrasporto"))) return false;
+                if (!player.Inventory.Items.Contains(itemsManager.FindItem("dispositivo_di_teletrasporto"))) return ErrorCmd();
                 return Teleport(player,roomsManager); //Tp
             case "muoviti":
             case"move":
@@ -132,6 +132,8 @@ public class CommandManager
 
     private bool UseObject(string direction, MainCharacter p, RoomsManager rm,ItemsManager im)
     {
+        if (!p.Inventory.GetFirstItem().IsUsable) return ErrorCmd("itemNotUsable");
+        if(p.Inventory.Items.Count==0) return ErrorCmd("noItemsInInventory");
         Room finalDestination;
         switch (direction.ToLower())
         {
@@ -160,6 +162,11 @@ public class CommandManager
         if(finalDestination.UnlockKeyId.ToLower().Replace("_","")!=p.Inventory.GetFirstItem().Id.ToLower().Replace("_","")) return ErrorCmd("incompatibleKey");
         rm.FindRoom(finalDestination.Id).IsLocked = false;
         ConsoleStylingWrite.HelperCmd($"[{p.Inventory.GetFirstItem().Color}]{p.Inventory.GetFirstItem().Name}[/] ha aperto la stanza [bold]{finalDestination.NameOfTheRoom}[/], ora puoi entrarci!");
+        if (p.Inventory.GetFirstItem().Equals(im.FindItem("chiave_magnetica_livello_10")))
+        {
+            p.Inventory.GetFirstItem().IsUsable = false;
+            ConsoleStylingWrite.HelperCmd($"Oh cavolo... credo che [{p.Inventory.GetFirstItem().Color}]{p.Inventory.GetFirstItem().Name}[/] si sia smagnetizzata... Penso che ora sia inutile.");
+        }
         return true;
     }
     
@@ -386,6 +393,12 @@ public class CommandManager
                 return false;
             case "FileNotFound":
                 AnsiConsole.MarkupLine("[bold italic #ff4400]Il salvataggio che stai cercando di caricare non esiste![/]");
+                return false;
+            case "noItemsInInventory":
+                AnsiConsole.MarkupLine("[bold italic #ff4400]Non hai oggetti da utilizzare nell'inventario![/]");
+                return false;
+            case "itemNotUsable":
+                AnsiConsole.MarkupLine("[bold italic #ff4400]L'oggetto non sembra avere uno scopo chiaro[/]");
                 return false;
         }
     }

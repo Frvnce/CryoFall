@@ -1,5 +1,6 @@
 ﻿using CryoFall.Items;
 using CryoFall.Rooms;
+using Spectre.Console;
 
 namespace CryoFall.Character
 {
@@ -50,6 +51,7 @@ namespace CryoFall.Character
             var top = _stack[0];
             _stack.RemoveAt(0);
             room.AddItem(top);
+            AnsiConsole.MarkupLine($" [italic]Hai depositato in {room.NameOfTheRoom} l'oggetto [{top.Color}]{top.Name}[/][/].");
             return true;
         }
 

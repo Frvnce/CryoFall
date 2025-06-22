@@ -28,7 +28,7 @@ namespace CryoFall.SaveSystem
                 VisitedRoomIds = player.VisitedRoomIds.ToList(),
                 LastDialogueId = player.LastDialogueId,
                 Placeholders = ConsoleStylingWrite.GetPlaceholdersDict(),
-                EventiAttivati = player.EventiAttivati.ToList()
+                EventiAttivati = player.ActivetedEvents.ToList()
             };
 
             // aggiunge lo stato di ogni stanza
@@ -63,9 +63,9 @@ namespace CryoFall.SaveSystem
             foreach (var id in data.VisitedRoomIds)
                 player.VisitedRoomIds.Add(id);
             player.LastDialogueId = data.LastDialogueId;
-            player.EventiAttivati.Clear();
+            player.ActivetedEvents.Clear();
             foreach (var id in data.EventiAttivati)
-                player.EventiAttivati.Add(id);
+                player.ActivetedEvents.Add(id);
 
             // imposta stanza corrente
             var startRoom = roomsManager.FindRoom(data.PlayerCurrentRoomId)

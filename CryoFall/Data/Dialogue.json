@@ -1403,6 +1403,15 @@
     "character": "narrator",
     "kind": "narration",
     "action": "pullLever",
+    "text": "",
+    "next": "atto3_007.1"
+  },
+  {
+    "id": "atto3_007.1",
+    "room": "zona_controllo",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
     "text": "Attivi la leva, senti un rumore metallico in lontananza. Tutte le porte della nave sono ora sbloccate.",
     "next": "assistente_027"
   },
@@ -1592,7 +1601,7 @@
     "speakerName": "<mainHelper>",
     "character": "friend",
     "kind": "dialogue",
-    "text": "Quel robot ha ucciso i nostri amici. E chissà cosa aveva in mente per noi.",
+    "text": "Quel robot ha ucciso i nostri amici. E chissà cosa aveva in mente per noi. Grazie per averla trovata, me la consegnerai quando tutto sarà finito, tienila stretta a te!",
     "next": "lena_008"
   },
   {
@@ -1731,6 +1740,33 @@
     "next": "waitForCmd"
   },
   {
+    "id": "atto5_000",
+    "room": "corridoio_ovest_3",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Senti che la fine di tutto si sta avvicinando, hai paura...",
+    "next": "end"
+  },
+  {
+    "id": "atto5_000.1",
+    "room": "corridoio_ovest_3",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Senza l'emettitori di energia sai che sarà dura.",
+    "next": "waitForCmd"
+  },
+  {
+    "id": "atto5_000.2",
+    "room": "corridoio_ovest_3",
+    "speakerName": "Narratore",
+    "character": "narrator",
+    "kind": "narration",
+    "text": "Con l'emettitori di energia sai che le cose andranno bene.",
+    "next": "waitForCmd"
+  },
+  {
     "id": "atto5_001",
     "room": "zona_di_scarico",
     "speakerName": "Narratore",
@@ -1754,7 +1790,7 @@
     "speakerName": "<playerName>",
     "character": "main",
     "kind": "dialogue",
-    "text": "Perché, AX-7? Perché hai fatto questo? Marcus e Sarah erano brave persone!",
+    "text": "Perché, AX-7? Perché hai fatto questo? <secondHelper> e <thirdHelper> erano brave persone!",
     "next": "ax7_finale_002"
   },
   {
@@ -1773,7 +1809,7 @@
     "character": "helper",
     "kind": "dialogue",
     "text": "Ehm... tempo di usare quel piano che avevamo ideato. Cioè, avevamo un piano vero??",
-    "next": "main_040_con_emettitore"
+    "next": "end"
   },
   {
     "id": "main_040_con_emettitore",
@@ -1782,7 +1818,7 @@
     "character": "main",
     "kind": "dialogue",
     "text": "<mainHelper>, prendi l'emettitore. Tu sai cosa fare!",
-    "next": "waitForCmd"
+    "next": "lena_finale_001"
   },
   {
     "id": "lena_finale_001",
@@ -2060,7 +2096,7 @@
     "speakerName": "Sistema",
     "character": "narrator",
     "kind": "intro",
-    "text": "[center bold]VITTORIA[/]\n[center]L'umanità sopravviverà... forse.[/]\n[center italic]12.833 anime in attesa di un nuovo mondo.[/]",
+    "text": "[bold]VITTORIA[/]\nL'umanità sopravviverà... forse.[/]\n[italic]12.833 anime in attesa di un nuovo mondo.[/]",
     "next": "end"
   }
 

@@ -19,7 +19,7 @@ public class MainCharacter(string name, int maxCapacity)
     public bool HasCompletedTutorial { get; set; } = false; // tutorial completato o no
     public HashSet<string> VisitedRoomIds { get; } = new HashSet<string>(); // stanze visitate
     public string? LastDialogueId { get; set; } = null;
-    public HashSet<string> EventiAttivati { get; } = new HashSet<string>(); //eventi di gioco
+    public HashSet<string> ActivetedEvents { get; } = new HashSet<string>(); //eventi di gioco
     private readonly string _name = name;
 
     /// <summary>
